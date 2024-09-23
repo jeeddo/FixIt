@@ -1,4 +1,4 @@
-package v1;
+ 
 /**
  * Classe Command - une commande du jeu d'aventure Zuul.
  *
@@ -8,7 +8,7 @@ public class Command
 {
     private String aCommandWord;
     private String aSecondWord;
-    
+       
     public Command(final String pCommandWord, final String pSecondWord) {
         this.aCommandWord = pCommandWord;
         this.aSecondWord = pSecondWord;

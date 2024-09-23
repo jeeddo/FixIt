@@ -1,4 +1,4 @@
-package v1;
+ 
 
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ import java.util.Scanner;
  * @version 2008.03.30 + 2013.09.15
  */
 public class Parser 
-{
+{  
     private CommandWords aValidCommands;  // (voir la classe CommandWords)
     private Scanner aReader;         // permettra de lire les commandes au clavier
 

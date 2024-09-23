@@ -1,4 +1,4 @@
-package v1;
+ 
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -14,7 +14,7 @@ public class CommandWords
 {
     // a constant array that will hold all valid command words
     private final String[] aValidCommands;
-
+  
     /**
      * Constructor - initialise the command words.
      */
