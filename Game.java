@@ -9,29 +9,33 @@ public class Game
     private Room aCurrentRoom;
     private Parser aParser;
        
+    
     private void createRooms() 
     {
-        //Création des 5 lieux
-        Room vOutside = new Room("outside the main entrance of the university");
-        Room vTheatre = new Room("in a lecture theatre");
-        Room vPub = new Room("in the campus pub");
-        Room vLab = new Room("in a computing lab");
-        Room vOffice = new Room("in the computing admin office");
-        
-        //Positionnement des sorties
-        
-        vOutside.setExits(null, vLab, vTheatre, vPub);
-        vTheatre.setExits(null, null, null, vOutside);
-        vPub.setExits(null, null, vOutside, null);
-        vLab.setExits(vOutside, null, vOffice, null);
-        vOffice.setExits(null, null, null, vLab);
-        
-        // Current Room
-        
-        this.aCurrentRoom = vOutside;
-        
-        
-    } //createRooms
+    
+    Room hall = new Room("in The entry hall.");
+    Room developerRoom = new Room("inside the developer room.");
+    Room serverRoom = new Room("inside the server room.");
+    Room meetingRoom = new Room("inside the meeting room.");
+    Room cafeteria = new Room("inside the cafétéria,");
+    Room projectManagerOffice = new Room("inside the project manager office.");
+    Room openSpace = new Room("inside the open-space");
+    Room presentationRoom = new Room("inside the presenting room");
+    Room Wc = new Room("In the toilet...");
+
+    hall.setExits(openSpace, null, null, null);
+    developerRoom.setExits(projectManagerOffice, null, null, serverRoom);
+    serverRoom.setExits(null, null, developerRoom, null);
+    meetingRoom.setExits(null, null, openSpace, null);
+    cafeteria.setExits(presentationRoom, Wc, null, openSpace);
+    projectManagerOffice.setExits(null, developerRoom, null, null);
+    openSpace.setExits(null, null, cafeteria, meetingRoom);
+    presentationRoom.setExits(null, cafeteria, null, null);
+    Wc.setExits(cafeteria, null, null, null);
+
+    this.aCurrentRoom = hall;
+} // createRooms
+
     public Game() {
         this.createRooms();
         this.aParser = new Parser();
@@ -40,6 +44,7 @@ public class Game
         
     }//Game
     
+    
     private void goRoom(final Command pCommande)
     {
         if (!pCommande.hasSecondWord()) {
@@ -47,53 +52,29 @@ public class Game
             return;
         }
         String vDirection = pCommande.getSecondWord();
-        if (vDirection.equals("North")){
-            if (this.aCurrentRoom.aNorthExit == null){
-                System.out.println("There is no door !");
-                return;
-            }
-            
-            this.aCurrentRoom = this.aCurrentRoom.aNorthExit;
-            this.printLocationInfo();
-
-        }
-        else if (vDirection.equals("South")){
-            if (this.aCurrentRoom.aSouthExit == null){
-                System.out.println("There is no door !");
-                return;
-            }
-            this.aCurrentRoom = this.aCurrentRoom.aSouthExit;
-            this.printLocationInfo();
-        }
-        else if (vDirection.equals("East")){
-            if (this.aCurrentRoom.aEastExit == null){
-                System.out.println("There is no door !");
-                return;
-            }
-            this.aCurrentRoom = this.aCurrentRoom.aEastExit;
-            this.printLocationInfo();
-
-        }
-        else if (vDirection.equals("West")) {
-            if (this.aCurrentRoom.aWestExit == null){
-                System.out.println("There is no door !");
-                return;
-            }
-            this.aCurrentRoom = this.aCurrentRoom.aWestExit;
-            this.printLocationInfo();
-            
-        }
-        else
+        
+        if (!vDirection.equals("North") && !vDirection.equals("South") && !vDirection.equals("East") && !vDirection.equals("West"))
         {
             System.out.println("Unknown direction !");
             return;
         }
+        
+        if (this.aCurrentRoom.getExit(vDirection) == null){
+            System.out.println("There is no door !");
+            return;
+        }
+ 
+            
+        this.aCurrentRoom = this.aCurrentRoom.getExit(vDirection);
+        this.printLocationInfo();
+       
         
     } //goRoom
     private void printWelcome() {
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help. \n \n");
+        this.printLocationInfo();
     } //printWelcome
     
     public void printHelp() {
@@ -114,7 +95,6 @@ public class Game
     
     private void play() {
         this.printWelcome();
-        System.out.println( "You are " + this.aCurrentRoom.getDescription()); 
         boolean vFinished = false;
         while (!vFinished) {
             Command vResultat = this.aParser.getCommand();
@@ -127,24 +107,28 @@ public class Game
         
         System.out.println( "You are " + this.aCurrentRoom.getDescription()); 
         System.out.print( "Exits: " ); 
-        if(this.aCurrentRoom.aNorthExit != null) { 
+        if(this.aCurrentRoom.getExit("North") != null) { 
             System.out.print( "north "); 
         } 
-        if(this.aCurrentRoom.aEastExit != null) { 
-            System.out.print( "east " ); 
+        if(this.aCurrentRoom.getExit("South") != null) { 
+            System.out.print( "south " ); 
         } 
          
-        if(this.aCurrentRoom.aSouthExit != null) { 
-            System.out . print( " south "); 
+        if(this.aCurrentRoom.getExit("East") != null) { 
+            System.out . print( "east "); 
         } 
-        if(this.aCurrentRoom.aWestExit != null) { 
-            System.out.print( " west " ); 
+        if(this.aCurrentRoom.getExit("West") != null) { 
+            System.out.print( "west " ); 
         } 
         System.out.println();
     } //printLocationInfo
     
     private boolean processCommand(final Command pUneCommande) {
-        if (pUneCommande.getCommandWord().equals("go")) {
+        if (pUneCommande.isUnknown()) {
+        System.out.println("I don't know what you mean...");
+        return false;
+    }
+        else if (pUneCommande.getCommandWord().equals("go")) {
         goRoom(pUneCommande);
         return false;
     } 
@@ -155,10 +139,7 @@ public class Game
         printHelp();
         return false;
     } 
-        else if (pUneCommande.isUnknown()) {
-        System.out.println("I don't know what you mean...");
-        return false;
-    }
+      
     else {
         System.out.println("Erreur du programmeur : commande non reconnue !");
         return false;
