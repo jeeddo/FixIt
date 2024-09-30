@@ -17,15 +17,15 @@ public class Room
     public Room(final String pDescription) {
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
-    }
+    }//Room
     
     public String getDescription() {
         return this.aDescription;
-    }
+    }//getDescription
     public Room getExit(String pDirection) {
         return this.aExits.get(pDirection);
         
-    }
+    }//getExit
     
     public String getExitString() {
         String vExitString = "Exits:  ";
@@ -37,10 +37,10 @@ public class Room
 
         return vExitString;
         
-    }
+    }//getExitString
 
      
     public void setExits(final String pDirection, final Room pNeighbor){
         aExits.put(pDirection, pNeighbor);
-    }
+    }//setExits
 } // Room

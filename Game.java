@@ -153,7 +153,7 @@ public class Game
         }
         else
             return true;
-    }
+    } //quit
     
     private void play() {
         this.printWelcome();
@@ -163,7 +163,7 @@ public class Game
             vFinished = this.processCommand(vResultat);
         }
         System.out.println("Thank you for playing. Good bye.");
-    }
+    }//play
     
     private void printLocationInfo() {
         
@@ -193,5 +193,5 @@ public class Game
         return false;
     }
     
-}
+}//processCommand
 } // Game
