@@ -49,6 +49,26 @@ public class Room
         
         
     }
+    
+    public String getExitString() {
+        String vExitString = "Exits:  ";
+        
+        if(this.getExit("North") != null) { 
+            vExitString += "north "; 
+        } 
+        if(this.getExit("South") != null) { 
+            vExitString += "south "; 
+        } 
+         
+        if(this.getExit("East") != null) { 
+            vExitString += "east "; 
+        } 
+        if(this.getExit("West") != null) { 
+            vExitString += "west "; 
+        }
+        return vExitString;
+        
+    }
 
      
     public void setExits(final Room pNorthExit, final Room pSouthExit, final Room pEastExit, final Room pWestExit){
