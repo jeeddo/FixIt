@@ -1,4 +1,5 @@
  import java.util.HashMap;
+ import java.util.Set;
  
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
@@ -29,25 +30,9 @@ public class Room
     public String getExitString() {
         String vExitString = "Exits:  ";
         
-        if(this.aExits.get("North") != null) { 
-            vExitString += "north "; 
-        } 
-        if(this.aExits.get("South") != null) { 
-            vExitString += "south "; 
-        } 
-         
-        if(this.aExits.get("East") != null) { 
-            vExitString += "east "; 
-        } 
-        if(this.aExits.get("West") != null) { 
-            vExitString += "west "; 
-        }
-        if(this.aExits.get("Up") != null) { 
-            vExitString += "up "; 
-        }
-
-        if(this.aExits.get("Down") != null) { 
-            vExitString += "down "; 
+        for (String element : this.aExits.keySet()) {
+            if (this.aExits.get(element) != null)
+                vExitString += " "+ element;
         }
 
         return vExitString;
