@@ -22,17 +22,52 @@ public class Game
     Room openSpace = new Room("inside the open-space");
     Room presentationRoom = new Room("inside the presenting room");
     Room Wc = new Room("In the toilet...");
-
-    hall.setExits(openSpace, null, null, null);
-    developerRoom.setExits(projectManagerOffice, null, null, serverRoom);
-    serverRoom.setExits(null, null, developerRoom, null);
-    meetingRoom.setExits(null, null, openSpace, null);
-    cafeteria.setExits(presentationRoom, Wc, null, openSpace);
-    projectManagerOffice.setExits(null, developerRoom, null, null);
-    openSpace.setExits(null, null, cafeteria, meetingRoom);
-    presentationRoom.setExits(null, cafeteria, null, null);
-    Wc.setExits(cafeteria, null, null, null);
-
+    
+    hall.setExits("North", openSpace);
+    hall.setExits("South", null);
+    hall.setExits("East", null);
+    hall.setExits("West", null);
+    
+    developerRoom.setExits("North", projectManagerOffice);
+    developerRoom.setExits("South", null);
+    developerRoom.setExits("East", null);
+    developerRoom.setExits("West", serverRoom);
+    
+    serverRoom.setExits("North", null);
+    serverRoom.setExits("South", null);
+    serverRoom.setExits("East", developerRoom);
+    serverRoom.setExits("West", null);
+    
+    meetingRoom.setExits("North", null);
+    meetingRoom.setExits("South", null);
+    meetingRoom.setExits("East", openSpace);
+    meetingRoom.setExits("West", null);
+    
+    cafeteria.setExits("North", presentationRoom);
+    cafeteria.setExits("South", Wc);
+    cafeteria.setExits("East", null);
+    cafeteria.setExits("West", openSpace);
+    
+    projectManagerOffice.setExits("North", null);
+    projectManagerOffice.setExits("South", developerRoom);
+    projectManagerOffice.setExits("East", null);
+    projectManagerOffice.setExits("West", null);
+    
+    openSpace.setExits("North", null);
+    openSpace.setExits("South", null);
+    openSpace.setExits("East", cafeteria);
+    openSpace.setExits("West", meetingRoom);
+    
+    presentationRoom.setExits("North", null);
+    presentationRoom.setExits("South", cafeteria);
+    presentationRoom.setExits("East", null);
+    presentationRoom.setExits("West", null);
+    
+    Wc.setExits("North", cafeteria);
+    Wc.setExits("South", null);
+    Wc.setExits("East", null);
+    Wc.setExits("West", null);
+    
     this.aCurrentRoom = hall;
 } // createRooms
 
