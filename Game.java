@@ -23,50 +23,77 @@ public class Game
     Room presentationRoom = new Room("inside the presenting room");
     Room Wc = new Room("In the toilet...");
     
-    hall.setExits("North", openSpace);
+    hall.setExits("North", null);
     hall.setExits("South", null);
     hall.setExits("East", null);
     hall.setExits("West", null);
-    
+    hall.setExits("Up", openSpace);
+    hall.setExits("Down", null);
+
+    // Developer Room configuration
     developerRoom.setExits("North", projectManagerOffice);
     developerRoom.setExits("South", null);
     developerRoom.setExits("East", null);
     developerRoom.setExits("West", serverRoom);
-    
+    developerRoom.setExits("Up", null);
+    developerRoom.setExits("Down", meetingRoom);
+
+    // Server Room configuration
     serverRoom.setExits("North", null);
     serverRoom.setExits("South", null);
     serverRoom.setExits("East", developerRoom);
     serverRoom.setExits("West", null);
-    
+    serverRoom.setExits("Up", null);
+    serverRoom.setExits("Down", null);
+
+    // Meeting Room configuration
     meetingRoom.setExits("North", null);
     meetingRoom.setExits("South", null);
     meetingRoom.setExits("East", openSpace);
     meetingRoom.setExits("West", null);
-    
+    meetingRoom.setExits("Up", developerRoom);
+    meetingRoom.setExits("Down", null);
+
+    // Cafeteria configuration
     cafeteria.setExits("North", presentationRoom);
     cafeteria.setExits("South", Wc);
     cafeteria.setExits("East", null);
     cafeteria.setExits("West", openSpace);
-    
+    cafeteria.setExits("Up", null);
+    cafeteria.setExits("Down", null);
+
+    // Project Manager Office configuration
     projectManagerOffice.setExits("North", null);
     projectManagerOffice.setExits("South", developerRoom);
     projectManagerOffice.setExits("East", null);
     projectManagerOffice.setExits("West", null);
-    
+    projectManagerOffice.setExits("Up", null);
+    projectManagerOffice.setExits("Down", null);
+
+    // Open Space configuration
     openSpace.setExits("North", null);
     openSpace.setExits("South", null);
     openSpace.setExits("East", cafeteria);
     openSpace.setExits("West", meetingRoom);
-    
+    openSpace.setExits("Up", null);
+    openSpace.setExits("Down", hall);
+
+    // Presentation Room configuration
     presentationRoom.setExits("North", null);
     presentationRoom.setExits("South", cafeteria);
     presentationRoom.setExits("East", null);
     presentationRoom.setExits("West", null);
-    
+    presentationRoom.setExits("Up", null);
+    presentationRoom.setExits("Down", null);
+
+    // Wc configuration
     Wc.setExits("North", cafeteria);
     Wc.setExits("South", null);
     Wc.setExits("East", null);
     Wc.setExits("West", null);
+    Wc.setExits("Up", null);
+    Wc.setExits("Down", null);
+
     
     this.aCurrentRoom = hall;
 } // createRooms
@@ -88,7 +115,7 @@ public class Game
         }
         String vDirection = pCommande.getSecondWord();
         
-        if (!vDirection.equals("North") && !vDirection.equals("South") && !vDirection.equals("East") && !vDirection.equals("West"))
+        if (!vDirection.equals("North") && !vDirection.equals("South") && !vDirection.equals("East") && !vDirection.equals("West") && !vDirection.equals("Up") && !vDirection.equals("Down"))
         {
             System.out.println("Unknown direction !");
             return;
