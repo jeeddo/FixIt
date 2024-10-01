@@ -38,6 +38,10 @@ public class Room
         return vExitString;
         
     }//getExitString
+    
+    public String getLongDescription() {
+        return "You are" + this.aDescription + ".\n" + getExitString();
+    }
 
      
     public void setExits(final String pDirection, final Room pNeighbor){

@@ -143,7 +143,7 @@ public class Game
         System.out.println("You are lost. You are alone.");
         System.out.println("You wander around at the university.\n");
         System.out.println("Your command words are:");
-        System.out.println(" go quit help");
+        this.aParser.showCommands();
     }//printHelp
     
     private boolean quit(final Command pUneCommande) {
@@ -167,9 +167,15 @@ public class Game
     
     private void printLocationInfo() {
         
-        System.out.println( "\nYou are " + this.aCurrentRoom.getDescription()); 
-        System.out.println(this.aCurrentRoom.getExitString() + "\n");
+        System.out.println(this.aCurrentRoom.getLongDescription());
+        
     } //printLocationInfo
+    public void look(){
+        System.out.println(this.aCurrentRoom.getLongDescription());
+    }
+    public void eat() {
+        System.out.println("You have eaten now and you are not hungry any more");
+    }
     
     private boolean processCommand(final Command pUneCommande) {
         if (pUneCommande.isUnknown()) {
@@ -187,6 +193,14 @@ public class Game
         printHelp();
         return false;
     } 
+    else if (pUneCommande.getCommandWord().equals("look")) {
+        look();
+        return false;
+    }
+    else if (pUneCommande.getCommandWord().equals("eat")) {
+        eat();
+        return false;
+    }
       
     else {
         System.out.println("Erreur du programmeur : commande non reconnue !");

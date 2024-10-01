@@ -20,10 +20,7 @@ public class CommandWords
      */
     public CommandWords()
     {
-        this.aValidCommands = new String[3];
-        this.aValidCommands[0] = "go";
-        this.aValidCommands[1] = "help";
-        this.aValidCommands[2] = "quit";
+       this.aValidCommands = new String[]{"go", "help", "quit", "look", "eat"};
     } // CommandWords()
 
     /**
@@ -40,4 +37,9 @@ public class CommandWords
         // if we get here, the string was not found in the commands :
         return false;
     } // isCommand()
+    public void showAll() {
+        for (String command : this.aValidCommands)
+            System.out.print(command + " ");
+        System.out.println();
+    }
 } // CommandWords
