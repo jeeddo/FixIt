@@ -46,9 +46,9 @@ public class CommandWords
  */
 
     public String getCommandList() {
-        String vCommandList = "";
+        StringBuilder vCommandList = new StringBuilder("");
         for (String command : this.aValidCommands)
-            vCommandList += command + " ";
-        return vCommandList;
+            vCommandList.append(command + " ");
+        return vCommandList.toString();
     } //getCommandList
 } // CommandWords

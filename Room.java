@@ -58,7 +58,7 @@ public class Room
  */
     
     public String getLongDescription() {
-        return "You are" + this.aDescription + ".\n" + getExitString();
+        return "You are " + this.aDescription + ".\n" + this.getExitString();
     }
     
     /**
