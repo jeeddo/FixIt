@@ -42,5 +42,5 @@ public class CommandWords
         for (String command : this.aValidCommands)
             vCommandList += command + " ";
         return vCommandList;
-    }
+    } //getCommandList
 } // CommandWords

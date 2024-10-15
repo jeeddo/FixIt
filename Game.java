@@ -133,7 +133,7 @@ public class Game
         
     } //goRoom
     private void printWelcome() {
-        System.out.println("Welcome to the World of Zuul!");
+        System.out.println("Welcome to 404 : Pc not found !");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
