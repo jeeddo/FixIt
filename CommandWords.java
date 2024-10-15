@@ -16,18 +16,19 @@ public class CommandWords
     private final String[] aValidCommands;
   
     /**
-     * Constructor - initialise the command words.
-     */
+ * Constructor - initializes the list of valid command words.
+ */
     public CommandWords()
     {
        this.aValidCommands = new String[]{"go", "help", "quit", "look", "eat"};
     } // CommandWords()
 
     /**
-     * Check whether a given String is a valid command word. 
-     * @return true if a given string is a valid command,
-     * false if it isn't.
-     */
+ * Check whether a given string is a valid command.
+ * 
+ * @param pString The command string to check.
+ * @return true if the given string is a valid command, false otherwise.
+ */
     public boolean isCommand( final String pString )
     {
         for ( int vI=0; vI<this.aValidCommands.length; vI++ ) {
@@ -37,6 +38,13 @@ public class CommandWords
         // if we get here, the string was not found in the commands :
         return false;
     } // isCommand()
+    
+    /**
+ * Returns a list of all valid command words.
+ * 
+ * @return A string containing all valid commands separated by a space.
+ */
+
     public String getCommandList() {
         String vCommandList = "";
         for (String command : this.aValidCommands)

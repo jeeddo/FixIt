@@ -24,22 +24,25 @@ public class Parser
     private Scanner aReader;         // permettra de lire les commandes au clavier
 
     /**
-     * Constructeur par defaut qui cree les 2 objets prevus pour les attributs
-     */
+ * Default constructor that initializes the valid commands and input reader.
+ */
     public Parser() 
     {
         this.aValidCommands = new CommandWords();
         this.aReader        = new Scanner( System.in );
         // System.in designe le clavier, comme System.out designe l'ecran
     } // Parser()
+    /**
+ * Returns a list of valid command words.
+ */
     
     public String getCommands() {
         return this.aValidCommands.getCommandList();
     }
 
-    /**
-     * @return The next command from the user.
-     */
+   /**
+ * Reads user input and returns the next command.
+ */
     public Command getCommand() 
     {
         String vInputLine;    // contiendra toute la ligne tapee

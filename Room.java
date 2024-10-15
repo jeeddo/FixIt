@@ -13,19 +13,34 @@ public class Room
     private HashMap<String, Room> aExits;
     
        
-    
+    /**
+ * Constructor for the room, initializes the description and exits.
+ */
+
     public Room(final String pDescription) {
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
     }//Room
+    /**
+ * Returns the description of the room.
+ */
     
     public String getDescription() {
         return this.aDescription;
     }//getDescription
+    
+    /**
+ * Returns the room in the given direction.
+ */
+    
     public Room getExit(String pDirection) {
         return this.aExits.get(pDirection);
         
     }//getExit
+    
+    /**
+ * Returns a string of available exits from the room.
+ */
     
     public String getExitString() {
         StringBuilder sb = new StringBuilder("Exits:  ");
@@ -38,10 +53,17 @@ public class Room
         return sb.toString();
         
     }//getExitString
+    /**
+ * Returns a detailed description of the room including exits.
+ */
     
     public String getLongDescription() {
         return "You are" + this.aDescription + ".\n" + getExitString();
     }
+    
+    /**
+ * Sets the exits from the room in the specified direction.
+ */
 
      
     public void setExits(final String pDirection, final Room pNeighbor){

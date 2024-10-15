@@ -9,7 +9,10 @@ public class Game
     private Room aCurrentRoom;
     private Parser aParser;
        
-    
+    /**
+ * Creates the different rooms in the game.
+ */
+
     private void createRooms() 
     {
     
@@ -98,6 +101,9 @@ public class Game
     this.aCurrentRoom = hall;
 } // createRooms
 
+/**
+ * Constructor for the game, initializes rooms and the parser.
+ */
     public Game() {
         this.createRooms();
         this.aParser = new Parser();
@@ -106,6 +112,9 @@ public class Game
         
     }//Game
     
+    /**
+ * Moves the player to another room based on the command.
+ */
     
     private void goRoom(final Command pCommande)
     {
@@ -132,6 +141,10 @@ public class Game
        
         
     } //goRoom
+    
+    /**
+ * Displays the welcome message to the player.
+ */
     private void printWelcome() {
         System.out.println("Welcome to 404 : Pc not found !");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
@@ -139,6 +152,9 @@ public class Game
         this.printLocationInfo();
     } //printWelcome
     
+    /**
+ * Displays help with the list of available commands.
+ */
     public void printHelp() {
         System.out.println("You are lost. You are alone.");
         System.out.println("You wander around at the university.\n");
@@ -146,6 +162,10 @@ public class Game
         System.out.println(this.aParser.getCommands());
     }//printHelp
     
+    /**
+ * Quits the game if the command is correct.
+ */
+
     private boolean quit(final Command pUneCommande) {
         if (pUneCommande.hasSecondWord()){ 
             System.out.println("Quit what ?");
@@ -155,6 +175,10 @@ public class Game
             return true;
     } //quit
     
+    /**
+ * Starts the game and manages the main loop.
+ */
+
     private void play() {
         this.printWelcome();
         boolean vFinished = false;
@@ -164,18 +188,35 @@ public class Game
         }
         System.out.println("Thank you for playing. Good bye.");
     }//play
+    /**
+ * Displays the current room's description.
+ */
+
     
     private void printLocationInfo() {
         
         System.out.println(this.aCurrentRoom.getLongDescription());
         
     } //printLocationInfo
+    
+    /**
+ * Displays the detailed description of the current room.
+ */
+
     public void look(){
         System.out.println(this.aCurrentRoom.getLongDescription());
     }
+    
+    /**
+ * Displays a message indicating the player has eaten.
+ */
     public void eat() {
         System.out.println("You have eaten now and you are not hungry any more");
     }
+    
+    /**
+ * Processes the given command and performs the appropriate action.
+ */
     
     private boolean processCommand(final Command pUneCommande) {
         if (pUneCommande.isUnknown()) {
