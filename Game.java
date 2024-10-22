@@ -25,6 +25,7 @@ public class Game
     Room openSpace = new Room("inside the open-space");
     Room presentationRoom = new Room("inside the presenting room");
     Room Wc = new Room("In the toilet...");
+    Room maintenanceRoom = new Room("inside the maintenance room.");
     
     hall.setExits("North", null);
     hall.setExits("South", null);
@@ -33,7 +34,6 @@ public class Game
     hall.setExits("Up", openSpace);
     hall.setExits("Down", null);
 
-    // Developer Room configuration
     developerRoom.setExits("North", projectManagerOffice);
     developerRoom.setExits("South", null);
     developerRoom.setExits("East", null);
@@ -41,15 +41,15 @@ public class Game
     developerRoom.setExits("Up", null);
     developerRoom.setExits("Down", meetingRoom);
 
-    // Server Room configuration
+ 
     serverRoom.setExits("North", null);
-    serverRoom.setExits("South", null);
+    serverRoom.setExits("South", maintenanceRoom);
     serverRoom.setExits("East", developerRoom);
     serverRoom.setExits("West", null);
     serverRoom.setExits("Up", null);
     serverRoom.setExits("Down", null);
 
-    // Meeting Room configuration
+    
     meetingRoom.setExits("North", null);
     meetingRoom.setExits("South", null);
     meetingRoom.setExits("East", openSpace);
@@ -57,7 +57,7 @@ public class Game
     meetingRoom.setExits("Up", developerRoom);
     meetingRoom.setExits("Down", null);
 
-    // Cafeteria configuration
+    
     cafeteria.setExits("North", presentationRoom);
     cafeteria.setExits("South", Wc);
     cafeteria.setExits("East", null);
@@ -65,7 +65,7 @@ public class Game
     cafeteria.setExits("Up", null);
     cafeteria.setExits("Down", null);
 
-    // Project Manager Office configuration
+   
     projectManagerOffice.setExits("North", null);
     projectManagerOffice.setExits("South", developerRoom);
     projectManagerOffice.setExits("East", null);
@@ -73,7 +73,7 @@ public class Game
     projectManagerOffice.setExits("Up", null);
     projectManagerOffice.setExits("Down", null);
 
-    // Open Space configuration
+    
     openSpace.setExits("North", null);
     openSpace.setExits("South", null);
     openSpace.setExits("East", cafeteria);
@@ -81,7 +81,7 @@ public class Game
     openSpace.setExits("Up", null);
     openSpace.setExits("Down", hall);
 
-    // Presentation Room configuration
+    
     presentationRoom.setExits("North", null);
     presentationRoom.setExits("South", cafeteria);
     presentationRoom.setExits("East", null);
@@ -89,13 +89,20 @@ public class Game
     presentationRoom.setExits("Up", null);
     presentationRoom.setExits("Down", null);
 
-    // Wc configuration
+   
     Wc.setExits("North", cafeteria);
     Wc.setExits("South", null);
     Wc.setExits("East", null);
     Wc.setExits("West", null);
     Wc.setExits("Up", null);
     Wc.setExits("Down", null);
+    
+    maintenanceRoom.setExits("North", serverRoom);
+    maintenanceRoom.setExits("South", null);
+    maintenanceRoom.setExits("East", null);
+    maintenanceRoom.setExits("West", null);
+    maintenanceRoom.setExits("Up", null);
+    maintenanceRoom.setExits("Down", null);
 
     
     this.aCurrentRoom = hall;
