@@ -131,9 +131,9 @@ public class GameEngine
  * Displays the welcome message to the player.
  */
     private void printWelcome() {
-        System.out.println("Welcome to 404 : Pc not found !");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help. \n");
+        this.aGui.println("Welcome to 404 : Pc not found !");
+        this.aGui.println("World of Zuul is a new, incredibly boring adventure game.");
+        this.aGui.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
     } //printWelcome
     
@@ -157,7 +157,7 @@ public class GameEngine
     
     private void printLocationInfo() {
         
-        System.out.println(this.aCurrentRoom.getLongDescription());
+        this.aGui.println(this.aCurrentRoom.getLongDescription());
         if ( this.aCurrentRoom.getImageName() != null )
             this.aGui.showImage( this.aCurrentRoom.getImageName() );
         
@@ -176,7 +176,7 @@ public class GameEngine
  * Displays a message indicating the player has eaten.
  */
     public void eat() {
-        System.out.println("You have eaten now and you are not hungry any more");
+        this.aGui.println("You have eaten now and you are not hungry any more");
     }
     
 
