@@ -1,4 +1,3 @@
-
 /**
  * Décrivez votre classe Item ici.
  *
@@ -9,10 +8,13 @@ public class Item
 {
     private String aDescription;
     private int aWeigth;
+    private String aName;
     
-    public Item(final String pDescription, final int pWeigth) {
+    public Item(final String pName, final String pDescription, final int pWeigth) {
+        this.aName = pName;
         this.aDescription = pDescription;
         this.aWeigth = pWeigth;
+        
     }
     
     public String getItemDescription() {
@@ -22,12 +24,11 @@ public class Item
     public int getItemWeigth() {
         return this.aWeigth;
     }
-    
-    public void setItem(final Room pRoom) {
-        pRoom.setItem(this);
+    public String getName() {
+        return this.aName;
     }
     
     public String getItemString() {
-        return this.aDescription + " " + this.aWeigth;
+        return this.aName +" "+this.aDescription + " " + this.aWeigth;
     }
 }

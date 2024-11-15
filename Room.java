@@ -1,5 +1,6 @@
  import java.util.HashMap;
  import java.util.Set;
+ import java.util.ArrayList;
  
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
@@ -12,7 +13,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
-    private Item aItem;
+    private ArrayList<Item> aItem;
     
        
     /**
@@ -23,7 +24,7 @@ public class Room
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
         this.aImageName = pImage;
-        this.aItem = null;
+        this.aItem = new ArrayList<Item>();
     }//Room
     /**
  * Returns the description of the room.
@@ -62,15 +63,20 @@ public class Room
  */
     
     public String getLongDescription() {
-        if (this.aItem == null) 
-            return "You are " + this.aDescription + ".\n" + this.getExitString()
-        + ".\nNo item here. ";
-    
         
-        return "You are " + this.aDescription + ".\n" + this.getExitString()
-        + ".\nItems : " + this.aItem.getItemString();
-            
- 
+        return "You are " + this.aDescription + ".\n" + this.getExitString() +this.getAllItemString();
+    }
+    
+    public String getAllItemString() {
+        if (this.aItem.isEmpty()) 
+            return ".\nNo item here. ";
+        StringBuilder vSb = new StringBuilder("\nItems available :");
+        
+        for (Item item : this.aItem) {
+            vSb.append(item.getName() +"\n");
+        }
+
+        return vSb.toString();
     }
     
     /**
@@ -87,7 +93,7 @@ public class Room
          return this.aImageName;
    }
    
-   public void setItem(final Item pItem) {
-       this.aItem = pItem;
+   public void addItem(final Item pItem) {
+       this.aItem.add(pItem);
    }
 } // Room

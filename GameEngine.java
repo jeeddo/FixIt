@@ -44,10 +44,10 @@ public class GameEngine
     Wc = new Room("In the toilet...", "Images/Wc.png");
     maintenanceRoom = new Room("inside the maintenance room.", "Images/maintenanceRoom.png");
     
-    Item one = new Item("Item 1 ", 300);
-    Item two = new Item("Item 2 ", 200);
+    Item one = new Item("Item", "Item 1 ", 300);
+    Item two = new Item("Item 4", "Item 2 ", 200);
     
-    Item three = new Item("Item 3 ", 500);
+    Item three = new Item("Item 5", "Item 3 ", 500);
     
     
     
@@ -57,7 +57,7 @@ public class GameEngine
     hall.setExits("West", null);
     hall.setExits("Up", openSpace);
     hall.setExits("Down", null);
-    one.setItem(hall);
+    hall.addItem(one);
     
 
     developerRoom.setExits("North", projectManagerOffice);
@@ -82,7 +82,7 @@ public class GameEngine
     meetingRoom.setExits("West", null);
     meetingRoom.setExits("Up", developerRoom);
     meetingRoom.setExits("Down", null);
-    two.setItem(meetingRoom);
+    meetingRoom.addItem(two);
 
     
     cafeteria.setExits("North", presentationRoom);
@@ -99,8 +99,7 @@ public class GameEngine
     projectManagerOffice.setExits("West", null);
     projectManagerOffice.setExits("Up", null);
     projectManagerOffice.setExits("Down", null);
-    three.setItem(projectManagerOffice);
-
+    projectManagerOffice.addItem(three);
     
     openSpace.setExits("North", null);
     openSpace.setExits("South", null);
