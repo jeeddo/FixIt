@@ -11,15 +11,17 @@ public class Room
     
     private String aDescription;
     private HashMap<String, Room> aExits;
+    private String aImageName;
     
        
     /**
  * Constructor for the room, initializes the description and exits.
  */
 
-    public Room(final String pDescription) {
+    public Room(final String pDescription, final String pImage) {
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
+        this.aImageName = pImage;
     }//Room
     /**
  * Returns the description of the room.
@@ -67,6 +69,11 @@ public class Room
 
      
     public void setExits(final String pDirection, final Room pNeighbor){
-        aExits.put(pDirection, pNeighbor);
+        this.aExits.put(pDirection, pNeighbor);
     }//setExits
+    
+    public String getImageName()
+    {
+         return this.aImageName;
+   }
 } // Room
