@@ -82,7 +82,7 @@ public class UserInterface implements ActionListener
     } // showImage(.)
 
     /**
-     * Enable or disable input in the entry field.
+     * Enable or disable input in the entry field or button(s).
      */
     public void enable( final boolean pOnOff )
     {
@@ -94,6 +94,7 @@ public class UserInterface implements ActionListener
         else { // disable
             this.aEntryField.getCaret().setBlinkRate( 0 ); // cursor won't blink
             this.aEntryField.removeActionListener( this ); // won't react to entry
+            this.aButton.removeActionListener( this ); // won't react to look button
         }
     } // enable(.)
 

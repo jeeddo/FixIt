@@ -38,11 +38,18 @@ public class GameEngine
     serverRoom = new Room("inside the server room.", "Images/serverRoom.png");
     meetingRoom = new Room("inside the meeting room.", "Images/meetingRoom.png");
     cafeteria = new Room("inside the cafétéria,", "Images/cafeteria.png");
-    projectManagerOffice = new Room("inside the project manager office.", "Images/projectMangerOffice.png");
+    projectManagerOffice = new Room("inside the project manager office.", "Images/projectManagerOffice.png");
     openSpace = new Room("inside the open-space", "Images/openSpace.png");
     presentationRoom = new Room("inside the presenting room", "Images/presentationRoom.png");
     Wc = new Room("In the toilet...", "Images/Wc.png");
     maintenanceRoom = new Room("inside the maintenance room.", "Images/maintenanceRoom.png");
+    
+    Item one = new Item("Item 1 ", 300);
+    Item two = new Item("Item 2 ", 200);
+    
+    Item three = new Item("Item 3 ", 500);
+    
+    
     
     hall.setExits("North", null);
     hall.setExits("South", null);
@@ -50,6 +57,8 @@ public class GameEngine
     hall.setExits("West", null);
     hall.setExits("Up", openSpace);
     hall.setExits("Down", null);
+    one.setItem(hall);
+    
 
     developerRoom.setExits("North", projectManagerOffice);
     developerRoom.setExits("South", null);
@@ -73,6 +82,7 @@ public class GameEngine
     meetingRoom.setExits("West", null);
     meetingRoom.setExits("Up", developerRoom);
     meetingRoom.setExits("Down", null);
+    two.setItem(meetingRoom);
 
     
     cafeteria.setExits("North", presentationRoom);
@@ -89,6 +99,7 @@ public class GameEngine
     projectManagerOffice.setExits("West", null);
     projectManagerOffice.setExits("Up", null);
     projectManagerOffice.setExits("Down", null);
+    three.setItem(projectManagerOffice);
 
     
     openSpace.setExits("North", null);

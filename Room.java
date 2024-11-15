@@ -12,6 +12,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
+    private Item aItem;
     
        
     /**
@@ -22,6 +23,7 @@ public class Room
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
         this.aImageName = pImage;
+        this.aItem = null;
     }//Room
     /**
  * Returns the description of the room.
@@ -60,7 +62,15 @@ public class Room
  */
     
     public String getLongDescription() {
-        return "You are " + this.aDescription + ".\n" + this.getExitString();
+        if (this.aItem == null) 
+            return "You are " + this.aDescription + ".\n" + this.getExitString()
+        + ".\nNo item here. ";
+    
+        
+        return "You are " + this.aDescription + ".\n" + this.getExitString()
+        + ".\nItems : " + this.aItem.getItemString();
+            
+ 
     }
     
     /**
@@ -75,5 +85,9 @@ public class Room
     public String getImageName()
     {
          return this.aImageName;
+   }
+   
+   public void setItem(final Item pItem) {
+       this.aItem = pItem;
    }
 } // Room
