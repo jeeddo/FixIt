@@ -33,16 +33,16 @@ public class GameEngine
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
-    hall = new Room("in The entry hall.", "images/hall.png");
-    developerRoom = new Room("inside the developer room.", "images/developerRoom.png");
-    serverRoom = new Room("inside the server room.", "images/serverRoom.png");
-    meetingRoom = new Room("inside the meeting room.", "images/meetingRoom.png");
-    cafeteria = new Room("inside the cafétéria,", "images/cafeteria.png");
-    projectManagerOffice = new Room("inside the project manager office.", "images/projectMangerOffice.png");
-    openSpace = new Room("inside the open-space", "images/openSpace.png");
-    presentationRoom = new Room("inside the presenting room", "images/presentationRoom.png");
-    Wc = new Room("In the toilet...", "images/Wc.png");
-    maintenanceRoom = new Room("inside the maintenance room.", "images/maintenanceRoom.png");
+    hall = new Room("in The entry hall.", "Images/hall.png");
+    developerRoom = new Room("inside the developer room.", "Images/developerRoom.png");
+    serverRoom = new Room("inside the server room.", "Images/serverRoom.png");
+    meetingRoom = new Room("inside the meeting room.", "Images/meetingRoom.png");
+    cafeteria = new Room("inside the cafétéria,", "Images/cafeteria.png");
+    projectManagerOffice = new Room("inside the project manager office.", "Images/projectMangerOffice.png");
+    openSpace = new Room("inside the open-space", "Images/openSpace.png");
+    presentationRoom = new Room("inside the presenting room", "Images/presentationRoom.png");
+    Wc = new Room("In the toilet...", "Images/Wc.png");
+    maintenanceRoom = new Room("inside the maintenance room.", "Images/maintenanceRoom.png");
     
     hall.setExits("North", null);
     hall.setExits("South", null);

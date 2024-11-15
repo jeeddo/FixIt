@@ -5,6 +5,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -31,6 +32,8 @@ public class UserInterface implements ActionListener
     private JTextField aEntryField;
     private JTextArea  aLog;
     private JLabel     aImage;
+    private JButton    aButton; 
+
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -99,7 +102,7 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "No title !?" ); // change the title !
+        this.aMyFrame = new JFrame( "404 error : PC not found" );  
         this.aEntryField = new JTextField( 34 );
 
         this.aLog = new JTextArea();
@@ -109,17 +112,23 @@ public class UserInterface implements ActionListener
         vListScroller.setMinimumSize( new Dimension(100,100) );
 
         this.aImage = new JLabel();
+        this.aButton = new JButton("Look"); 
+        this.aButton.setPreferredSize(new Dimension(100, 10)); 
 
         JPanel vPanel = new JPanel();
         vPanel.setLayout( new BorderLayout() ); // ==> only five places
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
         vPanel.add( this.aEntryField, BorderLayout.SOUTH );
+        vPanel.add( this.aButton, BorderLayout.WEST );
+
+
 
         this.aMyFrame.getContentPane().add( vPanel, BorderLayout.CENTER );
 
         // add some event listeners to some components
         this.aEntryField.addActionListener( this );
+        this.aButton.addActionListener(this);
 
         // to end program when window is closed
         this.aMyFrame.addWindowListener(
@@ -140,20 +149,29 @@ public class UserInterface implements ActionListener
      */
     @Override public void actionPerformed( final ActionEvent pE ) 
     {
-        // no need to check the type of action at the moment
-        // because there is only one possible action (text input) :
-        this.processCommand(); // never suppress this line
+        if (pE.getSource() == this.aButton) {
+            this.processCommand("look");
+            return;
+        }
+        
+        String vInput = this.aEntryField.getText();
+        
+        if (vInput.equals(""))
+            return;
+            
+        this.processCommand(vInput); 
+        this.aEntryField.setText( "" );
+
+       
+      
     } // actionPerformed(.)
 
     /**
      * A command has been entered in the entry field.  
      * Read the command and do whatever is necessary to process it.
      */
-    private void processCommand()
+    private void processCommand(final String pString)
     {
-        String vInput = this.aEntryField.getText();
-        this.aEntryField.setText( "" );
-
-        this.aEngine.interpretCommand( vInput );
+        this.aEngine.interpretCommand( pString );
     } // processCommand()
 } // UserInterface 
