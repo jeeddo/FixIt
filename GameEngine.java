@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GameEngine
 {
     private Room aCurrentRoom;
-    private ArrayList<Room> aItinerary;
+    private Stack<Room> aItinerary;
     private Parser aParser;
     private UserInterface aGui;
        
@@ -19,7 +19,7 @@ public class GameEngine
   public GameEngine()
     {
         this.aParser = new Parser();
-        this.aItinerary = new ArrayList<>();
+        this.aItinerary = new Stack<>();
         this.createRooms();
         
     }
@@ -137,7 +137,7 @@ public class GameEngine
 
     
     this.aCurrentRoom = hall;
-    this.aItinerary.add(this.aCurrentRoom);
+    this.aItinerary.push(this.aCurrentRoom);
 } // createRooms
 
 
@@ -194,15 +194,38 @@ public class GameEngine
         this.aGui.println("You have eaten now and you are not hungry any more");
     }
     
-    private void back() {
-    
+    private void back(final String pXTime) {
+        
         if (this.aItinerary.size() == 1)
             this.aGui.println("Back is no possible here...");
             
+     
         else {
-            this.aItinerary.remove(this.aItinerary.size() - 1);
-            this.aCurrentRoom = this.aItinerary.get(this.aItinerary.size() - 1);
+            if (pXTime == null) {
+                this.aItinerary.pop();
+                this.aCurrentRoom = this.aItinerary.peek();
+                this.aGui.println( this.aCurrentRoom.getLongDescription() );
+                if ( this.aCurrentRoom.getImageName() != null )
+                    this.aGui.showImage( this.aCurrentRoom.getImageName() );
+                return;
+            }
+            String[] vCommands = pXTime.split(" ");
+            for(int i = 0; i < vCommands.length; i++) {
+                if (!vCommands[i].equals("back")) 
+                {
+                   this.aGui.println("back what ?");
+                   return;
+                }
+            }
         
+            for (int i = 0; i < vCommands.length + 1; i++) {
+                if (this.aItinerary.size() == 1) break;
+                
+                this.aItinerary.pop();
+            }
+            
+        
+            this.aCurrentRoom = this.aItinerary.peek();
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );
@@ -248,7 +271,7 @@ public class GameEngine
             this.eat();
         }
         else if (vCommandWord.equals("back"))
-            this.back();
+            this.back(vCommand.getSecondWord());
       
     else {
         this.aGui.println("Erreur du programmeur : commande non reconnue !");
@@ -270,15 +293,15 @@ public class GameEngine
         }
 
         String vDirection = pCommand.getSecondWord();
-
+        
         // Try to leave current room.
         Room vNextRoom = this.aCurrentRoom.getExit( vDirection );
-
+        
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
             this.aCurrentRoom = vNextRoom;
-            this.aItinerary.add(this.aCurrentRoom);
+            this.aItinerary.push(this.aCurrentRoom);
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );

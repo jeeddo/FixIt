@@ -43,7 +43,7 @@ public class Parser
  public Command getCommand( final String pInputLine ) 
     {
         String vWord1;
-        String vWord2;
+        StringBuilder vWord2 = new StringBuilder();
 
         StringTokenizer tokenizer = new StringTokenizer( pInputLine );
 
@@ -51,10 +51,18 @@ public class Parser
             vWord1 = tokenizer.nextToken();      // get first word
         else
             vWord1 = null;
-
-        if ( tokenizer.hasMoreTokens() )
-            vWord2 = tokenizer.nextToken();      // get second word
-        else
+        
+        if (vWord1.equals("back")) {
+             while(tokenizer.hasMoreTokens()) {
+            vWord2.append(tokenizer.nextToken()).append(" ");
+        }
+        }
+        else {
+            if ( tokenizer.hasMoreTokens() )
+                vWord2.append(tokenizer.nextToken()); 
+        }
+       
+        if (vWord2.length() == 0)
             vWord2 = null;
 
         // note: we just ignore the rest of the input line.
@@ -62,10 +70,11 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
 
-        if ( this.aValidCommands.isCommand( vWord1 ) )
-            return new Command( vWord1, vWord2 );
+        String vCheckWord2 = vWord2 != null ? vWord2.toString() : null;
+        if ( this.aValidCommands.isCommand( vWord1 ))
+            return new Command( vWord1, vCheckWord2 );
         else
-            return new Command( null, vWord2 );
+            return new Command( null, vCheckWord2 );
     } // getCommand(.)
     
     
