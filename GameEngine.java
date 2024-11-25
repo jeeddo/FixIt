@@ -204,6 +204,8 @@ public class GameEngine
             this.aCurrentRoom = this.aItinerary.get(this.aItinerary.size() - 1);
         
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
+            if ( this.aCurrentRoom.getImageName() != null )
+                this.aGui.showImage( this.aCurrentRoom.getImageName() );
         }
         
         
@@ -285,7 +287,7 @@ public class GameEngine
 
     private void endGame()
     {
-        this.aGui.println( "Thank you for playing.  Good bye." );
+        this.aGui.println( "Thank you for playing.  Good bye." ); 
         this.aGui.enable( false );
     }
 
