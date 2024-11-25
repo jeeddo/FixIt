@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -8,6 +9,7 @@
 public class GameEngine
 {
     private Room aCurrentRoom;
+    private ArrayList<Room> aItinerary;
     private Parser aParser;
     private UserInterface aGui;
        
@@ -17,7 +19,9 @@ public class GameEngine
   public GameEngine()
     {
         this.aParser = new Parser();
+        this.aItinerary = new ArrayList<>();
         this.createRooms();
+        
     }
     
        public void setGUI( final UserInterface pUserInterface )
@@ -133,6 +137,7 @@ public class GameEngine
 
     
     this.aCurrentRoom = hall;
+    this.aItinerary.add(this.aCurrentRoom);
 } // createRooms
 
 
@@ -189,6 +194,22 @@ public class GameEngine
         this.aGui.println("You have eaten now and you are not hungry any more");
     }
     
+    private void back() {
+    
+        if (this.aItinerary.size() == 1)
+            this.aGui.println("Back is no possible here...");
+            
+        else {
+            this.aItinerary.remove(this.aItinerary.size() - 1);
+            this.aCurrentRoom = this.aItinerary.get(this.aItinerary.size() - 1);
+        
+            this.aGui.println( this.aCurrentRoom.getLongDescription() );
+        }
+        
+        
+        
+    }
+    
 
 
 /**
@@ -224,6 +245,8 @@ public class GameEngine
         else if (vCommandWord.equals("eat")) {
             this.eat();
         }
+        else if (vCommandWord.equals("back"))
+            this.back();
       
     else {
         this.aGui.println("Erreur du programmeur : commande non reconnue !");
@@ -253,6 +276,7 @@ public class GameEngine
             this.aGui.println( "There is no door!" );
         else {
             this.aCurrentRoom = vNextRoom;
+            this.aItinerary.add(this.aCurrentRoom);
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );
