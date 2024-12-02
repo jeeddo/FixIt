@@ -1,0 +1,23 @@
+go Up
+look
+eat
+go Down
+go North
+go Down
+go North
+back 
+back ad back
+go Down
+go North
+back back
+go Down
+go North
+back back back
+go Down
+go North
+help
+quit
+quit fze
+go 
+go East
+go West

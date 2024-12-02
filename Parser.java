@@ -52,15 +52,19 @@ public class Parser
         else
             vWord1 = null;
         
+            if (vWord1 != null) {
+                
         if (vWord1.equals("back")) {
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
         }
-        }
-        else {
+    }
+         else {
             if ( tokenizer.hasMoreTokens() )
                 vWord2.append(tokenizer.nextToken()); 
         }
+        }
+       
        
         if (vWord2.length() == 0)
             vWord2 = null;

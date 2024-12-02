@@ -1,4 +1,7 @@
 import java.util.Stack;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -235,6 +238,37 @@ public class GameEngine
         
     }
     
+ private void test(final Command pUneCommande) {
+  
+    if (!pUneCommande.hasSecondWord()) {
+        this.aGui.println("Test what ?");
+        return; 
+    }
+
+ 
+    String vSecondWord = pUneCommande.getSecondWord();
+
+ 
+    File vDossier = new File("./tests");
+    File vFichier = new File(vDossier, vSecondWord + ".txt");
+
+
+    if (!vFichier.exists()) {
+        this.aGui.println("Le fichier '" + vSecondWord + ".txt' n'existe pas.");
+        return;  
+    }
+
+     try (Scanner vScanner = new Scanner(vFichier)) {
+         while (vScanner.hasNextLine()) {
+            
+             this.interpretCommand(vScanner.nextLine());
+        }
+    } catch (IOException e) {
+        System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+    }
+}
+
+    
 
 
 /**
@@ -263,15 +297,17 @@ public class GameEngine
             else
                 this.endGame();
         }
-          else if (vCommandWord.equals("look")) {
+          else if (vCommandWord.equals("look")) 
         this.look();
         
-    }
-        else if (vCommandWord.equals("eat")) {
+    
+        else if (vCommandWord.equals("eat")) 
             this.eat();
-        }
+        
         else if (vCommandWord.equals("back"))
             this.back(vCommand.getSecondWord());
+        else if (vCommandWord.equals("test"))
+            this.test(vCommand);
       
     else {
         this.aGui.println("Erreur du programmeur : commande non reconnue !");

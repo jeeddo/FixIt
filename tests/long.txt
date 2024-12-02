@@ -1,0 +1,16 @@
+go Up
+go West
+go North
+Go West
+go East
+go North
+ 
+ 
+go East
+go South
+go North
+go North
+look
+eat
+back
+back back
