@@ -11,26 +11,30 @@ import java.io.IOException;
  */
 public class GameEngine
 {
-    private Room aCurrentRoom;
     private Stack<Room> aItinerary;
     private Parser aParser;
     private UserInterface aGui;
+    private Player aPlayer;
        
 /**
      * Constructor for objects of class GameEngine
      */
   public GameEngine()
     {
-        this.aParser = new Parser();
+        this.aParser = new Parser(this);
         this.aItinerary = new Stack<>();
-        this.createRooms();
         
     }
     
        public void setGUI( final UserInterface pUserInterface )
     {
         this.aGui = pUserInterface;
-        this.printWelcome();
+        this.printNameQuestion();
+       
+    }
+    
+    public boolean getItinerarySizeInfo() {
+        return this.aItinerary.isEmpty();
     }
         /**
  * Creates the different rooms in the game.
@@ -139,8 +143,8 @@ public class GameEngine
     maintenanceRoom.setExits("Down", null);
 
     
-    this.aCurrentRoom = hall;
-    this.aItinerary.push(this.aCurrentRoom);
+    this.aPlayer.setCurrentRoom( hall);
+    this.aItinerary.push(this.aPlayer.getCurrentRoom());
 } // createRooms
 
 
@@ -149,11 +153,15 @@ public class GameEngine
  * Displays the welcome message to the player.
  */
     private void printWelcome() {
-        this.aGui.println("Welcome to 404 : Pc not found !");
+        this.aGui.println("Welcome " + this.aPlayer.getName().toUpperCase() + " to 404 : Pc not found !");
         this.aGui.println("World of Zuul is a new, incredibly boring adventure game.");
         this.aGui.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
     } //printWelcome
+    private void printNameQuestion() {
+        this.aGui.println("Hello, please enter your username...");
+    }
+    
     
     /**
  * Displays help with the list of available commands.
@@ -174,10 +182,10 @@ public class GameEngine
 
     
     private void printLocationInfo() {
-        
-        this.aGui.println(this.aCurrentRoom.getLongDescription());
-        if ( this.aCurrentRoom.getImageName() != null )
-            this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        Room vRoom = this.aPlayer.getCurrentRoom();
+        this.aGui.println(vRoom.getLongDescription());
+        if ( vRoom.getImageName() != null )
+            this.aGui.showImage( vRoom.getImageName() );
         
         
     } //printLocationInfo
@@ -194,7 +202,7 @@ public class GameEngine
  * Displays a message indicating the player has eaten.
  */
     public void eat() {
-        this.aGui.println("You have eaten now and you are not hungry any more");
+        this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and you are not hungry any more");
     }
     
     private void back(final String pXTime) {
@@ -206,10 +214,10 @@ public class GameEngine
         else {
             if (pXTime == null) {
                 this.aItinerary.pop();
-                this.aCurrentRoom = this.aItinerary.peek();
-                this.aGui.println( this.aCurrentRoom.getLongDescription() );
-                if ( this.aCurrentRoom.getImageName() != null )
-                    this.aGui.showImage( this.aCurrentRoom.getImageName() );
+                this.aPlayer.setCurrentRoom( this.aItinerary.peek());
+                this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
+                if ( this.aPlayer.getCurrentRoom().getImageName() != null )
+                    this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
                 return;
             }
             String[] vCommands = pXTime.split(" ");
@@ -228,10 +236,10 @@ public class GameEngine
             }
             
         
-            this.aCurrentRoom = this.aItinerary.peek();
-            this.aGui.println( this.aCurrentRoom.getLongDescription() );
-            if ( this.aCurrentRoom.getImageName() != null )
-                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+                this.aPlayer.setCurrentRoom( this.aItinerary.peek());
+            this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
+            if ( this.aPlayer.getCurrentRoom().getImageName() != null )
+                this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
         }
         
         
@@ -280,9 +288,22 @@ public class GameEngine
     {
         this.aGui.println( "> " + pCommandLine );
         Command vCommand = this.aParser.getCommand( pCommandLine );
-
-        if ( vCommand.isUnknown() ) {
-            this.aGui.println( "I don't know what you mean..." );
+        
+        if (vCommand == null) {
+            this.aGui.println("Your name should not be a game command");
+            return;
+        }
+        else if ( vCommand.isUnknown() ) {
+            if (this.getItinerarySizeInfo()) {
+                
+                this.aPlayer = new Player(vCommand.getSecondWord());
+                this.createRooms();
+                this.printWelcome();
+            }
+            else {
+                this.aGui.println( "I don't know what you mean..." );
+                
+            }
             return;
         }
 
@@ -327,20 +348,23 @@ public class GameEngine
             this.aGui.println( "Go where?" );
             return;
         }
+        
+
+
 
         String vDirection = pCommand.getSecondWord();
         
         // Try to leave current room.
-        Room vNextRoom = this.aCurrentRoom.getExit( vDirection );
+        Room vNextRoom = this.aPlayer.getCurrentRoom().getExit( vDirection );
         
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
-            this.aCurrentRoom = vNextRoom;
-            this.aItinerary.push(this.aCurrentRoom);
-            this.aGui.println( this.aCurrentRoom.getLongDescription() );
-            if ( this.aCurrentRoom.getImageName() != null )
-                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+            this.aPlayer.setCurrentRoom(vNextRoom);
+            this.aItinerary.push(this.aPlayer.getCurrentRoom());
+            this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
+            if ( this.aPlayer.getCurrentRoom().getImageName() != null )
+                this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
         }
     }
 

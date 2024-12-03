@@ -21,13 +21,15 @@ import java.util.StringTokenizer;
 public class Parser 
 {  
     private CommandWords aValidCommands;  // (voir la classe CommandWords)
+    private GameEngine aGameEngine;
 
     /**
  * Default constructor that initializes the valid commands and input reader.
  */
-    public Parser() 
+    public Parser(final GameEngine pGameEngine) 
     {
         this.aValidCommands = new CommandWords();
+        this.aGameEngine = pGameEngine;
     } // Parser()
     /**
  * Returns a list of valid command words.
@@ -53,8 +55,16 @@ public class Parser
             vWord1 = null;
         
             if (vWord1 != null) {
+            
+                boolean vItineraryIsEmpty = this.aGameEngine.getItinerarySizeInfo();
                 
-        if (vWord1.equals("back")) {
+            if ((vWord1.equals("go") || vWord1.equals("back") || vWord1.equals("quit") || vWord1.equals("help")
+            || vWord1.equals("look") || vWord1.equals("eat") || vWord1.equals("test")) && vItineraryIsEmpty) 
+                return null;
+                
+              
+        if (vWord1.equals("back") || vItineraryIsEmpty) {
+            if (vItineraryIsEmpty) vWord2.append(vWord1).append(" ");
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
         }
