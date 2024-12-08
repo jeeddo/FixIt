@@ -9,10 +9,12 @@ public class Player
 {
     private Room aCurrentRoom;
     private String aName;
+    private Item aItem;
     
     
     public Player(final String pName) {
         this.aName = pName;
+        System.out.println(this.aItem);
     }
     
     public void setCurrentRoom(final Room pRoom) {
@@ -25,7 +27,10 @@ public class Player
         return this.aName;
     }
     
-    public void setName(final String pName) {
-        this.aName = pName;
+    public void setItem(final Item pItem) {
+        this.aItem = pItem;
+    }
+    public Item getItem() {
+        return this.aItem;
     }
 }

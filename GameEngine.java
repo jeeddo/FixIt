@@ -59,6 +59,7 @@ public class GameEngine
     Item two = new Item("Item 4", "Item 2 ", 200);
     
     Item three = new Item("Item 5", "Item 3 ", 500);
+    Item zero = new Item("Item0", "0", 100);
     
     
     
@@ -69,6 +70,7 @@ public class GameEngine
     hall.setExits("Up", openSpace);
     hall.setExits("Down", null);
     hall.addItem(one);
+    hall.addItem(zero);
     
 
     developerRoom.setExits("North", projectManagerOffice);
@@ -205,6 +207,36 @@ public class GameEngine
         this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and you are not hungry any more");
     }
     
+   private void take(final String pItemName) {
+       Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+        if (vCurrentRoom.getAllItemString().contains(pItemName)) {
+            if (this.aPlayer.getItem() != null) {
+                this.aGui.println("You already have an item, you cant store more than one");
+                return;
+            }
+             this.aPlayer.setItem(vCurrentRoom.getItem(pItemName));
+             vCurrentRoom.removeItem(pItemName);
+             this.aGui.println("Here is your item : " + this.aPlayer.getItem().getItemString());
+            
+        }
+           
+        else 
+            this.aGui.println("this item does'nt exist in this room...");
+    } 
+    
+    private void drop(final String pItemName) {
+        if (!this.aPlayer.getItem().getName().equals(pItemName)) this.aGui.println("You don't own " + pItemName);
+        
+        else if (this.aPlayer.getCurrentRoom().getItem(pItemName) != null) this.aGui.println("You are not allowed to put the same item in the room");
+        
+        else {
+            this.aPlayer.getCurrentRoom().addItem(this.aPlayer.getItem());
+
+            this.aPlayer.setItem(null);
+            this.aGui.println("You droped " + pItemName);
+        }
+    }
+    
     private void back(final String pXTime) {
         
         if (this.aItinerary.size() == 1)
@@ -329,6 +361,16 @@ public class GameEngine
             this.back(vCommand.getSecondWord());
         else if (vCommandWord.equals("test"))
             this.test(vCommand);
+        else if (vCommandWord.equals("take")) {
+            if (!vCommand.hasSecondWord()) this.aGui.println("Take what ?");
+            else this.take(vCommand.getSecondWord());
+        }
+        
+        else if (vCommandWord.equals("drop")) {
+            if (!vCommand.hasSecondWord()) this.aGui.println("Drop what ?");
+            else this.drop(vCommand.getSecondWord());
+        }
+
       
     else {
         this.aGui.println("Erreur du programmeur : commande non reconnue !");

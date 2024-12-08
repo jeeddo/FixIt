@@ -1,6 +1,5 @@
  import java.util.HashMap;
  import java.util.Set;
- import java.util.ArrayList;
  
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
@@ -13,7 +12,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
-    private ArrayList<Item> aItem;
+    private HashMap<String, Item> aItem;
     
        
     /**
@@ -24,7 +23,7 @@ public class Room
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
         this.aImageName = pImage;
-        this.aItem = new ArrayList<Item>();
+        this.aItem = new HashMap<>();
     }//Room
     /**
  * Returns the description of the room.
@@ -72,8 +71,8 @@ public class Room
             return ".\nNo item here. ";
         StringBuilder vSb = new StringBuilder("\nItems available :");
         
-        for (Item item : this.aItem) {
-            vSb.append(item.getName() +"\n");
+        for (String itemName : this.aItem.keySet()) {
+            vSb.append(itemName +" ");
         }
 
         return vSb.toString();
@@ -94,6 +93,15 @@ public class Room
    }
    
    public void addItem(final Item pItem) {
-       this.aItem.add(pItem);
+       this.aItem.put(pItem.getName(), pItem);
+   }
+   
+   public void removeItem(final String pItemName) {
+       this.aItem.remove(pItemName);
+   }
+   
+   public Item getItem(final String pKey) {
+       return this.aItem.get(pKey);
+       
    }
 } // Room
