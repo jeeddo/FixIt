@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 /**
  * Décrivez votre classe Player ici.
  *
@@ -9,12 +9,13 @@ public class Player
 {
     private Room aCurrentRoom;
     private String aName;
-    private Item aItem;
+    private HashMap<String, Item> aItemList;
     
     
     public Player(final String pName) {
         this.aName = pName;
-        System.out.println(this.aItem);
+        this.aItemList = new HashMap<>();
+        
     }
     
     public void setCurrentRoom(final Room pRoom) {
@@ -27,10 +28,25 @@ public class Player
         return this.aName;
     }
     
-    public void setItem(final Item pItem) {
-        this.aItem = pItem;
+    public void addItem(final Item pItem) {
+        this.aItemList.put(pItem.getName(), pItem);
     }
-    public Item getItem() {
-        return this.aItem;
+    public Item getItem(final String pItemName) {
+        return this.aItemList.get(pItemName);
+    }
+    
+    public void removeItem(final String pItemName) {
+        this.aItemList.remove(pItemName);
+    }
+    
+    public String getAllItemString() {
+
+        StringBuilder vSb = new StringBuilder("\nItems available :");
+        
+        for (String itemName : this.aItemList.keySet()) {
+            vSb.append(itemName +" ");
+        }
+
+        return vSb.toString();
     }
 }

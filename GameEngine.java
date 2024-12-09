@@ -209,14 +209,12 @@ public class GameEngine
     
    private void take(final String pItemName) {
        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        if (vCurrentRoom.getAllItemString().contains(pItemName)) {
-            if (this.aPlayer.getItem() != null) {
-                this.aGui.println("You already have an item, you cant store more than one");
-                return;
-            }
-             this.aPlayer.setItem(vCurrentRoom.getItem(pItemName));
+        if (vCurrentRoom.getItem(pItemName) != null) {
+           
+             this.aPlayer.addItem(vCurrentRoom.getItem(pItemName));
+            this.aGui.println("Here are your items : " + vCurrentRoom.getItem(pItemName).getItemString());
              vCurrentRoom.removeItem(pItemName);
-             this.aGui.println("Here is your item : " + this.aPlayer.getItem().getItemString());
+             this.aGui.println("That's all your items : " + this.aPlayer.getAllItemString());
             
         }
            
@@ -225,14 +223,15 @@ public class GameEngine
     } 
     
     private void drop(final String pItemName) {
-        if (!this.aPlayer.getItem().getName().equals(pItemName)) this.aGui.println("You don't own " + pItemName);
+
+        if ( this.aPlayer.getItem(pItemName) == null) this.aGui.println("You don't own " + pItemName);
         
         else if (this.aPlayer.getCurrentRoom().getItem(pItemName) != null) this.aGui.println("You are not allowed to put the same item in the room");
         
         else {
-            this.aPlayer.getCurrentRoom().addItem(this.aPlayer.getItem());
+            this.aPlayer.getCurrentRoom().addItem(this.aPlayer.getItem(pItemName));
 
-            this.aPlayer.setItem(null);
+            this.aPlayer.removeItem(pItemName);
             this.aGui.println("You droped " + pItemName);
         }
     }
