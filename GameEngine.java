@@ -212,9 +212,9 @@ public class GameEngine
         if (vCurrentRoom.getItem(pItemName) != null) {
            
              this.aPlayer.addItem(vCurrentRoom.getItem(pItemName));
-            this.aGui.println("Here are your items : " + vCurrentRoom.getItem(pItemName).getItemString());
+            this.aGui.println("You took : " + vCurrentRoom.getItem(pItemName).getItemString());
              vCurrentRoom.removeItem(pItemName);
-             this.aGui.println("That's all your items : " + this.aPlayer.getAllItemString());
+             this.aGui.println(this.aPlayer.getMyItemsList());
             
         }
            

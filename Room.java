@@ -12,7 +12,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
-    private HashMap<String, Item> aItem;
+    private ItemList aItems;
     
        
     /**
@@ -23,7 +23,7 @@ public class Room
         this.aDescription = pDescription;
         aExits = new HashMap<String, Room>();
         this.aImageName = pImage;
-        this.aItem = new HashMap<>();
+        this.aItems = new ItemList();
     }//Room
     /**
  * Returns the description of the room.
@@ -63,20 +63,10 @@ public class Room
     
     public String getLongDescription() {
         
-        return "You are " + this.aDescription + ".\n" + this.getExitString() +this.getAllItemString();
+        return "You are " + this.aDescription + ".\n" + this.getExitString() +this.aItems.getAllItemString(this);
     }
     
-    public String getAllItemString() {
-        if (this.aItem.isEmpty()) 
-            return ".\nNo item here. ";
-        StringBuilder vSb = new StringBuilder("\nItems available :");
-        
-        for (String itemName : this.aItem.keySet()) {
-            vSb.append(itemName +" ");
-        }
-
-        return vSb.toString();
-    }
+ 
     
     /**
  * Sets the exits from the room in the specified direction.
@@ -92,16 +82,16 @@ public class Room
          return this.aImageName;
    }
    
-   public void addItem(final Item pItem) {
-       this.aItem.put(pItem.getName(), pItem);
-   }
    
-   public void removeItem(final String pItemName) {
-       this.aItem.remove(pItemName);
-   }
+    public void addItem(final Item pItem) {
+        this.aItems.addItem(pItem);
+    }
+    public Item getItem(final String pItemName) {
+        return this.aItems.getItem(pItemName);
+    }
+    
+    public void removeItem(final String pItemName) {
+        this.aItems.removeItem(pItemName);
+    }
    
-   public Item getItem(final String pKey) {
-       return this.aItem.get(pKey);
-       
-   }
 } // Room
