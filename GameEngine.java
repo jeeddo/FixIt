@@ -210,11 +210,16 @@ public class GameEngine
    private void take(final String pItemName) {
        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
         if (vCurrentRoom.getItem(pItemName) != null) {
-           
-             this.aPlayer.addItem(vCurrentRoom.getItem(pItemName));
-            this.aGui.println("You took : " + vCurrentRoom.getItem(pItemName).getItemString());
-             vCurrentRoom.removeItem(pItemName);
-             this.aGui.println(this.aPlayer.getMyItemsList());
+            
+            if (vCurrentRoom.getItem(pItemName).getItemWeigth() <= this.aPlayer.getPlayerWeigth()) {
+                 this.aPlayer.addItem(vCurrentRoom.getItem(pItemName));
+                this.aGui.println("You took : " + vCurrentRoom.getItem(pItemName).getItemString());
+                this.aPlayer.setPlayerWeigth(- vCurrentRoom.getItem(pItemName).getItemWeigth());
+                 vCurrentRoom.removeItem(pItemName);
+                 this.aGui.println(this.aPlayer.getMyItemsList());  
+            }
+            else this.aGui.println("You can carry " + pItemName + " because you weigth available is :" + this.aPlayer.getPlayerWeigth());
+            
             
         }
            
@@ -230,7 +235,7 @@ public class GameEngine
         
         else {
             this.aPlayer.getCurrentRoom().addItem(this.aPlayer.getItem(pItemName));
-
+            this.aPlayer.setPlayerWeigth(this.aPlayer.getItem(pItemName).getItemWeigth());
             this.aPlayer.removeItem(pItemName);
             this.aGui.println("You droped " + pItemName);
         }

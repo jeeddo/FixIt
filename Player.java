@@ -9,11 +9,13 @@ public class Player
     private Room aCurrentRoom;
     private String aName;
     private ItemList aItems;
+    private int aWeigth;
     
     
     public Player(final String pName) {
         this.aName = pName;
         this.aItems = new ItemList();
+        this.aWeigth = 300;
         
     }
     
@@ -27,6 +29,12 @@ public class Player
         return this.aName;
     }
     
+    public int getPlayerWeigth() {
+        return this.aWeigth;
+    }
+    public void setPlayerWeigth(final int pWeigth) {
+        this.aWeigth += pWeigth;
+    }
        
     public void addItem(final Item pItem) {
         this.aItems.addItem(pItem);
