@@ -58,8 +58,9 @@ public class GameEngine
     Item one = new Item("Item", "Item 1 ", 300);
     Item two = new Item("Item 4", "Item 2 ", 200);
     
-    Item three = new Item("Item 5", "Item 3 ", 500);
+    Item three = new Item("Item3", "Item 3 ", 500);
     Item zero = new Item("Item0", "0", 100);
+    Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
     
     
     
@@ -120,6 +121,8 @@ public class GameEngine
     openSpace.setExits("West", meetingRoom);
     openSpace.setExits("Up", null);
     openSpace.setExits("Down", hall);
+    openSpace.addItem(three);
+    
 
     
     presentationRoom.setExits("North", null);
@@ -143,6 +146,8 @@ public class GameEngine
     maintenanceRoom.setExits("West", null);
     maintenanceRoom.setExits("Up", null);
     maintenanceRoom.setExits("Down", null);
+    maintenanceRoom.addItem(magicCookie);
+    
 
     
     this.aPlayer.setCurrentRoom( hall);
@@ -203,8 +208,15 @@ public class GameEngine
     /**
  * Displays a message indicating the player has eaten.
  */
-    public void eat() {
-        this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and you are not hungry any more");
+    public void eat(final String pItemName) {
+        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+        if (vCurrentRoom.getItem(pItemName) != null && pItemName.equals("magicCookie")) {
+            this.aPlayer.setPlayerWeigth(this.aPlayer.getPlayerWeigth());
+            this.aGui.println("Miam miam miammmmm, here is your weigth now : " + this.aPlayer.getPlayerWeigth());
+            vCurrentRoom.removeItem(pItemName);
+        }
+        else this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and he's not hungry any more");
+
     }
     
    private void take(final String pItemName) {
@@ -228,14 +240,16 @@ public class GameEngine
     } 
     
     private void drop(final String pItemName) {
+        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+        Item vPlayerItem = this.aPlayer.getItem(pItemName); 
 
-        if ( this.aPlayer.getItem(pItemName) == null) this.aGui.println("You don't own " + pItemName);
+        if ( vPlayerItem == null) this.aGui.println("You don't own " + pItemName);
         
-        else if (this.aPlayer.getCurrentRoom().getItem(pItemName) != null) this.aGui.println("You are not allowed to put the same item in the room");
+        else if (vCurrentRoom.getItem(pItemName) != null) this.aGui.println("You are not allowed to put the same item in the room");
         
         else {
-            this.aPlayer.getCurrentRoom().addItem(this.aPlayer.getItem(pItemName));
-            this.aPlayer.setPlayerWeigth(this.aPlayer.getItem(pItemName).getItemWeigth());
+            vCurrentRoom.addItem(vPlayerItem);
+            this.aPlayer.setPlayerWeigth(vPlayerItem.getItemWeigth());
             this.aPlayer.removeItem(pItemName);
             this.aGui.println("You droped " + pItemName);
         }
@@ -312,6 +326,10 @@ public class GameEngine
     }
 }
 
+private void items() {
+    this.aGui.println(this.aPlayer.getMyItemsList());
+}
+
     
 
 
@@ -359,7 +377,7 @@ public class GameEngine
         
     
         else if (vCommandWord.equals("eat")) 
-            this.eat();
+            this.eat(vCommand.getSecondWord());
         
         else if (vCommandWord.equals("back"))
             this.back(vCommand.getSecondWord());
@@ -374,6 +392,7 @@ public class GameEngine
             if (!vCommand.hasSecondWord()) this.aGui.println("Drop what ?");
             else this.drop(vCommand.getSecondWord());
         }
+        else if (vCommandWord.equals("items")) this.items();
 
       
     else {

@@ -59,7 +59,7 @@ public class Parser
                 boolean vItineraryIsEmpty = this.aGameEngine.getItinerarySizeInfo();
                 
             if ((vWord1.equals("go") || vWord1.equals("back") || vWord1.equals("quit") || vWord1.equals("help")
-            || vWord1.equals("look") || vWord1.equals("eat") || vWord1.equals("test")) && vItineraryIsEmpty) 
+            || vWord1.equals("look") || vWord1.equals("eat") || vWord1.equals("test") || vWord1.equals("take") || vWord1.equals("drop") || vWord1.equals("items")) && vItineraryIsEmpty) 
                 return null;
                 
               
