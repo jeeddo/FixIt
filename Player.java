@@ -10,12 +10,14 @@ public class Player
     private String aName;
     private ItemList aItems;
     private int aWeigth;
+    private int aNbMoves;
     
     
     public Player(final String pName) {
         this.aName = pName;
         this.aItems = new ItemList();
         this.aWeigth = 300;
+        this.aNbMoves = 0;
         
     }
     
@@ -49,6 +51,14 @@ public class Player
     
     public String getMyItemsList() {
          return this.aItems.getAllItemString(this);
+    }
+    
+    public void addOneMove() {
+        this.aNbMoves += 1;
+    }
+    
+    public int getNbMoves() {
+        return this.aNbMoves;
     }
     
     

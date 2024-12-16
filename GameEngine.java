@@ -358,6 +358,7 @@ private void items() {
     public void interpretCommand( final String pCommandLine ) 
     {
         this.aGui.println( "> " + pCommandLine );
+
         Command vCommand = this.aParser.getCommand( pCommandLine );
         
         if (vCommand == null) {
@@ -376,6 +377,14 @@ private void items() {
                 
             }
             return;
+        }
+        this.aPlayer.addOneMove();
+        
+        if (this.aPlayer.getNbMoves() == 25) {
+            this.aGui.println("you've reached the maximum number of attempts (25)...");
+            this.endGame();
+            return;
+            
         }
 
         CommandWord vCommandWord = vCommand.getCommandWord();
@@ -428,6 +437,7 @@ private void items() {
             this.aGui.println("Erreur du programmeur : commande non reconnue !");
         
     }
+   
 }
         
 
