@@ -26,6 +26,7 @@ public class ItemList
     
     public String getAllItemString(final Object pO) {
         StringBuilder vSb;
+        int index = 0;
         if (pO instanceof Room) {
             if (this.aItemList.isEmpty()) return ".\nNo item here. ";
             vSb = new StringBuilder("\nItems available :");
@@ -40,9 +41,10 @@ public class ItemList
         
         
         for (String itemName : this.aItemList.keySet()) {
-            vSb.append(itemName +" ");
+            vSb.append(itemName +" (" + this.getItem(itemName).getItemWeigth() + ")").append(index == this.aItemList.size() - 1 ? "" : " / ");
+            index++;
         }
-
+     
         return vSb.toString();
     }
     
