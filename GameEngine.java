@@ -15,6 +15,7 @@ public class GameEngine
     private Parser aParser;
     private UserInterface aGui;
     private Player aPlayer;
+    private boolean aRestartGame;
        
 /**
      * Constructor for objects of class GameEngine
@@ -56,11 +57,12 @@ public class GameEngine
     maintenanceRoom = new Room("inside the maintenance room.", "Images/maintenanceRoom.png");
     
     Item one = new Item("Item", "Item 1 ", 300);
-    Item two = new Item("Item 4", "Item 2 ", 200);
+    Item two = new Item("Item4", "Item 2 ", 200);
     
     Item three = new Item("Item3", "Item 3 ", 500);
     Item zero = new Item("Item0", "0", 100);
     Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
+    Item thePC = new Item("thePC", "the holy grail", 300);
     
     
     
@@ -80,6 +82,7 @@ public class GameEngine
     developerRoom.setExits("West", serverRoom);
     developerRoom.setExits("Up", null);
     developerRoom.setExits("Down", meetingRoom);
+    developerRoom.addItem(thePC);
 
  
     serverRoom.setExits("North", null);
@@ -173,7 +176,7 @@ public class GameEngine
     /**
  * Displays help with the list of available commands.
  */
-    public void printHelp() {
+    private void printHelp() {
         this.aGui.println("You are lost. You are alone.");
         this.aGui.println("You wander around at the university.\n");
         this.aGui.println("Your command words are:");
@@ -201,7 +204,7 @@ public class GameEngine
  * Displays the detailed description of the current room.
  */
 
-    public void look(final String pSecondWord){
+    private void look(final String pSecondWord){
         Room vCurrentRoom = this.aPlayer.getCurrentRoom();
         if (pSecondWord == null)
             this.printLocationInfo();
@@ -228,7 +231,7 @@ public class GameEngine
     /**
  * Displays a message indicating the player has eaten.F
  */
-    public void eat(final String pItemName) {
+    private void eat(final String pItemName) {
         Room vCurrentRoom = this.aPlayer.getCurrentRoom();
         if (vCurrentRoom.getItem(pItemName) != null && pItemName.equals("magicCookie")) {
             this.aPlayer.setPlayerWeigth(this.aPlayer.getPlayerWeigth());
@@ -237,6 +240,19 @@ public class GameEngine
         }
         else this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and he's not hungry any more");
 
+    }
+    
+    private void fix(final String pSecondWord) {
+        Item thePC = this.aPlayer.getItem("thePC");
+        if ( thePC == null) this.aGui.println("You did'nt find your PC yet...");
+        else if (thePC != null && (pSecondWord == null || !pSecondWord.equals("bug"))) this.aGui.println("ahh you were close !");
+        else {
+            this.aGui.println("YOUUUUUPIII you have fix the bug, you won the Game BRAVO !");
+            this.endGame(true);
+        }
+        
+        
+        
     }
     
    private void take(final String pItemName) {
@@ -372,17 +388,24 @@ private void items() {
                 this.createRooms();
                 this.printWelcome();
             }
+            else if (this.aRestartGame) {
+                if (vCommand.getSecondWord() == null ||!vCommand.getSecondWord().equals("yes")) this.endGame(false); 
+                else {
+                    this.aGui.closeWindow();
+                    new Game();
+                    
+                }
+            }
             else {
                 this.aGui.println( "I don't know what you mean..." );
                 
             }
             return;
         }
-        this.aPlayer.addOneMove();
         
         if (this.aPlayer.getNbMoves() == 25) {
-            this.aGui.println("you've reached the maximum number of attempts (25)...");
-            this.endGame();
+            this.aGui.println("you've reached the maximum number of attempts (25)... ");
+            this.endGame(true);
             return;
             
         }
@@ -400,7 +423,7 @@ private void items() {
                 if ( vCommand.hasSecondWord() )
                 this.aGui.println( "Quit what?" );
             else
-                this.endGame();
+                this.endGame(false);
                  break;
         
           case LOOK:
@@ -432,11 +455,16 @@ private void items() {
         case ITEMS:
             this.items();
             break;
+        case FIX:
+            this.fix(vCommand.getSecondWord());
+            break;
             
         default:
             this.aGui.println("Erreur du programmeur : commande non reconnue !");
         
     }
+            this.aPlayer.addOneMove();
+
    
 }
         
@@ -471,11 +499,23 @@ private void items() {
             this.printLocationInfo();
         }
     }
-
-    private void endGame()
+    
+    public boolean getRestartGame() {
+        return this.aRestartGame;
+    }
+    
+    private void endGame(final boolean pRestartQuestion)
     {
+        if (pRestartQuestion) {
+            this.aGui.println("Do you want to play again ?");
+            this.aRestartGame = true;
+        }
+        else {
         this.aGui.println( "Thank you for playing.  Good bye." ); 
         this.aGui.enable( false );
+            
+        }
+  
     }
 
 }

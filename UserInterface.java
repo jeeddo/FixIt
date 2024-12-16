@@ -144,6 +144,8 @@ public class UserInterface implements ActionListener
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
     } // createGUI()
+    
+    // REMOVE LOOK BUTTON WHEN TYPING PLAYER NAME IN THE INPUT
 
     /**
      * Actionlistener interface for entry textfield.
@@ -175,4 +177,8 @@ public class UserInterface implements ActionListener
     {
         this.aEngine.interpretCommand( pString );
     } // processCommand()
+    
+    public void closeWindow() {
+    this.aMyFrame.dispose();
+}
 } // UserInterface 

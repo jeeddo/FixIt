@@ -75,9 +75,13 @@ public class Parser
         }
         }
        
+            
+        if ((vWord1.toLowerCase().equals("yes") || vWord1.toLowerCase().equals("no")) && this.aGameEngine.getRestartGame())
+            vWord2.append(vWord1.toLowerCase());
        
-        if (vWord2.length() == 0)
+        else if (vWord2.length() == 0)
             vWord2 = null;
+        
 
         // note: we just ignore the rest of the input line.
 

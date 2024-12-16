@@ -1,7 +1,8 @@
 
  
 /**
- * Classe Game - le moteur du jeu d'aventure Zuul.
+ * Classe Game - l
+ * e moteur du jeu d'aventure Zuul.
  *
  * @author Pierre MATAR
  */
