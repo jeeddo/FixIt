@@ -6,7 +6,7 @@
  */
 public class Command
 {
-    private String aCommandWord;
+    private CommandWord aCommandWord;
     private String aSecondWord;
     
     /**
@@ -14,7 +14,7 @@ public class Command
  */
 
        
-    public Command(final String pCommandWord, final String pSecondWord) {
+    public Command(final CommandWord pCommandWord, final String pSecondWord) {
         this.aCommandWord = pCommandWord;
         this.aSecondWord = pSecondWord;
     } //Command
@@ -22,7 +22,7 @@ public class Command
  * Returns the main command word.
  */
     
-    public String getCommandWord(){
+    public CommandWord getCommandWord(){
         return this.aCommandWord;
     }//getCommandWord
     /**
@@ -48,6 +48,6 @@ public class Command
 
     
     public boolean isUnknown() {
-        return this.aCommandWord == null;
+        return this.aCommandWord == CommandWord.UNKNOWN ;
     }//isUnknown
 } // Command

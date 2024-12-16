@@ -361,47 +361,61 @@ private void items() {
             return;
         }
 
-        String vCommandWord = vCommand.getCommandWord();
-        if ( vCommandWord.equals( "help" ) )
-            this.printHelp();
-        else if ( vCommandWord.equals( "go" ) )
-            this.goRoom( vCommand );
-        else if ( vCommandWord.equals( "quit" ) ) {
-            if ( vCommand.hasSecondWord() )
+        CommandWord vCommandWord = vCommand.getCommandWord();
+        
+        switch (vCommandWord) {
+            case HELP:
+                this.printHelp();
+                 break;
+            case GO:
+                this.goRoom( vCommand );
+                 break;
+            case QUIT:
+                if ( vCommand.hasSecondWord() )
                 this.aGui.println( "Quit what?" );
             else
                 this.endGame();
-        }
-          else if (vCommandWord.equals("look")) 
-        this.look();
+                 break;
+        
+          case LOOK:
+            this.look();
+             break;
         
     
-        else if (vCommandWord.equals("eat")) 
+        case EAT: 
             this.eat(vCommand.getSecondWord());
+             break;
         
-        else if (vCommandWord.equals("back"))
+        case BACK:
             this.back(vCommand.getSecondWord());
-        else if (vCommandWord.equals("test"))
+             break;
+        case TEST:
             this.test(vCommand);
-        else if (vCommandWord.equals("take")) {
+             break;
+        case TAKE:
             if (!vCommand.hasSecondWord()) this.aGui.println("Take what ?");
             else this.take(vCommand.getSecondWord());
-        }
+             break;
         
-        else if (vCommandWord.equals("drop")) {
+        
+        case DROP: 
             if (!vCommand.hasSecondWord()) this.aGui.println("Drop what ?");
             else this.drop(vCommand.getSecondWord());
-        }
-        else if (vCommandWord.equals("items")) this.items();
-
-      
-    else {
-        this.aGui.println("Erreur du programmeur : commande non reconnue !");
+            break;
+        
+        case ITEMS:
+            this.items();
+            break;
+            
+        default:
+            this.aGui.println("Erreur du programmeur : commande non reconnue !");
         
     }
+}
+        
 
         
-    }
+
  /** 
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -438,8 +452,6 @@ private void items() {
         this.aGui.println( "Thank you for playing.  Good bye." ); 
         this.aGui.enable( false );
     }
-
-
 
 }
 

@@ -1,5 +1,5 @@
  
-
+import java.util.HashMap;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -13,31 +13,24 @@
 public class CommandWords
 {
     // a constant array that will hold all valid command words
-    private final String[] aValidCommands;
+    private final HashMap<String, CommandWord> aValidCommands;
   
     /**
  * Constructor - initializes the list of valid command words.
  */
     public CommandWords()
     {
-       this.aValidCommands = new String[]{"go", "help", "quit", "look", "eat", "back", "test", "take", "drop", "items"};
+        this.aValidCommands = new HashMap<>();
+       for (CommandWord command : CommandWord.values() ) {
+           this.aValidCommands.put(command.getDescription(), command);
+       }
     } // CommandWords()
 
-    /**
- * Check whether a given string is a valid command.
- * 
- * @param pString The command string to check.
- * @return true if the given string is a valid command, false otherwise.
- */
-    public boolean isCommand( final String pString )
-    {
-        for ( int vI=0; vI<this.aValidCommands.length; vI++ ) {
-            if ( this.aValidCommands[vI].equals( pString ) )
-                return true;
-        } // for
-        // if we get here, the string was not found in the commands :
-        return false;
-    } // isCommand()
+    
+    public CommandWord getCommandWord(final String pCommandString) {
+        return this.aValidCommands.get(pCommandString);
+        
+    }
     
     /**
  * Returns a list of all valid command words.
@@ -47,8 +40,8 @@ public class CommandWords
 
     public String getCommandList() {
         StringBuilder vCommandList = new StringBuilder("");
-        for (String command : this.aValidCommands)
-            vCommandList.append(command + " ");
+        for (String command : this.aValidCommands.keySet())
+            vCommandList.append(command).append(" ");
         return vCommandList.toString();
     } //getCommandList
 } // CommandWords

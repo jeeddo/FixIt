@@ -84,12 +84,8 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
 
-        String vCheckWord2 = vWord2 != null ? vWord2.toString() : null;
-        if ( this.aValidCommands.isCommand( vWord1 ))
-            return new Command( vWord1, vCheckWord2 );
-        else
-            return new Command( null, vCheckWord2 );
+        return new Command( this.aValidCommands.getCommandWord(vWord1) == null ? CommandWord.UNKNOWN : this.aValidCommands.getCommandWord(vWord1), vWord2 != null ? vWord2.toString() : null);
+      
     } // getCommand(.)
-    
     
 } // Parser
