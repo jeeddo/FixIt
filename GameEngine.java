@@ -201,12 +201,32 @@ public class GameEngine
  * Displays the detailed description of the current room.
  */
 
-    public void look(){
-        this.printLocationInfo();
+    public void look(final String pSecondWord){
+        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+        if (pSecondWord == null)
+            this.printLocationInfo();
+        else {
+            String[] vItemsToLook = pSecondWord.trim().split(" ");
+            
+            for (String pItemName : vItemsToLook) {
+                if (vCurrentRoom.getItem(pItemName) == null) {
+                    this.aGui.println( pItemName + " does'nt exist in this room...");
+                    return;
+
+                }
+            }
+            for (String pItemName : vItemsToLook) {
+                this.aGui.println(vCurrentRoom.getItem(pItemName).getItemString());
+            }
+            
+        }
+        
+        
+            
     }
     
     /**
- * Displays a message indicating the player has eaten.
+ * Displays a message indicating the player has eaten.F
  */
     public void eat(final String pItemName) {
         Room vCurrentRoom = this.aPlayer.getCurrentRoom();
@@ -265,12 +285,10 @@ public class GameEngine
             if (pXTime == null) {
                 this.aItinerary.pop();
                 this.aPlayer.setCurrentRoom( this.aItinerary.peek());
-                this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
-                if ( this.aPlayer.getCurrentRoom().getImageName() != null )
-                    this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
+                this.printLocationInfo();
                 return;
             }
-            String[] vCommands = pXTime.split(" ");
+            String[] vCommands = pXTime.trim().split(" ");
             for(int i = 0; i < vCommands.length; i++) {
                 if (!vCommands[i].equals("back")) 
                 {
@@ -286,10 +304,9 @@ public class GameEngine
             }
             
         
-                this.aPlayer.setCurrentRoom( this.aItinerary.peek());
-            this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
-            if ( this.aPlayer.getCurrentRoom().getImageName() != null )
-                this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
+            this.aPlayer.setCurrentRoom( this.aItinerary.peek());
+            this.printLocationInfo();
+           
         }
         
         
@@ -378,7 +395,7 @@ private void items() {
                  break;
         
           case LOOK:
-            this.look();
+            this.look(vCommand.getSecondWord());
              break;
         
     
@@ -441,9 +458,7 @@ private void items() {
         else {
             this.aPlayer.setCurrentRoom(vNextRoom);
             this.aItinerary.push(this.aPlayer.getCurrentRoom());
-            this.aGui.println( this.aPlayer.getCurrentRoom().getLongDescription() );
-            if ( this.aPlayer.getCurrentRoom().getImageName() != null )
-                this.aGui.showImage( this.aPlayer.getCurrentRoom().getImageName() );
+            this.printLocationInfo();
         }
     }
 

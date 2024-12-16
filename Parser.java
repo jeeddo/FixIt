@@ -63,7 +63,7 @@ public class Parser
                 return null;
                 
               
-        if (vWord1.equals("back") || vItineraryIsEmpty) {
+        if (vWord1.equals("back") || vItineraryIsEmpty || vWord1.equals("look")) {
             if (vItineraryIsEmpty) vWord2.append(vWord1).append(" ");
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
