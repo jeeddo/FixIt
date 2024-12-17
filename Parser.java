@@ -59,8 +59,8 @@ public class Parser
             
           
               
-        if (vWord1.equals("back") || pItineraryIsEmpty || vWord1.equals("look")) {
-            if (pItineraryIsEmpty) vWord2.append(vWord1).append(" ");
+        if (vWord1.equals("back") || vWord1.equals("look")) {
+    
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
         }
