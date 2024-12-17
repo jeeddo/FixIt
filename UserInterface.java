@@ -94,7 +94,7 @@ public class UserInterface implements ActionListener
         else { // disable
             this.aEntryField.getCaret().setBlinkRate( 0 ); // cursor won't blink
             this.aEntryField.removeActionListener( this ); // won't react to entry
-            this.aButton.removeActionListener( this ); // won't react to look button
+            this.aButton.setVisible(false);
         }
     } // enable(.)
 
@@ -178,6 +178,7 @@ public class UserInterface implements ActionListener
         this.aEngine.interpretCommand( pString );
     } // processCommand()
     
+   
     public void closeWindow() {
     this.aMyFrame.dispose();
 }

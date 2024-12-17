@@ -11,7 +11,6 @@ import java.io.IOException;
  */
 public class GameEngine
 {
-    private Stack<Room> aItinerary;
     private Parser aParser;
     private UserInterface aGui;
     private Player aPlayer;
@@ -20,22 +19,18 @@ public class GameEngine
 /**
      * Constructor for objects of class GameEngine
      */
-  public GameEngine()
+  public GameEngine(final String pPlayerName)
     {
         this.aParser = new Parser(this);
-        this.aItinerary = new Stack<>();
-        
+        this.aPlayer = new Player(pPlayerName);
+        this.createRooms();
     }
     
        public void setGUI( final UserInterface pUserInterface )
     {
         this.aGui = pUserInterface;
-        this.printNameQuestion();
+        this.printWelcome();
        
-    }
-    
-    public boolean getItinerarySizeInfo() {
-        return this.aItinerary.isEmpty();
     }
         /**
  * Creates the different rooms in the game.
@@ -154,7 +149,7 @@ public class GameEngine
 
     
     this.aPlayer.setCurrentRoom( hall);
-    this.aItinerary.push(this.aPlayer.getCurrentRoom());
+    this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
 } // createRooms
 
 
@@ -168,10 +163,7 @@ public class GameEngine
         this.aGui.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
     } //printWelcome
-    private void printNameQuestion() {
-        this.aGui.println("Hello, please enter your username...");
-    }
-    
+  
     
     /**
  * Displays help with the list of available commands.
@@ -293,15 +285,15 @@ public class GameEngine
     
     private void back(final String pXTime) {
         
-        if (this.aItinerary.size() == 1)
+        if (this.aPlayer.getItinerarySize() == 1)
             this.aGui.println("Back is no possible here...");
             
      
         else {
-            if (this.aPlayer.getCurrentRoom().isExit(this.aItinerary.get(this.aItinerary.size() - 2))) {
+            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( )- 2))) {
                  if (pXTime == null) {
-                this.aItinerary.pop();
-                this.aPlayer.setCurrentRoom( this.aItinerary.peek());
+                this.aPlayer.removeTopRoom();
+                this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
                 this.printLocationInfo();
                 return;
             }
@@ -315,19 +307,20 @@ public class GameEngine
             }
         
             for (int i = 0; i < vCommands.length + 1; i++) {
-                if (this.aItinerary.size() == 1) break;
+                if (this.aPlayer.getItinerarySize() == 1) break;
                 
-                this.aItinerary.pop();
+                this.aPlayer.removeTopRoom();
             }
             
         
-            this.aPlayer.setCurrentRoom( this.aItinerary.peek());
+            this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
             this.printLocationInfo();
                 
             }
             else {
-                this.aItinerary.clear();
-                this.aItinerary.push(this.aPlayer.getCurrentRoom());
+                this.aPlayer.clearItinerary();
+                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
+                System.out.println(this.aPlayer.getItinerarySize() + "brbrbrbr");
                 
             }
         
@@ -382,21 +375,13 @@ private void items() {
     {
         this.aGui.println( "> " + pCommandLine );
 
-        Command vCommand = this.aParser.getCommand( pCommandLine );
+        Command vCommand = this.aParser.getCommand( pCommandLine, this.aPlayer.isItineraryEmpty() );
         
-        if (vCommand == null) {
-            this.aGui.println("Your name should not be a game command");
-            return;
-        }
-        else if ( vCommand.isUnknown() ) {
-            if (this.getItinerarySizeInfo()) {
-                
-                this.aPlayer = new Player(vCommand.getSecondWord());
-                this.createRooms();
-                this.printWelcome();
-            }
-            else if (this.aRestartGame) {
-                if (vCommand.getSecondWord() == null ||!vCommand.getSecondWord().equals("yes")) this.endGame(false); 
+   
+        if ( vCommand.isUnknown() ) {
+         
+            if (this.aRestartGame) {
+                if (vCommand.getSecondWord() == null) this.endGame(false); 
                 else {
                     this.aGui.closeWindow();
                     new Game();
@@ -504,7 +489,7 @@ private void items() {
         else {
             this.aPlayer.setCurrentRoom(vNextRoom);
             Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-            this.aItinerary.push(vCurrentRoom);
+            this.aPlayer.addRoom(vCurrentRoom);
             if (vPreviousRoom.isTrapDoor(vDirection)) {
                 switch (vDirection) {
                     case "North": vCurrentRoom.removeDirection("South"); break;

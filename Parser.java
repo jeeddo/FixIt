@@ -22,6 +22,7 @@ public class Parser
 {  
     private CommandWords aValidCommands;  // (voir la classe CommandWords)
     private GameEngine aGameEngine;
+    private Player aPlayer;
 
     /**
  * Default constructor that initializes the valid commands and input reader.
@@ -42,7 +43,7 @@ public class Parser
    /**
  * Reads user input and returns the next command.
  */
- public Command getCommand( final String pInputLine ) 
+ public Command getCommand( final String pInputLine, final Boolean pItineraryIsEmpty ) 
     {
         String vWord1;
         StringBuilder vWord2 = new StringBuilder();
@@ -56,15 +57,10 @@ public class Parser
         
             if (vWord1 != null) {
             
-                boolean vItineraryIsEmpty = this.aGameEngine.getItinerarySizeInfo();
-                
-            if ((vWord1.equals("go") || vWord1.equals("back") || vWord1.equals("quit") || vWord1.equals("help")
-            || vWord1.equals("look") || vWord1.equals("eat") || vWord1.equals("test") || vWord1.equals("take") || vWord1.equals("drop") || vWord1.equals("items")) && vItineraryIsEmpty) 
-                return null;
-                
+          
               
-        if (vWord1.equals("back") || vItineraryIsEmpty || vWord1.equals("look")) {
-            if (vItineraryIsEmpty) vWord2.append(vWord1).append(" ");
+        if (vWord1.equals("back") || pItineraryIsEmpty || vWord1.equals("look")) {
+            if (pItineraryIsEmpty) vWord2.append(vWord1).append(" ");
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
         }
@@ -76,7 +72,7 @@ public class Parser
         }
        
             
-        if ((vWord1.toLowerCase().equals("yes") || vWord1.toLowerCase().equals("no")) && this.aGameEngine.getRestartGame())
+        if (vWord1.toLowerCase().equals("yes") && this.aGameEngine.getRestartGame())
             vWord2.append(vWord1.toLowerCase());
        
         else if (vWord2.length() == 0)

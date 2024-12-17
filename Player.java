@@ -1,3 +1,4 @@
+import java.util.Stack;
 /**
  * Décrivez votre classe Player ici.
  *
@@ -6,6 +7,7 @@
  */
 public class Player
 {
+    private Stack<Room> aItinerary;
     private Room aCurrentRoom;
     private String aName;
     private ItemList aItems;
@@ -18,6 +20,7 @@ public class Player
         this.aItems = new ItemList();
         this.aWeigth = 300;
         this.aNbMoves = 0;
+        this.aItinerary = new Stack<>();
         
     }
     
@@ -60,7 +63,32 @@ public class Player
     public int getNbMoves() {
         return this.aNbMoves;
     }
+    public int getItinerarySize() {
+        return this.aItinerary.size();
+    }
     
+    public void addRoom(final Room pRoom) {
+        this.aItinerary.push(pRoom);
+    }
     
+    public Room getRoom(final int pIndex) {
+        
+        return this.aItinerary.get(pIndex);
+    }
+    
+    public void removeTopRoom() {
+        this.aItinerary.pop();
+    }
+    
+    public Room getTopRoom() {
+        return this.aItinerary.peek();
+    }
+    public void clearItinerary() {
+        this.aItinerary.clear();
+    }
+    
+    public boolean isItineraryEmpty() {
+        return this.aItinerary.isEmpty();
+    }
 
 }

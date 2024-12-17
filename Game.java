@@ -17,7 +17,12 @@ public class Game
      */
     public Game() 
     {
-        this.aEngine = new GameEngine();
+        
+         String vPlayerName = "";
+        while(vPlayerName.length() == 0) {
+            vPlayerName = javax.swing.JOptionPane.showInputDialog("Enter your name to start the game : ");
+        }
+        this.aEngine = new GameEngine(vPlayerName);
         this.aGui = new UserInterface( this.aEngine );
         this.aEngine.setGUI( this.aGui );
     }
