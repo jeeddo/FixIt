@@ -10,7 +10,8 @@ public class Room
 {
     
     private String aDescription;
-    private HashMap<String, Room> aExits;
+     private HashMap<String, Room> aExits; 
+    private HashMap<String, Boolean> aTrapDoors;
     private String aImageName;
     private ItemList aItems;
     
@@ -21,7 +22,8 @@ public class Room
 
     public Room(final String pDescription, final String pImage) {
         this.aDescription = pDescription;
-        aExits = new HashMap<String, Room>();
+        this.aExits = new HashMap<String, Room>();
+        this.aTrapDoors = new HashMap<String, Boolean>();
         this.aImageName = pImage;
         this.aItems = new ItemList();
     }//Room
@@ -73,15 +75,29 @@ public class Room
  */
 
      
-    public void setExits(final String pDirection, final Room pNeighbor){
+       public void setExit(final String pDirection, final Room pNeighbor, final Boolean pIsTrapDoor) {
         this.aExits.put(pDirection, pNeighbor);
-    }//setExits
+        this.aTrapDoors.put(pDirection, pIsTrapDoor != null ? pIsTrapDoor : false );
+    }
+    
+    public void setExit(final String pDirection, final Room pNeighbor) {
+        this.setExit(pDirection, pNeighbor, false);
+    }
     
     public String getImageName()
     {
          return this.aImageName;
    }
+    public boolean isExit(Room pRoom) {
+        return this.aExits.containsValue(pRoom);
+    }
+     public boolean isTrapDoor(String pDirection) {
+        return this.aTrapDoors.get(pDirection);
+    }
    
+    public void removeDirection(final String pDirection) {
+        this.aExits.remove(pDirection);
+    }
    
     public void addItem(final Item pItem) {
         this.aItems.addItem(pItem);

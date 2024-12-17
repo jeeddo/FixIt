@@ -66,89 +66,89 @@ public class GameEngine
     
     
     
-    hall.setExits("North", null);
-    hall.setExits("South", null);
-    hall.setExits("East", null);
-    hall.setExits("West", null);
-    hall.setExits("Up", openSpace);
-    hall.setExits("Down", null);
+    hall.setExit("North", null);
+    hall.setExit("South", null);
+    hall.setExit("East", null);
+    hall.setExit("West", null);
+    hall.setExit("Up", openSpace);
+    hall.setExit("Down", null);
     hall.addItem(one);
     hall.addItem(zero);
     
 
-    developerRoom.setExits("North", projectManagerOffice);
-    developerRoom.setExits("South", null);
-    developerRoom.setExits("East", null);
-    developerRoom.setExits("West", serverRoom);
-    developerRoom.setExits("Up", null);
-    developerRoom.setExits("Down", meetingRoom);
+    developerRoom.setExit("North", projectManagerOffice);
+    developerRoom.setExit("South", null);
+    developerRoom.setExit("East", null);
+    developerRoom.setExit("West", serverRoom);
+    developerRoom.setExit("Up", null);
+    developerRoom.setExit("Down", meetingRoom);
     developerRoom.addItem(thePC);
 
  
-    serverRoom.setExits("North", null);
-    serverRoom.setExits("South", maintenanceRoom);
-    serverRoom.setExits("East", developerRoom);
-    serverRoom.setExits("West", null);
-    serverRoom.setExits("Up", null);
-    serverRoom.setExits("Down", null);
+    serverRoom.setExit("North", null);
+    serverRoom.setExit("South", maintenanceRoom);
+    serverRoom.setExit("East", developerRoom, true);
+    serverRoom.setExit("West", null);
+    serverRoom.setExit("Up", null);
+    serverRoom.setExit("Down", null);
 
     
-    meetingRoom.setExits("North", null);
-    meetingRoom.setExits("South", null);
-    meetingRoom.setExits("East", openSpace);
-    meetingRoom.setExits("West", null);
-    meetingRoom.setExits("Up", developerRoom);
-    meetingRoom.setExits("Down", null);
+    meetingRoom.setExit("North", null);
+    meetingRoom.setExit("South", null);
+    meetingRoom.setExit("East", openSpace);
+    meetingRoom.setExit("West", null);
+    meetingRoom.setExit("Up", developerRoom);
+    meetingRoom.setExit("Down", null);
     meetingRoom.addItem(two);
 
     
-    cafeteria.setExits("North", presentationRoom);
-    cafeteria.setExits("South", Wc);
-    cafeteria.setExits("East", null);
-    cafeteria.setExits("West", openSpace);
-    cafeteria.setExits("Up", null);
-    cafeteria.setExits("Down", null);
+    cafeteria.setExit("North", presentationRoom);
+    cafeteria.setExit("South", Wc);
+    cafeteria.setExit("East", null);
+    cafeteria.setExit("West", openSpace);
+    cafeteria.setExit("Up", null);
+    cafeteria.setExit("Down", null);
 
    
-    projectManagerOffice.setExits("North", null);
-    projectManagerOffice.setExits("South", developerRoom);
-    projectManagerOffice.setExits("East", null);
-    projectManagerOffice.setExits("West", null);
-    projectManagerOffice.setExits("Up", null);
-    projectManagerOffice.setExits("Down", null);
+    projectManagerOffice.setExit("North", null);
+    projectManagerOffice.setExit("South", developerRoom);
+    projectManagerOffice.setExit("East", null);
+    projectManagerOffice.setExit("West", null);
+    projectManagerOffice.setExit("Up", null);
+    projectManagerOffice.setExit("Down", null);
     projectManagerOffice.addItem(three);
     
-    openSpace.setExits("North", null);
-    openSpace.setExits("South", null);
-    openSpace.setExits("East", cafeteria);
-    openSpace.setExits("West", meetingRoom);
-    openSpace.setExits("Up", null);
-    openSpace.setExits("Down", hall);
+    openSpace.setExit("North", null);
+    openSpace.setExit("South", null);
+    openSpace.setExit("East", cafeteria);
+    openSpace.setExit("West", meetingRoom);
+    openSpace.setExit("Up", null);
+    openSpace.setExit("Down", hall);
     openSpace.addItem(three);
     
 
     
-    presentationRoom.setExits("North", null);
-    presentationRoom.setExits("South", cafeteria);
-    presentationRoom.setExits("East", null);
-    presentationRoom.setExits("West", null);
-    presentationRoom.setExits("Up", null);
-    presentationRoom.setExits("Down", null);
+    presentationRoom.setExit("North", null);
+    presentationRoom.setExit("South", cafeteria);
+    presentationRoom.setExit("East", null);
+    presentationRoom.setExit("West", null);
+    presentationRoom.setExit("Up", null);
+    presentationRoom.setExit("Down", null);
 
    
-    Wc.setExits("North", cafeteria);
-    Wc.setExits("South", null);
-    Wc.setExits("East", null);
-    Wc.setExits("West", null);
-    Wc.setExits("Up", null);
-    Wc.setExits("Down", null);
+    Wc.setExit("North", cafeteria);
+    Wc.setExit("South", null);
+    Wc.setExit("East", null);
+    Wc.setExit("West", null);
+    Wc.setExit("Up", null);
+    Wc.setExit("Down", null);
     
-    maintenanceRoom.setExits("North", serverRoom);
-    maintenanceRoom.setExits("South", null);
-    maintenanceRoom.setExits("East", null);
-    maintenanceRoom.setExits("West", null);
-    maintenanceRoom.setExits("Up", null);
-    maintenanceRoom.setExits("Down", null);
+    maintenanceRoom.setExit("North", serverRoom);
+    maintenanceRoom.setExit("South", null);
+    maintenanceRoom.setExit("East", null);
+    maintenanceRoom.setExit("West", null);
+    maintenanceRoom.setExit("Up", null);
+    maintenanceRoom.setExit("Down", null);
     maintenanceRoom.addItem(magicCookie);
     
 
@@ -298,7 +298,8 @@ public class GameEngine
             
      
         else {
-            if (pXTime == null) {
+            if (this.aPlayer.getCurrentRoom().isExit(this.aItinerary.get(this.aItinerary.size() - 2))) {
+                 if (pXTime == null) {
                 this.aItinerary.pop();
                 this.aPlayer.setCurrentRoom( this.aItinerary.peek());
                 this.printLocationInfo();
@@ -322,11 +323,17 @@ public class GameEngine
         
             this.aPlayer.setCurrentRoom( this.aItinerary.peek());
             this.printLocationInfo();
+                
+            }
+            else {
+                this.aItinerary.clear();
+                this.aItinerary.push(this.aPlayer.getCurrentRoom());
+                
+            }
+        
+           
            
         }
-        
-        
-        
     }
     
  private void test(final Command pUneCommande) {
@@ -489,13 +496,23 @@ private void items() {
         String vDirection = pCommand.getSecondWord();
         
         // Try to leave current room.
-        Room vNextRoom = this.aPlayer.getCurrentRoom().getExit( vDirection );
+        Room vPreviousRoom = this.aPlayer.getCurrentRoom();
+        Room vNextRoom = vPreviousRoom.getExit( vDirection );
         
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
             this.aPlayer.setCurrentRoom(vNextRoom);
-            this.aItinerary.push(this.aPlayer.getCurrentRoom());
+            Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+            this.aItinerary.push(vCurrentRoom);
+            if (vPreviousRoom.isTrapDoor(vDirection)) {
+                switch (vDirection) {
+                    case "North": vCurrentRoom.removeDirection("South"); break;
+                    case "South": vCurrentRoom.removeDirection("North"); break;
+                    case "West" : vCurrentRoom.removeDirection("East"); break;
+                    case "East": vCurrentRoom.removeDirection("West"); break;
+                }
+            }
             this.printLocationInfo();
         }
     }
