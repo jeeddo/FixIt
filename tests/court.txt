@@ -1,3 +1,7 @@
 go Up
 look
+eat
 back
+go 
+go Up
+go West

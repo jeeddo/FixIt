@@ -21,9 +21,11 @@ public class GameEngine
      */
   public GameEngine(final String pPlayerName)
     {
+        
         this.aParser = new Parser(this);
         this.aPlayer = new Player(pPlayerName);
         this.createRooms();
+  
     }
      /**
      * Initializes the user interface and displays the welcome message.

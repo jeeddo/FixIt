@@ -1,16 +1,22 @@
 go Up
+take Item3
 go West
-go North
-Go West
-go East
-go North
- 
- 
-go East
+drop Item
+drop Item3
+go Up
+go West
 go South
-go North
-go North
-look
 eat
+look magicCookie
+take magicCookie
+look
+items
+eat magicCookie
 back
-back back
+go East
+back 
+back back back
+take thePC
+fix fde
+fix bug
+no

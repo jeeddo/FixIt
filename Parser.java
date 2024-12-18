@@ -69,7 +69,7 @@ public class Parser
             if ( tokenizer.hasMoreTokens() )
                 vWord2.append(tokenizer.nextToken()); 
         }
-        }
+        
        
             
         if (vWord1.toLowerCase().equals("yes") && this.aGameEngine.getRestartGame())
@@ -77,6 +77,8 @@ public class Parser
        
         else if (vWord2.length() == 0)
             vWord2 = null;
+            
+        }
         
 
         // note: we just ignore the rest of the input line.
