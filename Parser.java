@@ -43,7 +43,7 @@ public class Parser
    /**
  * Reads user input and returns the next command.
  */
- public Command getCommand( final String pInputLine, final Boolean pItineraryIsEmpty ) 
+ public Command getCommand( final String pInputLine) 
     {
         String vWord1;
         StringBuilder vWord2 = new StringBuilder();

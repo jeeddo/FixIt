@@ -178,7 +178,9 @@ public class UserInterface implements ActionListener
         this.aEngine.interpretCommand( pString );
     } // processCommand()
     
-   
+   /** 
+    * Close the window object.
+    */
     public void closeWindow() {
     this.aMyFrame.dispose();
 }

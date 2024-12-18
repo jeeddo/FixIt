@@ -43,7 +43,7 @@ public class Command
     }//hasSecondWord
     
     /**
- * Checks if the command is unknown (null).
+ * Checks if the command is the enum object unknown.
  */
 
     

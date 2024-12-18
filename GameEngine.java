@@ -6,8 +6,8 @@ import java.io.IOException;
 /**
  * Décrivez votre classe GameEngine ici.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Pierre MATAR
+ * @version 2
  */
 public class GameEngine
 {
@@ -25,6 +25,10 @@ public class GameEngine
         this.aPlayer = new Player(pPlayerName);
         this.createRooms();
     }
+     /**
+     * Initializes the user interface and displays the welcome message.
+     * @param pUserInterface The user interface for the game.
+     */
     
        public void setGUI( final UserInterface pUserInterface )
     {
@@ -33,7 +37,7 @@ public class GameEngine
        
     }
         /**
- * Creates the different rooms in the game.
+ * Creates the different rooms in the game, along with their exits and items.
  */
 
     private void createRooms() 
@@ -193,7 +197,8 @@ public class GameEngine
     } //printLocationInfo
     
     /**
- * Displays the detailed description of the current room.
+ * Displays the detailed description of the current room or examines one or more objects in the current room.
+ * @param pSecondWord The name of the object or list of objects separated by spaces.
  */
 
     private void look(final String pSecondWord){
@@ -221,18 +226,25 @@ public class GameEngine
     }
     
     /**
- * Displays a message indicating the player has eaten.F
+ * Displays a message indicating the player has eaten or allows to eat the magicCookie.
+ * @param pItemName The name of the item to eat.
  */
     private void eat(final String pItemName) {
         Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        if (vCurrentRoom.getItem(pItemName) != null && pItemName.equals("magicCookie")) {
+        if ((vCurrentRoom.getItem(pItemName) != null || this.aPlayer.getItem(pItemName) != null) && pItemName.equals("magicCookie")) {
             this.aPlayer.setPlayerWeigth(this.aPlayer.getPlayerWeigth());
             this.aGui.println("Miam miam miammmmm, here is your weigth now : " + this.aPlayer.getPlayerWeigth());
-            vCurrentRoom.removeItem(pItemName);
+            if (vCurrentRoom.getItem(pItemName) != null) vCurrentRoom.removeItem(pItemName);
+            else this.aPlayer.removeItem(pItemName);
         }
         else this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and he's not hungry any more");
 
     }
+    
+     /**
+     * Checks if the player has fixed a bug using a specific object.
+     * @param pSecondWord The keyword needed to complete the game.
+     */
     
     private void fix(final String pSecondWord) {
         Item thePC = this.aPlayer.getItem("thePC");
@@ -246,16 +258,20 @@ public class GameEngine
         
         
     }
+      /**
+     * Allows the player to pick up an item in the current room if they can carry it.
+     * @param pItemName The name of the item to pick up.
+     */
     
    private void take(final String pItemName) {
-       Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        if (vCurrentRoom.getItem(pItemName) != null) {
+       Item vRoomItem = this.aPlayer.getCurrentRoom().getItem(pItemName);
+        if (vRoomItem != null) {
             
-            if (vCurrentRoom.getItem(pItemName).getItemWeigth() <= this.aPlayer.getPlayerWeigth()) {
-                 this.aPlayer.addItem(vCurrentRoom.getItem(pItemName));
-                this.aGui.println("You took : " + vCurrentRoom.getItem(pItemName).getItemString());
-                this.aPlayer.setPlayerWeigth(- vCurrentRoom.getItem(pItemName).getItemWeigth());
-                 vCurrentRoom.removeItem(pItemName);
+            if (vRoomItem.getItemWeigth() <= this.aPlayer.getPlayerWeigth()) {
+                 this.aPlayer.addItem(vRoomItem);
+                this.aGui.println("You took : " + vRoomItem.getItemString());
+                this.aPlayer.setPlayerWeigth(- vRoomItem.getItemWeigth());
+                 this.aPlayer.getCurrentRoom().removeItem(pItemName);
                  this.aGui.println(this.aPlayer.getMyItemsList());  
             }
             else this.aGui.println("You can carry " + pItemName + " because you weigth available is :" + this.aPlayer.getPlayerWeigth());
@@ -266,6 +282,11 @@ public class GameEngine
         else 
             this.aGui.println("this item does'nt exist in this room...");
     } 
+    
+     /**
+     * Allows the player to drop an item in the current room.
+     * @param pItemName The name of the item to drop.
+     */
     
     private void drop(final String pItemName) {
         Room vCurrentRoom = this.aPlayer.getCurrentRoom();
@@ -282,6 +303,12 @@ public class GameEngine
             this.aGui.println("You droped " + pItemName);
         }
     }
+    
+       /**
+     * Moves the player back to the previous room(s), depending on the command.
+     * If a specific number of "back" commands is provided, it goes back that many times.
+     * @param pXTime The number of times "back" is specified, or null for a single back.
+     */
     
     private void back(final String pXTime) {
         
@@ -319,9 +346,7 @@ public class GameEngine
             }
             else {
                 this.aPlayer.clearItinerary();
-                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
-                System.out.println(this.aPlayer.getItinerarySize() + "brbrbrbr");
-                
+                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());                
             }
         
            
@@ -329,6 +354,10 @@ public class GameEngine
         }
     }
     
+    /**
+     * Executes a series of commands from a test file located in the "./tests" directory.
+     * @param pUneCommande The command specifying the test file to execute.
+     */
  private void test(final Command pUneCommande) {
   
     if (!pUneCommande.hasSecondWord()) {
@@ -345,7 +374,7 @@ public class GameEngine
 
 
     if (!vFichier.exists()) {
-        this.aGui.println("Le fichier '" + vSecondWord + ".txt' n'existe pas.");
+        this.aGui.println("The file " + vSecondWord + ".txt' does not exist.");
         return;  
     }
 
@@ -355,10 +384,13 @@ public class GameEngine
              this.interpretCommand(vScanner.nextLine());
         }
     } catch (IOException e) {
-        System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+        System.out.println("An error occured : " + e.getMessage());
     }
 }
 
+/**
+* Displays the list of items currently in the player's inventory.
+*/
 private void items() {
     this.aGui.println(this.aPlayer.getMyItemsList());
 }
@@ -366,16 +398,16 @@ private void items() {
     
 
 
-/**
-     * Given a command, process (that is: execute) the command.
-     * If this command ends the game, true is returned, otherwise false is
-     * returned.
+ /**
+     * Interprets and executes a given command line string.
+     * If the command ends the game, the game terminates.
+     * @param pCommandLine The command line string entered by the player.
      */
     public void interpretCommand( final String pCommandLine ) 
     {
         this.aGui.println( "> " + pCommandLine );
 
-        Command vCommand = this.aParser.getCommand( pCommandLine, this.aPlayer.isItineraryEmpty() );
+        Command vCommand = this.aParser.getCommand( pCommandLine);
         
    
         if ( vCommand.isUnknown() ) {
@@ -502,9 +534,20 @@ private void items() {
         }
     }
     
+      /**
+     * Retrieves the state of the restart game flag.
+     * @return True if the game is ready to restart, false otherwise.
+     */
+    
     public boolean getRestartGame() {
         return this.aRestartGame;
     }
+    
+    
+      /**
+     * Ends the game, optionally prompting the player to restart the game.
+     * @param pRestartQuestion True to ask the player if they want to restart, false to end the game.
+     */
     
     private void endGame(final boolean pRestartQuestion)
     {

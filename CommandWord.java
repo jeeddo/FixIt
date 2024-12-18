@@ -1,6 +1,6 @@
 /**
  * Representations for all the valid command words for the game
- * along with a string in a particular language.
+ * along with a description string.
  * 
  * @author Pierre MATAR
  * @version 2006.03.30
