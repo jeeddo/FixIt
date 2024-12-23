@@ -13,6 +13,7 @@ public class Player
     private ItemList aItems;
     private int aWeigth;
     private int aNbMoves;
+    private Beamer aBeamer;
     
     
       /**
@@ -27,6 +28,7 @@ public class Player
         this.aWeigth = 300;
         this.aNbMoves = 0;
         this.aItinerary = new Stack<>();
+        this.aBeamer = new Beamer(null);
         
     }
        /**
@@ -177,6 +179,14 @@ public class Player
      */
     public void clearItinerary() {
         this.aItinerary.clear();
+    }
+    
+    public Room getBeamerRoom() {
+        return this.aBeamer.getRoom();
+    }
+    
+    public void setBeamerRoom(final Room pRoom) {
+        this.aBeamer.setRoom(pRoom);
     }
     
 

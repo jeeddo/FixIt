@@ -64,6 +64,7 @@ public class GameEngine
     Item zero = new Item("Item0", "0", 100);
     Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
     Item thePC = new Item("thePC", "the holy grail", 300);
+    Item beamer = new Item("beamer", "the transporter room ! ", 200);
     
     
     
@@ -109,6 +110,8 @@ public class GameEngine
     cafeteria.setExit("West", openSpace);
     cafeteria.setExit("Up", null);
     cafeteria.setExit("Down", null);
+    cafeteria.addItem(beamer);
+    
 
    
     projectManagerOffice.setExit("North", null);
@@ -323,7 +326,7 @@ public class GameEngine
                  if (pXTime == null) {
                 this.aPlayer.removeTopRoom();
                 this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
-                this.printLocationInfo();
+                 this.printLocationInfo();
                 return;
             }
             String[] vCommands = pXTime.trim().split(" ");
@@ -348,11 +351,40 @@ public class GameEngine
             }
             else {
                 this.aPlayer.clearItinerary();
-                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());                
+                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());  
+                
             }
         
            
            
+        }
+    }
+    
+    private void charge(final String pBeamerName) {
+        if (pBeamerName == null) this.aGui.println("charge what ?");
+        else if (! pBeamerName.equals("beamer")) this.aGui.println(pBeamerName + " is not the beamer");
+        else if (this.aPlayer.getItem(pBeamerName) == null) this.aGui.println("You don't own the beamer");
+        else {
+            this.aPlayer.setBeamerRoom(this.aPlayer.getCurrentRoom());
+            this.aGui.println("You charged the beamer");
+        }
+        
+    }
+    
+    private void fire(final String pBeamerName) {
+         if (pBeamerName == null) this.aGui.println("charge what ?");
+        else if (! pBeamerName.equals("beamer")) this.aGui.println(pBeamerName + " is not the beamer");
+        else if (this.aPlayer.getItem(pBeamerName) == null) this.aGui.println("You don't own the beamer");
+        else if (this.aPlayer.getBeamerRoom() == null) this.aGui.println("You forget to charge it !");
+        else {
+            if (this.aPlayer.getCurrentRoom() == this.aPlayer.getBeamerRoom()) {
+                this.aGui.println("You can not fire at the same room you charged the beamer...");
+                return;
+            }
+            this.aPlayer.setCurrentRoom(this.aPlayer.getBeamerRoom());
+            this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
+            this.printLocationInfo();
+            this.aPlayer.removeItem(pBeamerName);
         }
     }
     
@@ -483,6 +515,14 @@ private void items() {
             break;
         case FIX:
             this.fix(vCommand.getSecondWord());
+            break;
+        
+        case CHARGE: 
+            this.charge(vCommand.getSecondWord());
+            break;
+            
+        case FIRE:
+            this.fire(vCommand.getSecondWord());
             break;
             
         default:
