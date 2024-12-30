@@ -65,6 +65,7 @@ public class GameEngine
     Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
     Item thePC = new Item("thePC", "the holy grail", 300);
     Item beamer = new Item("beamer", "the transporter room ! ", 200);
+    Item key = new Item("key", "the key", 100);
     
     
     
@@ -76,6 +77,7 @@ public class GameEngine
     hall.setExit("Down", null);
     hall.addItem(one);
     hall.addItem(zero);
+    hall.addItem(key);
     
 
     developerRoom.setExit("North", projectManagerOffice);
@@ -89,7 +91,7 @@ public class GameEngine
  
     serverRoom.setExit("North", null);
     serverRoom.setExit("South", maintenanceRoom);
-    serverRoom.setExit("East", developerRoom, true);
+    serverRoom.setExit("East", developerRoom, true, key, true);
     serverRoom.setExit("West", null);
     serverRoom.setExit("Up", null);
     serverRoom.setExit("Down", null);
@@ -322,7 +324,7 @@ public class GameEngine
             
      
         else {
-            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( )- 2))) {
+            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( ) - 2))) {
                  if (pXTime == null) {
                 this.aPlayer.removeTopRoom();
                 this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
@@ -351,6 +353,7 @@ public class GameEngine
             }
             else {
                 this.aPlayer.clearItinerary();
+                
                 this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());  
                 
             }
@@ -557,19 +560,36 @@ private void items() {
         // Try to leave current room.
         Room vPreviousRoom = this.aPlayer.getCurrentRoom();
         Room vNextRoom = vPreviousRoom.getExit( vDirection );
+        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
+
         
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
-            this.aPlayer.setCurrentRoom(vNextRoom);
-            Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-            this.aPlayer.addRoom(vCurrentRoom);
+            if (vCurrentRoom.isLockedDoor(vDirection)) {
+                if (this.aPlayer.getItem(vCurrentRoom.getDoorKeyItemName(vDirection)) != null) {
+                     this.aPlayer.setCurrentRoom(vNextRoom);
+                    this.aPlayer.addRoom(vNextRoom);
+                   
+                }
+                else {
+                    this.aGui.println("You don't have the key to go to the " + vDirection);
+                    return;
+                }
+               
+                
+            }
+            else {
+                 this.aPlayer.setCurrentRoom(vNextRoom);
+                this.aPlayer.addRoom(vNextRoom);
+            }
+            
             if (vPreviousRoom.isTrapDoor(vDirection)) {
                 switch (vDirection) {
-                    case "North": vCurrentRoom.removeDirection("South"); break;
-                    case "South": vCurrentRoom.removeDirection("North"); break;
-                    case "West" : vCurrentRoom.removeDirection("East"); break;
-                    case "East": vCurrentRoom.removeDirection("West"); break;
+                    case "North": vNextRoom.removeDirection("South"); break;
+                    case "South": vNextRoom.removeDirection("North"); break;
+                    case "West" : vNextRoom.removeDirection("East"); break;
+                    case "East": vNextRoom.removeDirection("West");
                 }
             }
             this.printLocationInfo();

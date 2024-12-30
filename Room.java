@@ -10,8 +10,8 @@ public class Room
 {
     
     private String aDescription;
-     private HashMap<String, Room> aExits; 
-    private HashMap<String, Boolean> aTrapDoors;
+    private HashMap<String, Room> aExits; 
+    private HashMap<String, Door> aDoors;
     private String aImageName;
     private ItemList aItems;
     
@@ -23,7 +23,7 @@ public class Room
     public Room(final String pDescription, final String pImage) {
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
-        this.aTrapDoors = new HashMap<String, Boolean>();
+        this.aDoors = new HashMap<String, Door>();
         this.aImageName = pImage;
         this.aItems = new ItemList();
     }//Room
@@ -77,10 +77,12 @@ public class Room
  * @param pNeighbor   The neighboring room in the specified direction.
  * @param pIsTrapDoor True if the exit is a trap door; otherwise, false.
  */
-       public void setExit(final String pDirection, final Room pNeighbor, final Boolean pIsTrapDoor) {
+       public void setExit(final String pDirection, final Room pNeighbor, final boolean pIsLocked, final Item pKeyDoor, final boolean pIsTrapDoor) {
         this.aExits.put(pDirection, pNeighbor);
-        this.aTrapDoors.put(pDirection, pIsTrapDoor != null ? pIsTrapDoor : false );
+        this.aDoors.put(pDirection, new TrapDoor(pIsLocked, pKeyDoor, pIsTrapDoor));
     }
+    
+    
     
     /**
  * Sets an exit in a given direction without specifying trap door status.
@@ -91,7 +93,7 @@ public class Room
  */
     
     public void setExit(final String pDirection, final Room pNeighbor) {
-        this.setExit(pDirection, pNeighbor, false);
+        this.setExit(pDirection, pNeighbor, false, null, false);
     }
     
     /**
@@ -111,9 +113,17 @@ public class Room
  * @param pRoom The room to check.
  * @return True if the specified room is an exit; otherwise, false.
  */
-    public boolean isExit(Room pRoom) {
+    public boolean isExit(final Room pRoom) {
+        for (String key : this.aExits.keySet()) {
+            if (this.aExits.get(key) != null)
+            System.out.println(key);
+            
+        }
+        System.out.println(this.aExits);
+        System.out.println(this.aExits.containsValue(pRoom));
         return this.aExits.containsValue(pRoom);
     }
+    
     
     /**
  * Checks if the exit in a specified direction is a trap door.
@@ -121,8 +131,16 @@ public class Room
  * @param pDirection The direction to check.
  * @return True if the exit is a trap door; otherwise, false.
  */
-     public boolean isTrapDoor(String pDirection) {
-        return this.aTrapDoors.get(pDirection);
+     public boolean isTrapDoor(final String pDirection) {
+        return ( (TrapDoor) this.aDoors.get(pDirection)).isTrapDoor();
+    }
+    
+    public boolean isLockedDoor(final String pDirection) {
+        return this.aDoors.get(pDirection).isLocked();
+    }
+    
+    public String getDoorKeyItemName(final String pDirection) {
+        return this.aDoors.get(pDirection).getKeyItemName();
     }
     
     /**
