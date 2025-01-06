@@ -10,17 +10,18 @@ public class TransporterRoom extends Room
     private boolean aIsTransporterRoom;
     private GameEngine aGameEngine;
     private Room aTransporterRoom;
+    private RoomRandomizer aRoomRandomizer;
     
     
-    public TransporterRoom(final String pDescription, final String pImage, final boolean pIsTransporterRoom, final GameEngine pGameEngine) {
-        super(pDescription, pImage);
+    public TransporterRoom(final String pName, final String pDescription, final String pImage, final boolean pIsTransporterRoom, final GameEngine pGameEngine) {
+        super(pName,pDescription, pImage);
         this.aIsTransporterRoom = pIsTransporterRoom;
         this.aGameEngine = pGameEngine;
         this.aTransporterRoom = this;
     }
     
-    public TransporterRoom(final String pDescription, final String pImage) {
-        this(pDescription, pImage, false, null);
+    public TransporterRoom(final String pName, final String pDescription, final String pImage) {
+        this(pName, pDescription, pImage, false, null);
     }
     
     public boolean isATransporterRoom() {
@@ -34,7 +35,8 @@ public class TransporterRoom extends Room
     }
     
     private Room findRandomRoom() {
-        return RoomRandomizer.getRandomRoom(this.aGameEngine.getRooms(), this.aTransporterRoom);
+        this.aRoomRandomizer = new RoomRandomizer(this.aGameEngine.getAleaRoom());
+        return this.aRoomRandomizer.getRandomRoom(this.aGameEngine.getRooms(), this.aTransporterRoom);
     }
     
     

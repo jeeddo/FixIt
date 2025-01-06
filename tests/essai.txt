@@ -21,3 +21,4 @@ quit fze
 go 
 go East
 go West
+alea hall

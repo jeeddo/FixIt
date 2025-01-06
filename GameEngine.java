@@ -18,6 +18,8 @@ public class GameEngine
     private Player aPlayer;
     private boolean aRestartGame;
     private List<Room> aRooms;
+    private Room aAleaRoom;
+    private boolean aIsTestMode;
     
        
 /**
@@ -50,16 +52,16 @@ public class GameEngine
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
-    hall = new TransporterRoom("in The entry hall.", "Images/hall.png");
-    developerRoom = new TransporterRoom("inside the developer room.", "Images/developerRoom.png");
-    serverRoom = new TransporterRoom("inside the server room.", "Images/serverRoom.png");
-    meetingRoom = new TransporterRoom("inside the meeting room.", "Images/meetingRoom.png");
-    cafeteria = new TransporterRoom("inside the cafétéria,", "Images/cafeteria.png");
-    projectManagerOffice = new TransporterRoom("inside the project manager office.", "Images/projectManagerOffice.png", true, this);
-    openSpace = new TransporterRoom("inside the open-space", "Images/openSpace.png");
-    presentationRoom = new TransporterRoom("inside the presenting room", "Images/presentationRoom.png");
-    Wc = new TransporterRoom("In the toilet...", "Images/Wc.png");
-    maintenanceRoom = new TransporterRoom("inside the maintenance room.", "Images/maintenanceRoom.png");
+    hall = new TransporterRoom("hall", "in The entry hall.", "Images/hall.png");
+    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "Images/developerRoom.png");
+    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "Images/serverRoom.png");
+    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "Images/meetingRoom.png");
+    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "Images/cafeteria.png");
+    projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "Images/projectManagerOffice.png", true, this);
+    openSpace = new TransporterRoom("openSpace","inside the open-space", "Images/openSpace.png");
+    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "Images/presentationRoom.png");
+    Wc = new TransporterRoom("Wc","In the toilet...", "Images/Wc.png");
+    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "Images/maintenanceRoom.png");
     
     Item one = new Item("Item", "Item 1 ", 300);
     Item two = new Item("Item4", "Item 2 ", 200);
@@ -412,6 +414,21 @@ public List<Room> getRooms() {
         }
     }
     
+    private void alea(final String pSecondCommandWord) {
+        
+        if (pSecondCommandWord != null && this.aIsTestMode) {
+               for (Room room : this.aRooms) 
+            if (room.getName().equals(pSecondCommandWord)) this.aAleaRoom = room;
+        
+        }
+     
+ 
+    }
+    
+    public Room getAleaRoom() {
+        return this.aAleaRoom;
+    }
+    
     /**
      * Executes a series of commands from a test file located in the "./tests" directory.
      * @param pUneCommande The command specifying the test file to execute.
@@ -419,7 +436,7 @@ public List<Room> getRooms() {
  private void test(final Command pUneCommande) {
   
     if (!pUneCommande.hasSecondWord()) {
-        this.aGui.println("Test what ?");
+        this.aGui.println("Which file do you want to test ?");
         return; 
     }
 
@@ -437,10 +454,12 @@ public List<Room> getRooms() {
     }
 
      try (Scanner vScanner = new Scanner(vFichier)) {
+        this.aIsTestMode = true;
          while (vScanner.hasNextLine()) {
             
              this.interpretCommand(vScanner.nextLine());
         }
+        this.aIsTestMode = false;
     } catch (IOException e) {
         System.out.println("An error occured : " + e.getMessage());
     }
@@ -547,6 +566,9 @@ private void items() {
             
         case FIRE:
             this.fire(vCommand.getSecondWord());
+            break;
+        case ALEA:
+            this.alea(vCommand.getSecondWord());
             break;
             
         default:

@@ -8,7 +8,7 @@
  */
 public class Room
 {
-    
+    private String aName;
     private String aDescription;
     private HashMap<String, Room> aExits; 
     private HashMap<String, Door> aDoors;
@@ -20,7 +20,8 @@ public class Room
  * Constructor for the room, initializes the description and exits.
  */
 
-    public Room(final String pDescription, final String pImage) {
+    public Room(final String pName,final String pDescription, final String pImage) {
+        this.aName = pName;
         this.aDescription = pDescription;
         this.aExits = new HashMap<String, Room>();
         this.aDoors = new HashMap<String, Door>();
@@ -35,6 +36,9 @@ public class Room
         return this.aDescription;
     }//getDescription
     
+    public String getName() {
+        return this.aName;
+    }
     /**
  * Returns the room in the given direction.
  */
