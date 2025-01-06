@@ -1,7 +1,9 @@
-import java.util.Stack;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -15,15 +17,17 @@ public class GameEngine
     private UserInterface aGui;
     private Player aPlayer;
     private boolean aRestartGame;
+    private List<Room> aRooms;
+    
        
 /**
      * Constructor for objects of class GameEngine
      */
   public GameEngine(final String pPlayerName)
     {
-        
         this.aParser = new Parser(this);
         this.aPlayer = new Player(pPlayerName);
+        this.aRooms = new ArrayList<Room>();
         this.createRooms();
   
     }
@@ -46,16 +50,16 @@ public class GameEngine
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
-    hall = new Room("in The entry hall.", "Images/hall.png");
-    developerRoom = new Room("inside the developer room.", "Images/developerRoom.png");
-    serverRoom = new Room("inside the server room.", "Images/serverRoom.png");
-    meetingRoom = new Room("inside the meeting room.", "Images/meetingRoom.png");
-    cafeteria = new Room("inside the cafétéria,", "Images/cafeteria.png");
-    projectManagerOffice = new Room("inside the project manager office.", "Images/projectManagerOffice.png");
-    openSpace = new Room("inside the open-space", "Images/openSpace.png");
-    presentationRoom = new Room("inside the presenting room", "Images/presentationRoom.png");
-    Wc = new Room("In the toilet...", "Images/Wc.png");
-    maintenanceRoom = new Room("inside the maintenance room.", "Images/maintenanceRoom.png");
+    hall = new TransporterRoom("in The entry hall.", "Images/hall.png");
+    developerRoom = new TransporterRoom("inside the developer room.", "Images/developerRoom.png");
+    serverRoom = new TransporterRoom("inside the server room.", "Images/serverRoom.png");
+    meetingRoom = new TransporterRoom("inside the meeting room.", "Images/meetingRoom.png");
+    cafeteria = new TransporterRoom("inside the cafétéria,", "Images/cafeteria.png");
+    projectManagerOffice = new TransporterRoom("inside the project manager office.", "Images/projectManagerOffice.png", true, this);
+    openSpace = new TransporterRoom("inside the open-space", "Images/openSpace.png");
+    presentationRoom = new TransporterRoom("inside the presenting room", "Images/presentationRoom.png");
+    Wc = new TransporterRoom("In the toilet...", "Images/Wc.png");
+    maintenanceRoom = new TransporterRoom("inside the maintenance room.", "Images/maintenanceRoom.png");
     
     Item one = new Item("Item", "Item 1 ", 300);
     Item two = new Item("Item4", "Item 2 ", 200);
@@ -161,7 +165,24 @@ public class GameEngine
     
     this.aPlayer.setCurrentRoom( hall);
     this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
+    
+     this.aRooms.addAll(Arrays.asList(
+            hall,
+            presentationRoom,
+            Wc,
+            maintenanceRoom,
+            openSpace,
+            projectManagerOffice,
+            cafeteria,
+            meetingRoom,
+            serverRoom,
+            developerRoom
+        ));
 } // createRooms
+
+public List<Room> getRooms() {
+    return this.aRooms;
+}
 
 
     
@@ -324,7 +345,7 @@ public class GameEngine
             
      
         else {
-            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( ) - 2))) {
+            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( ) - 2)) || ( (TransporterRoom) (this.aPlayer.getRoom(this.aPlayer.getItinerarySize() - 2))).isATransporterRoom()) {
                  if (pXTime == null) {
                 this.aPlayer.removeTopRoom();
                 this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
@@ -560,29 +581,19 @@ private void items() {
         // Try to leave current room.
         Room vPreviousRoom = this.aPlayer.getCurrentRoom();
         Room vNextRoom = vPreviousRoom.getExit( vDirection );
-        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
 
         
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
-            if (vCurrentRoom.isLockedDoor(vDirection)) {
-                if (this.aPlayer.getItem(vCurrentRoom.getDoorKeyItemName(vDirection)) != null) {
-                     this.aPlayer.setCurrentRoom(vNextRoom);
-                    this.aPlayer.addRoom(vNextRoom);
-                   
-                }
-                else {
+            if (vPreviousRoom.isLockedDoor(vDirection) && this.aPlayer.getItem(vPreviousRoom.getDoorKeyItemName(vDirection)) == null) {
                     this.aGui.println("You don't have the key to go to the " + vDirection);
                     return;
-                }
-               
-                
             }
-            else {
-                 this.aPlayer.setCurrentRoom(vNextRoom);
-                this.aPlayer.addRoom(vNextRoom);
-            }
+            
+            this.aPlayer.setCurrentRoom(vNextRoom);
+            this.aPlayer.addRoom(vNextRoom);
+            
             
             if (vPreviousRoom.isTrapDoor(vDirection)) {
                 switch (vDirection) {
@@ -591,6 +602,13 @@ private void items() {
                     case "West" : vNextRoom.removeDirection("East"); break;
                     case "East": vNextRoom.removeDirection("West");
                 }
+            }
+                if (( (TransporterRoom) vPreviousRoom).isATransporterRoom()) {
+                this.aPlayer.removeTopRoom();
+                Room vRandomRoom = vPreviousRoom.getExit(null);
+                this.aPlayer.setCurrentRoom(vRandomRoom);
+                this.aPlayer.addRoom(vRandomRoom);
+
             }
             this.printLocationInfo();
         }

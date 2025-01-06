@@ -14,7 +14,7 @@ public class Room
     private HashMap<String, Door> aDoors;
     private String aImageName;
     private ItemList aItems;
-    
+
        
     /**
  * Constructor for the room, initializes the description and exits.
@@ -114,13 +114,6 @@ public class Room
  * @return True if the specified room is an exit; otherwise, false.
  */
     public boolean isExit(final Room pRoom) {
-        for (String key : this.aExits.keySet()) {
-            if (this.aExits.get(key) != null)
-            System.out.println(key);
-            
-        }
-        System.out.println(this.aExits);
-        System.out.println(this.aExits.containsValue(pRoom));
         return this.aExits.containsValue(pRoom);
     }
     
