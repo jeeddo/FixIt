@@ -4,27 +4,11 @@
  *
  * @author Pierre MATAR
  */
-public class Command
+public abstract class Command
 {
-    private CommandWord aCommandWord;
     private String aSecondWord;
     
-    /**
- * Constructor for the command, initializes the command word and second word.
- */
 
-       
-    public Command(final CommandWord pCommandWord, final String pSecondWord) {
-        this.aCommandWord = pCommandWord;
-        this.aSecondWord = pSecondWord;
-    } //Command
-    /**
- * Returns the main command word.
- */
-    
-    public CommandWord getCommandWord(){
-        return this.aCommandWord;
-    }//getCommandWord
     /**
  * Returns the second word of the command.
  */
@@ -32,6 +16,9 @@ public class Command
     public String getSecondWord(){
         return this.aSecondWord;
     }//getSecondWord
+    public void setSecondWord(final String pSecondWord) {
+        this.aSecondWord = pSecondWord;
+    }
     /**
  * Checks if the command has a second word.
  */
@@ -42,12 +29,5 @@ public class Command
         
     }//hasSecondWord
     
-    /**
- * Checks if the command is the enum object unknown.
- */
-
-    
-    public boolean isUnknown() {
-        return this.aCommandWord == CommandWord.UNKNOWN ;
-    }//isUnknown
+    public abstract void execute(final Player pPlayer, final GameEngine pGameEngine);
 } // Command

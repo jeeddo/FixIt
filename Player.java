@@ -11,9 +11,10 @@ public class Player
     private Room aCurrentRoom;
     private String aName;
     private ItemList aItems;
-    private int aWeigth;
+    private int aWeight;
     private int aNbMoves;
     private Beamer aBeamer;
+    private int aMaxMoves;
     
     
       /**
@@ -25,11 +26,10 @@ public class Player
     public Player(final String pName) {
         this.aName = pName;
         this.aItems = new ItemList();
-        this.aWeigth = 300;
+        this.aWeight = 300;
         this.aNbMoves = 0;
-        this.aItinerary = new Stack<>();
-        this.aBeamer = new Beamer(null);
-        
+        this.aItinerary = new Stack<Room>();
+        this.aMaxMoves = 25;
     }
        /**
      * Sets the current room the player is in.
@@ -48,6 +48,10 @@ public class Player
     public Room getCurrentRoom() {
         return this.aCurrentRoom;
     }
+    
+    public int getMaxMoves() {
+        return this.aMaxMoves;
+    }
        /**
      * Returns the name of the player.
      * 
@@ -63,16 +67,16 @@ public class Player
      * 
      * @return The weight of the player.
      */
-    public int getPlayerWeigth() {
-        return this.aWeigth;
+    public int getPlayerWeight() {
+        return this.aWeight;
     }
         /**
      * Sets the player's weight by adding the given weight.
      * 
      * @param pWeigth The weight to add to the player's current weight.
      */
-    public void setPlayerWeigth(final int pWeigth) {
-        this.aWeigth += pWeigth;
+    public void setPlayerWeight(final int pWeight) {
+        this.aWeight += pWeight;
     }
 
        /**
@@ -187,6 +191,12 @@ public class Player
     
     public void setBeamerRoom(final Room pRoom) {
         this.aBeamer.setRoom(pRoom);
+    }
+    public void setBeamer(final Beamer pBeamer) {
+        this.aBeamer = pBeamer;
+    }
+    public Beamer getBeamer() {
+        return this.aBeamer;
     }
     
 

@@ -20,8 +20,10 @@ public class GameEngine
     private List<Room> aRooms;
     private Room aAleaRoom;
     private boolean aIsTestMode;
+    private ItemList aItemsToEat;
+    private Item aMagicCookie, aThePC;
     
-       
+
 /**
      * Constructor for objects of class GameEngine
      */
@@ -30,7 +32,8 @@ public class GameEngine
         this.aParser = new Parser(this);
         this.aPlayer = new Player(pPlayerName);
         this.aRooms = new ArrayList<Room>();
-        this.createRooms();
+        this.aItemsToEat = new ItemList();
+        this.createRoomsAndItems();
   
     }
      /**
@@ -44,11 +47,19 @@ public class GameEngine
         this.printWelcome();
        
     }
+    
+    public UserInterface getGui() {
+        return this.aGui;
+    }
+    
+    public Parser getParser() {
+        return this.aParser;
+    }
         /**
  * Creates the different rooms in the game, along with their exits and items.
  */
 
-    private void createRooms() 
+    private void createRoomsAndItems() 
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
@@ -70,7 +81,7 @@ public class GameEngine
     Item zero = new Item("Item0", "0", 100);
     Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
     Item thePC = new Item("thePC", "the holy grail", 300);
-    Item beamer = new Item("beamer", "the transporter room ! ", 200);
+    Beamer beamer = new Beamer("beamer", "the transporter room ! ", 200);
     Item key = new Item("key", "the key", 100);
     
     
@@ -180,13 +191,25 @@ public class GameEngine
             serverRoom,
             developerRoom
         ));
+        
+    this.aItemsToEat.addItem(magicCookie);
+    this.aItemsToEat.addItem(zero);
+    this.aPlayer.setBeamer(beamer);
+    this.aMagicCookie = magicCookie;
+    this.aThePC = thePC;
 } // createRooms
 
 public List<Room> getRooms() {
     return this.aRooms;
 }
 
+public Item getThePC() {
+    return this.aThePC;
+}
 
+public Item getMagicCookie() {
+    return this.aMagicCookie;
+}
     
     /**
  * Displays the welcome message to the player.
@@ -202,22 +225,14 @@ public List<Room> getRooms() {
     /**
  * Displays help with the list of available commands.
  */
-    private void printHelp() {
-        this.aGui.println("You are lost. You are alone.");
-        this.aGui.println("You wander around at the university.\n");
-        this.aGui.println("Your command words are:");
-        this.aGui.println(this.aParser.getCommands());
-    }//printHelp
-    
-
-    
+ 
 
     /**
  * Displays the current room's description and its image.
  */
 
     
-    private void printLocationInfo() {
+    public void printLocationInfo() {
         Room vRoom = this.aPlayer.getCurrentRoom();
         this.aGui.println(vRoom.getLongDescription());
         if ( vRoom.getImageName() != null )
@@ -231,200 +246,45 @@ public List<Room> getRooms() {
  * @param pSecondWord The name of the object or list of objects separated by spaces.
  */
 
-    private void look(final String pSecondWord){
-        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        if (pSecondWord == null)
-            this.printLocationInfo();
-        else {
-            String[] vItemsToLook = pSecondWord.trim().split(" ");
-            
-            for (String pItemName : vItemsToLook) {
-                if (vCurrentRoom.getItem(pItemName) == null) {
-                    this.aGui.println( pItemName + " does'nt exist in this room...");
-                    return;
-
-                }
-            }
-            for (String pItemName : vItemsToLook) {
-                this.aGui.println(vCurrentRoom.getItem(pItemName).getItemString());
-            }
-            
-        }
-        
-        
-            
-    }
+   
     
     /**
  * Displays a message indicating the player has eaten or allows to eat the magicCookie.
  * @param pItemName The name of the item to eat.
  */
-    private void eat(final String pItemName) {
-        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        if ((vCurrentRoom.getItem(pItemName) != null || this.aPlayer.getItem(pItemName) != null) && pItemName.equals("magicCookie")) {
-            this.aPlayer.setPlayerWeigth(this.aPlayer.getPlayerWeigth());
-            this.aGui.println("Miam miam miammmmm, here is your weigth now : " + this.aPlayer.getPlayerWeigth());
-            if (vCurrentRoom.getItem(pItemName) != null) vCurrentRoom.removeItem(pItemName);
-            else this.aPlayer.removeItem(pItemName);
-        }
-        else this.aGui.println( this.aPlayer.getName().toUpperCase() + " has eaten now and he's not hungry any more");
-
-    }
+ 
     
      /**
      * Checks if the player has fixed a bug using a specific object.
      * @param pSecondWord The keyword needed to complete the game.
      */
     
-    private void fix(final String pSecondWord) {
-        Item thePC = this.aPlayer.getItem("thePC");
-        if ( thePC == null) this.aGui.println("You did'nt find your PC yet...");
-        else if (thePC != null && (pSecondWord == null || !pSecondWord.equals("bug"))) this.aGui.println("ahh you were close !");
-        else {
-            this.aGui.println("YOUUUUUPIII you have fix the bug, you won the Game BRAVO !");
-            this.endGame(true);
-        }
-        
-        
-        
-    }
-      /**
+ 
+    
+   
+      /** 
      * Allows the player to pick up an item in the current room if they can carry it.
      * @param pItemName The name of the item to pick up.
      */
-    
-   private void take(final String pItemName) {
-       Item vRoomItem = this.aPlayer.getCurrentRoom().getItem(pItemName);
-        if (vRoomItem != null) {
-            
-            if (vRoomItem.getItemWeigth() <= this.aPlayer.getPlayerWeigth()) {
-                 this.aPlayer.addItem(vRoomItem);
-                this.aGui.println("You took : " + vRoomItem.getItemString());
-                this.aPlayer.setPlayerWeigth(- vRoomItem.getItemWeigth());
-                 this.aPlayer.getCurrentRoom().removeItem(pItemName);
-                 this.aGui.println(this.aPlayer.getMyItemsList());  
-            }
-            else this.aGui.println("You can carry " + pItemName + " because you weigth available is :" + this.aPlayer.getPlayerWeigth());
-            
-            
-        }
-           
-        else 
-            this.aGui.println("this item does'nt exist in this room...");
-    } 
+ 
     
      /**
      * Allows the player to drop an item in the current room.
      * @param pItemName The name of the item to drop.
      */
-    
-    private void drop(final String pItemName) {
-        Room vCurrentRoom = this.aPlayer.getCurrentRoom();
-        Item vPlayerItem = this.aPlayer.getItem(pItemName); 
-
-        if ( vPlayerItem == null) this.aGui.println("You don't own " + pItemName);
-        
-        else if (vCurrentRoom.getItem(pItemName) != null) this.aGui.println("You are not allowed to put the same item in the room");
-        
-        else {
-            vCurrentRoom.addItem(vPlayerItem);
-            this.aPlayer.setPlayerWeigth(vPlayerItem.getItemWeigth());
-            this.aPlayer.removeItem(pItemName);
-            this.aGui.println("You droped " + pItemName);
-        }
-    }
-    
+  
        /**
      * Moves the player back to the previous room(s), depending on the command.
      * If a specific number of "back" commands is provided, it goes back that many times.
      * @param pXTime The number of times "back" is specified, or null for a single back.
      */
     
-    private void back(final String pXTime) {
-        
-        if (this.aPlayer.getItinerarySize() == 1)
-            this.aGui.println("Back is no possible here...");
-            
-     
-        else {
-            if (this.aPlayer.getCurrentRoom().isExit(this.aPlayer.getRoom(this.aPlayer.getItinerarySize( ) - 2)) || ( (TransporterRoom) (this.aPlayer.getRoom(this.aPlayer.getItinerarySize() - 2))).isATransporterRoom()) {
-                 if (pXTime == null) {
-                this.aPlayer.removeTopRoom();
-                this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
-                 this.printLocationInfo();
-                return;
-            }
-            String[] vCommands = pXTime.trim().split(" ");
-            for(int i = 0; i < vCommands.length; i++) {
-                if (!vCommands[i].equals("back")) 
-                {
-                   this.aGui.println("back what ?");
-                   return;
-                }
-            }
-        
-            for (int i = 0; i < vCommands.length + 1; i++) {
-                if (this.aPlayer.getItinerarySize() == 1) break;
-                
-                this.aPlayer.removeTopRoom();
-            }
-            
-        
-            this.aPlayer.setCurrentRoom( this.aPlayer.getTopRoom());
-            this.printLocationInfo();
-                
-            }
-            else {
-                this.aPlayer.clearItinerary();
-                
-                this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());  
-                
-            }
-        
-           
-           
-        }
-    }
+
     
-    private void charge(final String pBeamerName) {
-        if (pBeamerName == null) this.aGui.println("charge what ?");
-        else if (! pBeamerName.equals("beamer")) this.aGui.println(pBeamerName + " is not the beamer");
-        else if (this.aPlayer.getItem(pBeamerName) == null) this.aGui.println("You don't own the beamer");
-        else {
-            this.aPlayer.setBeamerRoom(this.aPlayer.getCurrentRoom());
-            this.aGui.println("You charged the beamer");
-        }
-        
-    }
-    
-    private void fire(final String pBeamerName) {
-         if (pBeamerName == null) this.aGui.println("charge what ?");
-        else if (! pBeamerName.equals("beamer")) this.aGui.println(pBeamerName + " is not the beamer");
-        else if (this.aPlayer.getItem(pBeamerName) == null) this.aGui.println("You don't own the beamer");
-        else if (this.aPlayer.getBeamerRoom() == null) this.aGui.println("You forget to charge it !");
-        else {
-            if (this.aPlayer.getCurrentRoom() == this.aPlayer.getBeamerRoom()) {
-                this.aGui.println("You can not fire at the same room you charged the beamer...");
-                return;
-            }
-            this.aPlayer.setCurrentRoom(this.aPlayer.getBeamerRoom());
-            this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
-            this.printLocationInfo();
-            this.aPlayer.removeItem(pBeamerName);
-        }
-    }
-    
-    private void alea(final String pSecondCommandWord) {
-        
-        if (pSecondCommandWord != null && this.aIsTestMode) {
-               for (Room room : this.aRooms) 
-            if (room.getName().equals(pSecondCommandWord)) this.aAleaRoom = room;
-        
-        }
-     
  
-    }
     
+    
+   
     public Room getAleaRoom() {
         return this.aAleaRoom;
     }
@@ -433,47 +293,24 @@ public List<Room> getRooms() {
      * Executes a series of commands from a test file located in the "./tests" directory.
      * @param pUneCommande The command specifying the test file to execute.
      */
- private void test(final Command pUneCommande) {
-  
-    if (!pUneCommande.hasSecondWord()) {
-        this.aGui.println("Which file do you want to test ?");
-        return; 
-    }
-
  
-    String vSecondWord = pUneCommande.getSecondWord();
-
- 
-    File vDossier = new File("./tests");
-    File vFichier = new File(vDossier, vSecondWord + ".txt");
-
-
-    if (!vFichier.exists()) {
-        this.aGui.println("The file " + vSecondWord + ".txt' does not exist.");
-        return;  
-    }
-
-     try (Scanner vScanner = new Scanner(vFichier)) {
-        this.aIsTestMode = true;
-         while (vScanner.hasNextLine()) {
-            
-             this.interpretCommand(vScanner.nextLine());
-        }
-        this.aIsTestMode = false;
-    } catch (IOException e) {
-        System.out.println("An error occured : " + e.getMessage());
-    }
-}
 
 /**
 * Displays the list of items currently in the player's inventory.
 */
-private void items() {
-    this.aGui.println(this.aPlayer.getMyItemsList());
+
+
+public void setTestMode(final boolean pBool) {
+    this.aIsTestMode = pBool;
 }
 
-    
+public boolean isTestMode() {
+    return this.aIsTestMode;
+}
 
+public void setAleaRoom(final Room pRoom) {
+    this.aAleaRoom = pRoom;
+}
 
  /**
      * Interprets and executes a given command line string.
@@ -487,10 +324,15 @@ private void items() {
         Command vCommand = this.aParser.getCommand( pCommandLine);
         
    
-        if ( vCommand.isUnknown() ) {
-         
+        if ( vCommand instanceof UnknownCommand ) {
+    
             if (this.aRestartGame) {
-                if (vCommand.getSecondWord() == null) this.endGame(false); 
+                String vSecondWord = vCommand.getSecondWord();
+                vCommand = CommandWord.QUIT.getCommand();
+                if (vSecondWord == null || !vSecondWord.equals("yes")) {
+                    ((QuitCommand)vCommand).setState(false);
+                    vCommand.execute(this.aPlayer, this);
+                }
                 else {
                     this.aGui.closeWindow();
                     new Game();
@@ -503,81 +345,24 @@ private void items() {
             }
             return;
         }
+        else if (vCommand instanceof EatCommand) {
+            ((EatCommand)vCommand).setItems(this.aItemsToEat);
+        }
         
-        if (this.aPlayer.getNbMoves() == 25) {
-            this.aGui.println("you've reached the maximum number of attempts (25)... ");
-            this.endGame(true);
+        if (this.aPlayer.getNbMoves() == this.aPlayer.getMaxMoves()) {
+            this.aGui.println("you've reached the maximum number of attempts ( " + this.aPlayer.getMaxMoves() + " )... ");
+            
+            vCommand = CommandWord.QUIT.getCommand();
+            ((QuitCommand)vCommand).setState(true);
+            vCommand.execute(this.aPlayer, this);
             return;
             
         }
+        
 
-        CommandWord vCommandWord = vCommand.getCommandWord();
         
-        switch (vCommandWord) {
-            case HELP:
-                this.printHelp();
-                 break;
-            case GO:
-                this.goRoom( vCommand );
-                 break;
-            case QUIT:
-                if ( vCommand.hasSecondWord() )
-                this.aGui.println( "Quit what?" );
-            else
-                this.endGame(false);
-                 break;
-        
-          case LOOK:
-            this.look(vCommand.getSecondWord());
-             break;
-        
-    
-        case EAT: 
-            this.eat(vCommand.getSecondWord());
-             break;
-        
-        case BACK:
-            this.back(vCommand.getSecondWord());
-             break;
-        case TEST:
-            this.test(vCommand);
-             break;
-        case TAKE:
-            if (!vCommand.hasSecondWord()) this.aGui.println("Take what ?");
-            else this.take(vCommand.getSecondWord());
-             break;
-        
-        
-        case DROP: 
-            if (!vCommand.hasSecondWord()) this.aGui.println("Drop what ?");
-            else this.drop(vCommand.getSecondWord());
-            break;
-        
-        case ITEMS:
-            this.items();
-            break;
-        case FIX:
-            this.fix(vCommand.getSecondWord());
-            break;
-        
-        case CHARGE: 
-            this.charge(vCommand.getSecondWord());
-            break;
-            
-        case FIRE:
-            this.fire(vCommand.getSecondWord());
-            break;
-        case ALEA:
-            this.alea(vCommand.getSecondWord());
-            break;
-            
-        default:
-            this.aGui.println("Erreur du programmeur : commande non reconnue !");
-        
-    }
-            this.aPlayer.addOneMove();
-
-   
+        vCommand.execute(this.aPlayer, this);
+        this.aPlayer.addOneMove();
 }
         
 
@@ -587,54 +372,7 @@ private void items() {
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
      */
-    private void goRoom( final Command pCommand ) 
-    {
-        if ( ! pCommand.hasSecondWord() ) {
-            // if there is no second word, we don't know where to go...
-            this.aGui.println( "Go where?" );
-            return;
-        }
-        
 
-
-
-        String vDirection = pCommand.getSecondWord();
-        
-        // Try to leave current room.
-        Room vPreviousRoom = this.aPlayer.getCurrentRoom();
-        Room vNextRoom = vPreviousRoom.getExit( vDirection );
-
-        
-        if ( vNextRoom == null )
-            this.aGui.println( "There is no door!" );
-        else {
-            if (vPreviousRoom.isLockedDoor(vDirection) && this.aPlayer.getItem(vPreviousRoom.getDoorKeyItemName(vDirection)) == null) {
-                    this.aGui.println("You don't have the key to go to the " + vDirection);
-                    return;
-            }
-            
-            this.aPlayer.setCurrentRoom(vNextRoom);
-            this.aPlayer.addRoom(vNextRoom);
-            
-            
-            if (vPreviousRoom.isTrapDoor(vDirection)) {
-                switch (vDirection) {
-                    case "North": vNextRoom.removeDirection("South"); break;
-                    case "South": vNextRoom.removeDirection("North"); break;
-                    case "West" : vNextRoom.removeDirection("East"); break;
-                    case "East": vNextRoom.removeDirection("West");
-                }
-            }
-                if (( (TransporterRoom) vPreviousRoom).isATransporterRoom()) {
-                this.aPlayer.removeTopRoom();
-                Room vRandomRoom = vPreviousRoom.getExit(null);
-                this.aPlayer.setCurrentRoom(vRandomRoom);
-                this.aPlayer.addRoom(vRandomRoom);
-
-            }
-            this.printLocationInfo();
-        }
-    }
     
       /**
      * Retrieves the state of the restart game flag.
@@ -643,6 +381,9 @@ private void items() {
     
     public boolean getRestartGame() {
         return this.aRestartGame;
+    }
+    public void setRestartGame(final boolean pBool) {
+        this.aRestartGame = pBool;
     }
     
     
@@ -666,4 +407,3 @@ private void items() {
     }
 
 }
-

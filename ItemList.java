@@ -60,15 +60,20 @@ public class ItemList
 
         }
             
-        else {
+        else if (pO instanceof Player) {
             if (this.aItemList.isEmpty()) return "\nYou are not carrying any items.";
             vSb = new StringBuilder("Your items -> ");
+
+        }
+        else {
+            if (this.aItemList.isEmpty()) return "\nYou can't eat...";
+                vSb = new StringBuilder("You can eat only these items : ");
 
         }
         
         
         for (String itemName : this.aItemList.keySet()) {
-            vSb.append(itemName +" (" + this.getItem(itemName).getItemWeigth() + ")").append(index == this.aItemList.size() - 1 ? "" : " / ");
+            vSb.append(itemName +" (" + this.getItem(itemName).getItemWeight() + ")").append(index == this.aItemList.size() - 1 ? "" : " / ");
             index++;
         }
      

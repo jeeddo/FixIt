@@ -5,14 +5,14 @@
  * @author Pierre MATAR
  * @version 2
  */
-public class Beamer
+public class Beamer extends Item
 {
     private Room aRoom;
     
-    public Beamer(final Room pRoom) {
-        this.aRoom = pRoom;
+    public Beamer(final String pName, final String pDescription, final int pWeight) {
+        super(pName, pDescription, pWeight);
     }
-    
+  
     public Room getRoom() {
         return this.aRoom;
     }

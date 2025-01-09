@@ -15,12 +15,12 @@ import java.util.StringTokenizer;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kolling and David J. Barnes + D.Bureau
+ * @author Pierre MATAR
  * @version 2008.03.30 + 2013.09.15
  */
 public class Parser 
 {  
-    private CommandWords aValidCommands;  // (voir la classe CommandWords)
+    private CommandWords aValidCommands;  
     private GameEngine aGameEngine;
     private Player aPlayer;
 
@@ -50,16 +50,14 @@ public class Parser
 
         StringTokenizer tokenizer = new StringTokenizer( pInputLine );
 
-        if ( tokenizer.hasMoreTokens() )
-            vWord1 = tokenizer.nextToken();      // get first word
-        else
-            vWord1 = null;
-        
+       
+        vWord1 = tokenizer.nextToken();     
+      
             if (vWord1 != null) {
             
           
               
-        if (vWord1.equals("back") || vWord1.equals("look")) {
+        if (vWord1.equals(CommandWord.BACK.getDescription()) || vWord1.equals(CommandWord.LOOK.getDescription())) {
     
              while(tokenizer.hasMoreTokens()) {
             vWord2.append(tokenizer.nextToken()).append(" ");
@@ -85,8 +83,11 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-
-        return new Command( this.aValidCommands.getCommandWord(vWord1) == null ? CommandWord.UNKNOWN : this.aValidCommands.getCommandWord(vWord1), vWord2 != null ? vWord2.toString() : null);
+       
+        
+        Command vCommand = this.aValidCommands.getCommandWord(vWord1).getCommand();
+        vCommand.setSecondWord(vWord2 != null ? vWord2.toString() : null);
+        return vCommand;
       
     } // getCommand(.)
     

@@ -20,7 +20,7 @@ public class RoomRandomizer
         if (this.aAleaRoom == null) {
             Room vRandomRoom = pRooms.get(vRandom.nextInt(pRooms.size()));
             while (vRandomRoom == pTransporterRoom) vRandomRoom = pRooms.get(vRandom.nextInt(pRooms.size()));
-            return pRooms.get(vRandom.nextInt(pRooms.size()));
+            return vRandomRoom;
         }
         return this.aAleaRoom;
     }

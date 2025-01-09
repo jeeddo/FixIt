@@ -8,7 +8,7 @@
 public class Item
 {
     private String aDescription;
-    private int aWeigth;
+    private int aWeight;
     private String aName;
     
       /**
@@ -19,10 +19,10 @@ public class Item
      * @param pWeigth The weight of the item.
      */
     
-    public Item(final String pName, final String pDescription, final int pWeigth) {
+    public Item(final String pName, final String pDescription, final int pWeight) {
         this.aName = pName;
         this.aDescription = pDescription;
-        this.aWeigth = pWeigth;
+        this.aWeight = pWeight;
         
     }
         
@@ -42,8 +42,8 @@ public class Item
      * @return The item's weight.
      */
     
-    public int getItemWeigth() {
-        return this.aWeigth;
+    public int getItemWeight() {
+        return this.aWeight;
     }
     
     /**
@@ -62,6 +62,6 @@ public class Item
      */
     
     public String getItemString() {
-        return this.aName +" "+this.aDescription + " " + this.aWeigth;
+        return this.aName +" "+this.aDescription + " " + this.aWeight;
     }
 }
