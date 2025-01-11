@@ -1,3 +1,5 @@
+import java.util.Collection;
+
  import java.util.HashMap;
  import java.util.Set;
  
@@ -14,6 +16,7 @@ public class Room
     private HashMap<String, Door> aDoors;
     private String aImageName;
     private ItemList aItems;
+    private HashMap<String, Character> aCharacters;
 
        
     /**
@@ -27,6 +30,7 @@ public class Room
         this.aDoors = new HashMap<String, Door>();
         this.aImageName = pImage;
         this.aItems = new ItemList();
+        this.aCharacters = new HashMap<String, Character>();
     }//Room
     /**
  * Returns the description of the room.
@@ -63,13 +67,25 @@ public class Room
         return vSb.toString();
         
     }//getExitString
+    
+    public String getCharactersString() {
+        if (!this.aCharacters.isEmpty()) {
+               StringBuilder vSb = new StringBuilder(".\nHere live"+ (this.aCharacters.size() > 1 ? " : " : "s : "));
+        for (String characterName : this.aCharacters.keySet()) {
+            vSb.append(characterName);
+        }
+        return vSb.toString();
+        }
+        return "";
+    }
+    
     /**
  * Returns a detailed description of the room including exits.
  */
     
     public String getLongDescription() {
         
-        return "You are " + this.aDescription + ".\n" + this.getExitString() +this.aItems.getAllItemString(this);
+        return "You are " + this.aDescription + ".\n" + this.getExitString() + this.aItems.getAllItemString(this) + this.getCharactersString();
     }
     
  
@@ -175,6 +191,18 @@ public class Room
     
     public void removeItem(final String pItemName) {
         this.aItems.removeItem(pItemName);
+    }
+    
+    public void addCharacter(final Character pCharacter) {
+        this.aCharacters.put(pCharacter.getName(), pCharacter);
+    }
+    
+    public Character getCharacter(final String pCharacterName) {
+        return this.aCharacters.get(pCharacterName);
+    }
+    
+    public Collection<Character> getCharacters() {
+        return this.aCharacters.values();
     }
    
 } // Room

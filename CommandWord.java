@@ -23,7 +23,8 @@ public enum CommandWord
     FIX("fix", new FixCommand()), 
     CHARGE("charge", new ChargeCommand()), 
     FIRE("fire", new FireCommand()), 
-    ALEA("alea", new AleaCommand());
+    ALEA("alea", new AleaCommand()),
+    INTERACT("interact", new InteractCommand());
     
     
     // The command string.

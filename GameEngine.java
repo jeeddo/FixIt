@@ -120,6 +120,7 @@ public class GameEngine
     meetingRoom.setExit("West", null);
     meetingRoom.setExit("Up", developerRoom);
     meetingRoom.setExit("Down", null);
+    meetingRoom.addCharacter(new Character("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", zero));
     meetingRoom.addItem(two);
 
     

@@ -62,12 +62,12 @@ public class ItemList
             
         else if (pO instanceof Player) {
             if (this.aItemList.isEmpty()) return "\nYou are not carrying any items.";
-            vSb = new StringBuilder("Your items -> ");
+            vSb = new StringBuilder("\nYour items -> ");
 
         }
         else {
             if (this.aItemList.isEmpty()) return "\nYou can't eat...";
-                vSb = new StringBuilder("You can eat only these items : ");
+                vSb = new StringBuilder("\nYou can eat only these items : ");
 
         }
         
