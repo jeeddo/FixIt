@@ -197,8 +197,8 @@ public class Room
         this.aCharacters.put(pCharacter.getName(), pCharacter);
     }
     
-    public void removeCharacter(final String pCharacterName) {
-        this.aCharacters.remove(pCharacterName);
+    public void removeCharacter(final Character pCharacter) {
+        this.aCharacters.remove(pCharacter.getName());
     }
     
     public Character getCharacter(final String pCharacterName) {

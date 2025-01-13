@@ -13,11 +13,14 @@ public class MovingCharacter extends Character
         super(pName, pTextToSay, pResponse, pItem);
         this.aRoom = pRoom;
     }
-    
-    public Room getRoom() {
-        return this.aRoom;
-    }
+
     public void setRoom(final Room pRoom) {
         this.aRoom = pRoom;
+    }
+    
+    public void move(final Room pRoom) {
+        this.aRoom.removeCharacter(this);
+        this.setRoom(pRoom);
+        this.aRoom.addCharacter(this);
     }
 }

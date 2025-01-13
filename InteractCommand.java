@@ -13,10 +13,7 @@ public class InteractCommand extends Command
          for (Character vCharacter : pGameEngine.getCharacters()) {
              
              if (vCharacter.getName().equals(vCharacterName) && vCharacter instanceof MovingCharacter) {
-                 ((MovingCharacter)vCharacter).getRoom().removeCharacter(vCharacter.getName());
-                 ((MovingCharacter)vCharacter).setRoom(pPlayer.getCurrentRoom());
-                 
-                 pPlayer.getCurrentRoom().addCharacter(vCharacter);
+                 ((MovingCharacter) vCharacter).move(pPlayer.getCurrentRoom());
                  break;
              }
              else if (vCharacter.getName().equals(vCharacterName) && pPlayer.getCurrentRoom().getCharacter(vCharacterName) == null) {
