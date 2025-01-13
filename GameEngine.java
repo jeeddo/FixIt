@@ -22,6 +22,7 @@ public class GameEngine
     private boolean aIsTestMode;
     private ItemList aItemsToEat;
     private Item aMagicCookie, aThePC;
+    private List<Character> aCharacters;
     
 
 /**
@@ -33,6 +34,7 @@ public class GameEngine
         this.aPlayer = new Player(pPlayerName);
         this.aRooms = new ArrayList<Room>();
         this.aItemsToEat = new ItemList();
+        this.aCharacters = new ArrayList<Character>();
         this.createRoomsAndItems();
   
     }
@@ -63,16 +65,16 @@ public class GameEngine
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
-    hall = new TransporterRoom("hall", "in The entry hall.", "Images/hall.png");
-    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "Images/developerRoom.png");
-    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "Images/serverRoom.png");
-    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "Images/meetingRoom.png");
-    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "Images/cafeteria.png");
-    projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "Images/projectManagerOffice.png", true, this);
-    openSpace = new TransporterRoom("openSpace","inside the open-space", "Images/openSpace.png");
-    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "Images/presentationRoom.png");
-    Wc = new TransporterRoom("Wc","In the toilet...", "Images/Wc.png");
-    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "Images/maintenanceRoom.png");
+    hall = new TransporterRoom("hall", "in The entry hall.", "images/hall.png");
+    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "images/developerRoom.png");
+    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "images/serverRoom.png");
+    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "images/meetingRoom.png");
+    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "images/cafeteria.png");
+    projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "images/projectManagerOffice.png", true, this);
+    openSpace = new TransporterRoom("openSpace","inside the open-space", "images/openSpace.png");
+    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "images/presentationRoom.png");
+    Wc = new TransporterRoom("Wc","In the toilet...", "images/Wc.png");
+    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "images/maintenanceRoom.png");
     
     Item one = new Item("Item", "Item 1 ", 300);
     Item two = new Item("Item4", "Item 2 ", 200);
@@ -95,7 +97,8 @@ public class GameEngine
     hall.addItem(one);
     hall.addItem(zero);
     hall.addItem(key);
-    
+    Character vRim = new Character("Rim", "hi de malda", "thanks", key);
+    hall.addCharacter(vRim);
 
     developerRoom.setExit("North", projectManagerOffice);
     developerRoom.setExit("South", null);
@@ -120,7 +123,8 @@ public class GameEngine
     meetingRoom.setExit("West", null);
     meetingRoom.setExit("Up", developerRoom);
     meetingRoom.setExit("Down", null);
-    meetingRoom.addCharacter(new Character("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", zero));
+    MovingCharacter vPierre = new MovingCharacter("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", zero, meetingRoom);
+    meetingRoom.addCharacter(vPierre);
     meetingRoom.addItem(two);
 
     
@@ -198,10 +202,16 @@ public class GameEngine
     this.aPlayer.setBeamer(beamer);
     this.aMagicCookie = magicCookie;
     this.aThePC = thePC;
+    this.aCharacters.add(vPierre);
+    this.aCharacters.add(vRim);
 } // createRooms
 
 public List<Room> getRooms() {
     return this.aRooms;
+}
+
+public List<Character> getCharacters() {
+    return this.aCharacters;
 }
 
 public Item getThePC() {

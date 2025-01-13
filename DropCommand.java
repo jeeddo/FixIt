@@ -32,7 +32,7 @@ public class DropCommand extends Command
             pGameEngine.getGui().println("You droped " + vItemName);
             for (Character vCharacter : vCurrentRoom.getCharacters()) {
                 if (vCharacter.getItem() == vCurrentRoom.getItem(vItemName)) {
-                    pGameEngine.getGui().println(vCharacter.getResponseText());
+                    pGameEngine.getGui().println(vCharacter.getName() + " : " + vCharacter.getResponseText());
                     vCurrentRoom.removeItem(vItemName);
                 }
             }

@@ -72,7 +72,7 @@ public class Room
         if (!this.aCharacters.isEmpty()) {
                StringBuilder vSb = new StringBuilder(".\nHere live"+ (this.aCharacters.size() > 1 ? " : " : "s : "));
         for (String characterName : this.aCharacters.keySet()) {
-            vSb.append(characterName);
+            vSb.append(characterName).append(" ");
         }
         return vSb.toString();
         }
@@ -195,6 +195,10 @@ public class Room
     
     public void addCharacter(final Character pCharacter) {
         this.aCharacters.put(pCharacter.getName(), pCharacter);
+    }
+    
+    public void removeCharacter(final String pCharacterName) {
+        this.aCharacters.remove(pCharacterName);
     }
     
     public Character getCharacter(final String pCharacterName) {
