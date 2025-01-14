@@ -21,6 +21,7 @@ public class Game
         while(vPlayerName.length() == 0) {
             vPlayerName = javax.swing.JOptionPane.showInputDialog("Enter your name to start the game : ");
         }
+        
         this.aEngine = new GameEngine(vPlayerName);
         this.aGui = new UserInterface( this.aEngine );
         this.aEngine.setGUI( this.aGui );

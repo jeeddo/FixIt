@@ -251,7 +251,7 @@ public Item getMagicCookie() {
  * Displays the welcome message to the player.
  */
     private void printWelcome() {
-        this.aGui.println("Welcome " + this.aPlayer.getName().toUpperCase() + " to 404 : Pc not found !");
+        this.aGui.println("Welcome " + this.aPlayer.getName().toUpperCase() + " to FixIt");
         this.aGui.println("World of Zuul is a new, incredibly boring adventure game.");
         this.aGui.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
