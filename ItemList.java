@@ -1,19 +1,19 @@
 import java.util.HashMap;
 /**
- * Décrivez votre classe ItemList ici.
- *
+ * Manages a collection of items. Allows adding, retrieving, and removing items.
+ * Also provides a method to list items based on context.
+ * 
  * @author Pierre MATAR
- * @version 2
  */
 public class ItemList
 {
     private HashMap<String, Item> aItemList;
     
     /**
- * Constructs an ItemList with an empty collection of items.
+ * Constructs an ItemList with an empty HashMap of items.
  */
     public ItemList() {
-        this.aItemList = new HashMap<>();
+        this.aItemList = new HashMap<String, Item>();
     }
     /**
  * Adds an item to the collection.
@@ -42,15 +42,13 @@ public class ItemList
     public void removeItem(final String pItemName) {
         this.aItemList.remove(pItemName);
     }
-    /**
- * Returns a string representation of all items in the collection.
- * The format of the string depends on whether the items belong to a room
- * or a player's inventory.
- * 
- * @param pO The object context (Room or other) to determine the string format.
- * @return A string listing all items and their weights, or a message if no items exist.
- */
-    
+ /**
+     * Returns a string representation of all items in the collection.
+     * Displays different formats based on the context.
+     * 
+     * @param pO The context (Room or Player).
+     * @return A string listing all items or a message if none.
+     */
     public String getAllItemString(final Object pO) {
         StringBuilder vSb;
         int index = 0;

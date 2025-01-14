@@ -1,20 +1,24 @@
 
 /**
- * Décrivez votre classe BackCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Represents the command to move the player back to the previous room in their itinerary.
+ * 
+ * @author Pierre MATAR
  */
 public class BackCommand extends Command
 
 {
+    /**
+     * Executes the "back" command, moving the player to the previous room in their itinerary.
+     * 
+     * @param pPlayer The player who is executing the command.
+     * @param pGameEngine The game engine.
+     */
+    
     @Override
      public void execute(final Player pPlayer, final GameEngine pGameEngine) {
         
         String vXTime = super.getSecondWord();
-        if (pPlayer.getItinerarySize() == 1)
-            pGameEngine.getGui().println("Back is no possible here...");
-            
+        if (pPlayer.getItinerarySize() == 1) pGameEngine.getGui().println("Back is no possible here...");
          
         else {
             if (pPlayer.getCurrentRoom().isExit(pPlayer.getRoom(pPlayer.getItinerarySize( ) - 2)) || ( (TransporterRoom) (pPlayer.getRoom(pPlayer.getItinerarySize() - 2))).isATransporterRoom()) {
@@ -26,7 +30,7 @@ public class BackCommand extends Command
             }
             String[] vCommands = vXTime.trim().split(" ");
             for(int i = 0; i < vCommands.length; i++) {
-                if (!vCommands[i].equals("back")) 
+                if (!vCommands[i].equals(CommandWord.BACK.getDescription())) 
                 {
                    pGameEngine.getGui().println("back what ?");
                    return;

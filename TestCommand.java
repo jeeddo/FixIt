@@ -3,13 +3,22 @@ import java.util.Scanner;
 import java.io.IOException;
 
 /**
- * Décrivez votre classe TestCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * The TestCommand class is used to execute a series of commands from a file.
+ * This command allows the player to load and execute predefined commands from a text file.
+ * 
+ * @author Piere MATAR
  */
 public class TestCommand extends Command
 {
+    /**
+     * Executes the "test" command.
+     * If no file name is provided, prompts the player to specify a file.
+     * If a valid file is found, executes each command inside it.
+     * 
+     * @param pPlayer The player who executed the command.
+     * @param pGameEngine The game engine.
+     */
+    
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) {
   

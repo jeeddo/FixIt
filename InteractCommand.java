@@ -1,12 +1,21 @@
 
 /**
- * Décrivez votre classe InteractCommand ici.
+ * Represents the command to interact with a character in the game.
+ * The player can attempt to talk to or move a character in the current room.
+ * The command checks if the character exists, whether he can be interacted with, and if he can move.
  *
  * @author Pierre MATAR
- * @version (un numéro de version ou une date)
- */
+*/
 public class InteractCommand extends Command
 {
+    /**
+     * Executes the interaction command, allowing the player to interact with a character in the room.
+     * The player can either talk to the character or move the character if applicable.
+     * If the character cannot be found or interacted with, appropriate messages are displayed.
+     *
+     * @param pPlayer The player who is executing the command.
+     * @param pGameEngine The game engine.
+     */
      @Override
      public void execute(final Player pPlayer, final GameEngine pGameEngine) {
          String vCharacterName = super.getSecondWord();

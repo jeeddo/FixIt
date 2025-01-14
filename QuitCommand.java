@@ -1,18 +1,29 @@
 
 /**
- * Décrivez votre classe QuitCommand ici.
+ * Command that handles quitting the game. 
+ * It can also prompt the player to restart if the game state allows.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Pierre MATAR
  */
 public class QuitCommand extends Command
 {
     private boolean aState;
     
+     /**
+     * Sets the state indicating whether the game can be restarted.
+     * 
+     * @param pState true if restart is allowed, false otherwise.
+     */
     public void setState(final boolean pState) {
         this.aState = pState;
     }
-    
+     /**
+     * Depending on the state, the game either 
+     * ends or asks the player if they want to restart.
+     * 
+     * @param pPlayer      the player executing the command.
+     * @param pGameEngine  the game engine managing interactions.
+     */
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine)
     {

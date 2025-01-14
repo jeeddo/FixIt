@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Décrivez votre classe GameEngine ici.
- *
+ * This class represents the core engine of the game, responsible for managing game elements such as rooms, items, and characters.
+ * It processes player commands and controls the flow of the game.
+ * 
  * @author Pierre MATAR
- * @version 2
  */
+
 public class GameEngine
 {
     private Parser aParser;
@@ -35,7 +36,7 @@ public class GameEngine
         this.aRooms = new ArrayList<Room>();
         this.aItemsToEat = new ItemList();
         this.aCharacters = new ArrayList<Character>();
-        this.createRoomsAndItems();
+        this.createRoomsAndItemsAndCharacters();
   
     }
      /**
@@ -50,18 +51,26 @@ public class GameEngine
        
     }
     
+     /**
+     * @return The UserInterface object.
+     */
+    
     public UserInterface getGui() {
         return this.aGui;
     }
+    
+    /**
+     * @return The Parser object.
+     */
     
     public Parser getParser() {
         return this.aParser;
     }
         /**
- * Creates the different rooms in the game, along with their exits and items.
+ * Creates the different rooms / items / characters in the game.
  */
 
-    private void createRoomsAndItems() 
+    private void createRoomsAndItemsAndCharacters() 
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
@@ -206,17 +215,33 @@ public class GameEngine
     this.aCharacters.add(vRim);
 } // createRooms
 
+ /**
+* @return List of rooms.
+*/
+
 public List<Room> getRooms() {
     return this.aRooms;
 }
 
+    /**
+     * @return List of characters.
+     */
+    
 public List<Character> getCharacters() {
     return this.aCharacters;
 }
 
+    /**
+     * @return The PC item.
+     */
+    
 public Item getThePC() {
     return this.aThePC;
 }
+
+/**  
+* @return The magic cookie item.
+*/
 
 public Item getMagicCookie() {
     return this.aMagicCookie;
@@ -231,12 +256,6 @@ public Item getMagicCookie() {
         this.aGui.println("Type 'help' if you need help. \n");
         this.printLocationInfo();
     } //printWelcome
-  
-    
-    /**
- * Displays help with the list of available commands.
- */
- 
 
     /**
  * Displays the current room's description and its image.
@@ -252,82 +271,52 @@ public Item getMagicCookie() {
         
     } //printLocationInfo
     
-    /**
- * Displays the detailed description of the current room or examines one or more objects in the current room.
- * @param pSecondWord The name of the object or list of objects separated by spaces.
- */
-
-   
-    
-    /**
- * Displays a message indicating the player has eaten or allows to eat the magicCookie.
- * @param pItemName The name of the item to eat.
- */
- 
-    
-     /**
-     * Checks if the player has fixed a bug using a specific object.
-     * @param pSecondWord The keyword needed to complete the game.
+   /**
+     * @return The alea room.
      */
-    
- 
-    
-   
-      /** 
-     * Allows the player to pick up an item in the current room if they can carry it.
-     * @param pItemName The name of the item to pick up.
-     */
- 
-    
-     /**
-     * Allows the player to drop an item in the current room.
-     * @param pItemName The name of the item to drop.
-     */
-  
-       /**
-     * Moves the player back to the previous room(s), depending on the command.
-     * If a specific number of "back" commands is provided, it goes back that many times.
-     * @param pXTime The number of times "back" is specified, or null for a single back.
-     */
-    
-
-    
- 
-    
-    
-   
     public Room getAleaRoom() {
         return this.aAleaRoom;
     }
     
-    /**
-     * Executes a series of commands from a test file located in the "./tests" directory.
-     * @param pUneCommande The command specifying the test file to execute.
-     */
+   
  
-
-/**
-* Displays the list of items currently in the player's inventory.
-*/
-
+ /**
+ * Sets the test mode flag for the game.
+ * 
+ * @param pBool True if the game is in test mode, false otherwise.
+ */
 
 public void setTestMode(final boolean pBool) {
     this.aIsTestMode = pBool;
 }
 
+ /**
+ * Checks if the game is in test mode.
+ * 
+ * @return True if the game is in test mode, false otherwise.
+ */
+    
+
 public boolean isTestMode() {
     return this.aIsTestMode;
 }
+
+ /**
+ * Sets the alea room used in the game.
+ * 
+ * @param pRoom The alea room.
+ */
 
 public void setAleaRoom(final Room pRoom) {
     this.aAleaRoom = pRoom;
 }
 
  /**
-     * Interprets and executes a given command line string.
-     * If the command ends the game, the game terminates.
-     * @param pCommandLine The command line string entered by the player.
-     */
+ * Interprets and executes a given command line string.
+ * If the command ends the game, the game terminates.
+ * 
+ * @param pCommandLine The command line string entered by the player.
+ */
     public void interpretCommand( final String pCommandLine ) 
     {
         this.aGui.println( "> " + pCommandLine );
@@ -376,45 +365,24 @@ public void setAleaRoom(final Room pRoom) {
         this.aPlayer.addOneMove();
 }
         
-
-        
-
- /** 
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
-     */
-
     
       /**
-     * Retrieves the state of the restart game flag.
      * @return True if the game is ready to restart, false otherwise.
      */
     
     public boolean getRestartGame() {
         return this.aRestartGame;
     }
+    
+      /**
+     * Sets the restart game flag.
+     * 
+     * @param pBool True if the game should restart, false otherwise.
+     */
+    
     public void setRestartGame(final boolean pBool) {
         this.aRestartGame = pBool;
     }
     
-    
-      /**
-     * Ends the game, optionally prompting the player to restart the game.
-     * @param pRestartQuestion True to ask the player if they want to restart, false to end the game.
-     */
-    
-    private void endGame(final boolean pRestartQuestion)
-    {
-        if (pRestartQuestion) {
-            this.aGui.println("Do you want to play again ?");
-            this.aRestartGame = true;
-        }
-        else {
-        this.aGui.println( "Thank you for playing.  Good bye." ); 
-        this.aGui.enable( false );
-            
-        }
-  
-    }
 
 }

@@ -1,14 +1,11 @@
 /**
  * Representations for all the valid command words for the game
- * along with a description string.
+ * along with a description string and corresponding commands.
  * 
  * @author Pierre MATAR
- * @version 2006.03.30
  */
 public enum CommandWord
 {
-    // A value for each command word along with its
-    // corresponding user interface string.
     GO("go", new GoCommand()), 
     QUIT("quit", new QuitCommand()), 
     HELP("help", new HelpCommand()), 
@@ -32,8 +29,9 @@ public enum CommandWord
     private Command aCommand;
     
     /**
-     * Initialise with the corresponding command word.
+     * Initialise with the corresponding command word and command.
      * @param commandWord The command string.
+     * @param pCommand The command object.
      */
     CommandWord(final String pCommandString, final Command pCommand)
     {
@@ -48,6 +46,10 @@ public enum CommandWord
     {
         return this.aCommandString;
     }
+    
+    /**
+     * @return The command instance.
+    */
     public Command getCommand() {
         return this.aCommand;
     }

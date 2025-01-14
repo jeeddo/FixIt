@@ -1,17 +1,30 @@
 
 /**
- * Décrivez votre classe GoCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * GoCommand class represents a command that allows the player to move to a different room
+ * by specifying a direction (North, South, East, West, etc.).
+ * 
+ * @author Pierre MATAR
  */
 public class GoCommand extends Command
 {
+    
+    /**
+     * Executes the GoCommand, allowing the player to move in a specified direction.
+     * 
+     * The method checks if a second word (direction) was provided, verifies if the player 
+     * can move in the specified direction (considering locked doors, traps, etc.), and updates 
+     * the player's current room accordingly.
+     * 
+     * If the current room is a transporter room, the player will be transported to a random room.
+     * 
+     * @param pPlayer The player who issued the command.
+     * @param pGameEngine The game engine which contains the state.
+     */
+    
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) 
     {
         if ( ! super.hasSecondWord() ) {
-            // if there is no second word, we don't know where to go...
             pGameEngine.getGui().println( "Go where?" );
             return;
         }
@@ -19,7 +32,6 @@ public class GoCommand extends Command
 
         String vDirection = super.getSecondWord();
         
-        // Try to leave current room.
         Room vPreviousRoom = pPlayer.getCurrentRoom();
         Room vNextRoom = vPreviousRoom.getExit( vDirection );
 

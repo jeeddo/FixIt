@@ -1,9 +1,9 @@
 import java.util.Stack;
 /**
- * Décrivez votre classe Player ici.
+ * Represents a player in the game.
  *
  * @author Pierre MATAR
- * @version 2
+ 
  */
 public class Player
 {
@@ -49,12 +49,14 @@ public class Player
         return this.aCurrentRoom;
     }
     
+    /**
+     * @return The maximum number of moves.
+     */
     public int getMaxMoves() {
         return this.aMaxMoves;
     }
-       /**
-     * Returns the name of the player.
-     * 
+    /**
+    
      * @return The name of the player.
      */
     public String getName() {
@@ -63,14 +65,13 @@ public class Player
 
     
     /**
-     * Returns the player's weight.
-     * 
      * @return The weight of the player.
      */
     public int getPlayerWeight() {
         return this.aWeight;
     }
-        /**
+    
+    /**
      * Sets the player's weight by adding the given weight.
      * 
      * @param pWeigth The weight to add to the player's current weight.
@@ -125,8 +126,6 @@ public class Player
     }
     
     /**
-     * Returns the number of moves the player has made.
-     * 
      * @return The number of moves.
      */
     
@@ -134,8 +133,6 @@ public class Player
         return this.aNbMoves;
     }
      /**
-     * Returns the size of the player's itinerary.
-     * 
      * @return The size of the itinerary.
      */
     public int getItinerarySize() {
@@ -178,6 +175,7 @@ public class Player
     public Room getTopRoom() {
         return this.aItinerary.peek();
     }
+    
       /**
      * Clears the player's itinerary.
      */
@@ -185,16 +183,37 @@ public class Player
         this.aItinerary.clear();
     }
     
+    /**
+     * @return The room of the beamer.
+     */
     public Room getBeamerRoom() {
         return this.aBeamer.getRoom();
     }
     
+    /**
+     * Sets the room for the player's beamer.
+     * 
+     * @param pRoom The room to set for the beamer.
+     */
+    
     public void setBeamerRoom(final Room pRoom) {
         this.aBeamer.setRoom(pRoom);
     }
+    
+    /**
+     * Sets the player's beamer.
+     * 
+     * @param pBeamer The beamer to set.
+     */
+    
     public void setBeamer(final Beamer pBeamer) {
         this.aBeamer = pBeamer;
     }
+    
+    /**
+     * @return The player's beamer.
+     */
+    
     public Beamer getBeamer() {
         return this.aBeamer;
     }

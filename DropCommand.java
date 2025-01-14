@@ -1,15 +1,17 @@
 
 /**
- * Décrivez votre classe DropCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Command that allows the player to drop an item in the current room.
+ * 
+ * @author Pierre MATAR
  */
 public class DropCommand extends Command
 {
-      /**
-     * Allows the player to drop an item in the current room.
-     * @param pItemName The name of the item to drop.
+    /**
+     * The "Drop" command, allowing the player to remove an item 
+     * from their inventory and place it in the current room.
+     *
+     * @param pPlayer      the player executing the command.
+     * @param pGameEngine  the game engine managing interactions.
      */
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) {

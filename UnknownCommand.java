@@ -1,12 +1,19 @@
 
 /**
- * Décrivez votre classe UnknownCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Command that handles unrecognized player inputs.
+ * Displays a message indicating an unknown command.
+ * 
+ * @author Pierre MATATR
  */
 public class UnknownCommand extends Command
 {
+    /**
+     * Executes the "Unknown" command behavior by notifying the player 
+     * that the input is invalid.
+     * 
+     * @param pPlayer      the player executing the command.
+     * @param pGameEngine  the game engine managing interactions.
+     */
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) {
         pGameEngine.getGui().println("Unknown command !");

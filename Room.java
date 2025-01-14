@@ -4,8 +4,8 @@ import java.util.Collection;
  import java.util.Set;
  
 /**
- * Classe Room - un lieu du jeu d'aventure Zuul.
- *     
+ * This class represents a room in the game with exits, items, characters, and doors / trapdoors.
+ *    
  * @author Pierre MATAR
  */
 public class Room
@@ -20,9 +20,12 @@ public class Room
 
        
     /**
- * Constructor for the room, initializes the description and exits.
- */
-
+     * Constructor for the room, initializes the description, exits, and items.
+     * 
+     * @param pName The name of the room.
+     * @param pDescription A brief description of the room.
+     * @param pImage The image name associated with the room.
+     */
     public Room(final String pName,final String pDescription, final String pImage) {
         this.aName = pName;
         this.aDescription = pDescription;
@@ -33,29 +36,30 @@ public class Room
         this.aCharacters = new HashMap<String, Character>();
     }//Room
     /**
- * Returns the description of the room.
- */
-    
+     * @return A string representing the description of the room.
+     */
     public String getDescription() {
         return this.aDescription;
     }//getDescription
     
+    /**
+     * @return The name of the room.
+     */
     public String getName() {
         return this.aName;
     }
     /**
- * Returns the room in the given direction.
- */
-    
+     * @param pDirection The direction of the exit (e.g., "north", "south").
+     * @return The room in the specified direction, or null if there is no exit in that direction.
+     */
     public Room getExit(String pDirection) {
         return this.aExits.get(pDirection);
         
     }//getExit
     
     /**
- * Returns a string of available exits from the room.
- */
-    
+     * @return A string listing all exits (e.g., "Exits: north south west").
+     */
     public String getExitString() {
         StringBuilder vSb = new StringBuilder("Exits:  ");
         
@@ -68,6 +72,9 @@ public class Room
         
     }//getExitString
     
+    /**
+     * @return A string listing the names of all characters in the room, or an empty string if no characters are present.
+     */
     public String getCharactersString() {
         if (!this.aCharacters.isEmpty()) {
                StringBuilder vSb = new StringBuilder(".\nHere live"+ (this.aCharacters.size() > 1 ? " : " : "s : "));
@@ -80,9 +87,8 @@ public class Room
     }
     
     /**
- * Returns a detailed description of the room including exits.
- */
-    
+     * @return A detailed string description of the room.
+     */
     public String getLongDescription() {
         
         return "You are " + this.aDescription + ".\n" + this.getExitString() + this.aItems.getAllItemString(this) + this.getCharactersString();
@@ -91,12 +97,14 @@ public class Room
  
     
 /**
- * Sets an exit in a given direction, specifying if it is a trap door.
- * 
- * @param pDirection  The direction of the exit.
- * @param pNeighbor   The neighboring room in the specified direction.
- * @param pIsTrapDoor True if the exit is a trap door; otherwise, false.
- */
+     * Sets an exit in a given direction, specifying whether it is a locked door or a trapdoor.
+     * 
+     * @param pDirection The direction of the exit.
+     * @param pNeighbor The neighboring room in the specified direction.
+     * @param pIsLocked True if the door is locked, otherwise false.
+     * @param pKeyDoor The key item required to open the door, or null if not needed.
+     * @param pIsTrapDoor True if the exit is a trapdoor, otherwise false.
+*/
        public void setExit(final String pDirection, final Room pNeighbor, final boolean pIsLocked, final Item pKeyDoor, final boolean pIsTrapDoor) {
         this.aExits.put(pDirection, pNeighbor);
         this.aDoors.put(pDirection, new TrapDoor(pIsLocked, pKeyDoor, pIsTrapDoor));
@@ -116,9 +124,7 @@ public class Room
         this.setExit(pDirection, pNeighbor, false, null, false);
     }
     
-    /**
- * Returns the name of the image file associated with the room.
- * 
+/**
  * @return The image file name.
  */
     
@@ -127,12 +133,12 @@ public class Room
          return this.aImageName;
    }
    
-   /**
- * Checks if a given room is one of the exits from the current room.
- * 
- * @param pRoom The room to check.
- * @return True if the specified room is an exit; otherwise, false.
- */
+ /**
+     * Checks if a given room is one of the exits from the current room.
+     * 
+     * @param pRoom The room to check.
+     * @return True if the specified room is an exit, otherwise false.
+     */
     public boolean isExit(final Room pRoom) {
         return this.aExits.containsValue(pRoom);
     }
@@ -147,10 +153,21 @@ public class Room
      public boolean isTrapDoor(final String pDirection) {
         return ( (TrapDoor) this.aDoors.get(pDirection)).isTrapDoor();
     }
+     /**
+     * Checks if the exit in a specified direction is a locked door.
+     * 
+     * @param pDirection The direction to check.
+     * @return True if the exit is a locked door, otherwise false.
+     */
     
     public boolean isLockedDoor(final String pDirection) {
         return this.aDoors.get(pDirection).isLocked();
     }
+    
+     /**
+     * @param pDirection The direction of the door.
+     * @return The name of the key item required to open the door, or null if no key is required.
+     */
     
     public String getDoorKeyItemName(final String pDirection) {
         return this.aDoors.get(pDirection).getKeyItemName();
@@ -193,17 +210,39 @@ public class Room
         this.aItems.removeItem(pItemName);
     }
     
+    /**
+     * Adds a character to the room.
+     * 
+     * @param pCharacter The character to add.
+     */
+    
     public void addCharacter(final Character pCharacter) {
         this.aCharacters.put(pCharacter.getName(), pCharacter);
     }
+    
+    /**
+     * Removes a character from the room.
+     * 
+     * @param pCharacter The character to remove.
+     */
     
     public void removeCharacter(final Character pCharacter) {
         this.aCharacters.remove(pCharacter.getName());
     }
     
+     /**
+     * Retrieves a character from the room by name.
+     * 
+     * @param pCharacterName The name of the character to retrieve.
+     * @return The character if found, otherwise null.
+     */
     public Character getCharacter(final String pCharacterName) {
         return this.aCharacters.get(pCharacterName);
     }
+    
+    /**
+     * @return A collection of characters in the room.
+     */
     
     public Collection<Character> getCharacters() {
         return this.aCharacters.values();

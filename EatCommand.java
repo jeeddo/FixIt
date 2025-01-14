@@ -1,17 +1,31 @@
 import java.util.Set;
 /**
- * Décrivez votre classe EatCommand ici.
+ * Command allowing the player to consume a specific item, 
+ * adjusting their weight depending on the item consumed.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Pierre MATAR
  */
 public class EatCommand extends Command
 {
     private ItemList aItems;
     
+     /**
+     * Sets the available items for the command.
+     *
+     * @param pItems list of consumable items.
+     */
     public void setItems(final ItemList pItems) {
         this.aItems = pItems;
     }
+    
+      /**
+     * Executes the "Eat" command by consuming an item from the current room 
+     * or player's inventory and adjusting weight accordingly.
+     *
+     * @param pPlayer      the player executing the command.
+     * @param pGameEngine  the game engine managing interactions.
+     */
+    
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) {
         String vItemName = super.getSecondWord();

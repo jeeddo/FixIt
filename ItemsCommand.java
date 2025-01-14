@@ -1,9 +1,8 @@
 
 /**
- * Décrivez votre classe ItemsCommand ici.
+ * ItemsCommand a class that prints the player's items.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Pierre MATAR
  */
 public class ItemsCommand extends Command
 {

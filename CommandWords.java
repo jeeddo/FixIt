@@ -1,13 +1,9 @@
 import java.util.HashMap;
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * The CommandWords class holds all the valid command words that the game recognizes.
+ * It is used to validate and recognize commands as they are typed by the player.
  * 
- * This class holds an enumeration table of all command words known to the game.
- * It is used to recognise commands as they are typed in.
- *
  * @author Pierre MATAR
- * @version
  */
 public class CommandWords
 {
@@ -15,27 +11,30 @@ public class CommandWords
     private final HashMap<String, CommandWord> aValidCommands;
   
     /**
- * Constructor - initializes the list of valid command words.
+ * Constructor - initializes the list of valid command words thanks to an enumeration of commands.
  */
     public CommandWords()
     {
-        this.aValidCommands = new HashMap<>();
+        this.aValidCommands = new HashMap<String, CommandWord>();
        for (CommandWord command : CommandWord.values() ) {
-           System.out.println(command.getDescription());
            this.aValidCommands.put(command.getDescription(), command);
        }
     } // CommandWords()
 
-    
+    /**
+     * Returns the CommandWord enum corresponding to the given command string.
+     * If the string is not a valid command, it returns the "?" command word.
+     * 
+     * @param pCommandString The command string entered by the player.
+     * @return The corresponding CommandWord, or the "?" command if the string is not valid.
+     */
     public CommandWord getCommandWord(final String pCommandString) {
     
         return this.aValidCommands.get(pCommandString) != null ? this.aValidCommands.get(pCommandString) : this.aValidCommands.get("?");
         
     }
 
-   /**
- * Returns a list of all valid command words.
- * 
+ /**
  * @return A string containing all valid commands separated by a space.
  */
 

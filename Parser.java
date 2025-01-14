@@ -3,20 +3,10 @@
 import java.util.StringTokenizer;
 
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- * 
- * This parser reads user input and tries to interpret it as an "Adventure"
- * command. Every time it is called it reads a line from the terminal and
- * tries to interpret the line as a two word command. It returns the command
- * as an object of class Command.
- *
- * The parser has a set of known command words. It checks user input against
- * the known commands, and if the input is not one of the known commands, it
- * returns a command object that is marked as an unknown command.
+ * This class parses user input, maps it to known commands, and returns the corresponding Command object.
+ * It handles single and multi-word commands and special cases, like restarting the game.
  * 
  * @author Pierre MATAR
- * @version 2008.03.30 + 2013.09.15
  */
 public class Parser 
 {  
@@ -24,9 +14,11 @@ public class Parser
     private GameEngine aGameEngine;
     private Player aPlayer;
 
-    /**
- * Default constructor that initializes the valid commands and input reader.
- */
+       /**
+     * Initializes the parser with valid commands and the game engine.
+     * 
+     * @param pGameEngine The game engine.
+     */
     public Parser(final GameEngine pGameEngine) 
     {
         this.aValidCommands = new CommandWords();
@@ -41,8 +33,12 @@ public class Parser
     }
 
    /**
- * Reads user input and returns the next command.
- */
+     * Parses user input and returns the corresponding Command object.
+     * Handles special cases like "yes" for restarting the game.
+     * 
+     * @param pInputLine User input.
+     * @return Corresponding Command object.
+     */
  public Command getCommand( final String pInputLine) 
     {
         String vWord1;

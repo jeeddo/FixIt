@@ -22,8 +22,7 @@ import java.net.URL;
  * This class implements a simple graphical user interface with a 
  * text entry area, a text output area and an optional image.
  * 
- * @author Michael Kolling
- * @version 1.0 (Jan 2003) DB edited (2023)
+ * @author Pierre MATAR
  */
 public class UserInterface implements ActionListener
 {

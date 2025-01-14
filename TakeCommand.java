@@ -1,15 +1,16 @@
 
 /**
- * Décrivez votre classe TakeCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * Command that allows the player to pick up an item from the current room if they can carry it.
+ * @author Pierre MATAR
  */
 public class TakeCommand extends Command
 {
-          /**
-     * Allows the player to pick up an item in the current room if they can carry it.
-     * @param pItemName The name of the item to pick up.
+   /**
+     * Executes the command to allow the player to pick up an item if they are able to carry it.
+     * Checks if the item exists in the room and if the player can carry it based on weight.
+     * 
+     * @param pPlayer The player attempting to take the item.
+     * @param pGameEngine The game engine instance to manage output.
      */
     @Override
    public void execute(final Player pPlayer, final GameEngine pGameEngine) {
@@ -28,7 +29,7 @@ public class TakeCommand extends Command
                 pPlayer.getCurrentRoom().removeItem(vItemName);
                 pGameEngine.getGui().println(pPlayer.getMyItemsList());  
             }
-            else pGameEngine.getGui().println("You can carry " + vItemName + " because you weigth available is :" + pPlayer.getPlayerWeight());
+            else pGameEngine.getGui().println("You can't carry " + vItemName + " because you weigth available is :" + pPlayer.getPlayerWeight());
             
             
         }

@@ -1,9 +1,8 @@
 
  
 /**
- * Classe Game - l
- * e moteur du jeu d'aventure Zuul.
- *
+ * Game class
+ * 
  * @author Pierre MATAR
  */
 public class Game
@@ -18,7 +17,7 @@ public class Game
     public Game() 
     {
         
-         String vPlayerName = "";
+        String vPlayerName = "";
         while(vPlayerName.length() == 0) {
             vPlayerName = javax.swing.JOptionPane.showInputDialog("Enter your name to start the game : ");
         }

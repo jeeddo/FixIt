@@ -1,16 +1,21 @@
 
 /**
- * Décrivez votre classe FixCommand ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * FixCommand class is a command that allows the player to fix a bug if he finds his PC.
+ * This class allows the player to win the game.
+ * 
+ * @author Pierre MATAR
  */
 public class FixCommand extends Command
 {
-      /**
-     * Checks if the player has fixed a bug using a specific object.
-     * @param pSecondWord The keyword needed to complete the game.
+     /**
+     * Executes the "fix" command for the player.
+     * It checks if the player has the correct item (the PC) and if the second word
+     * of the command is "bug". If the conditions are met, the player wins the game.
+     *
+     * @param pPlayer the player who issued the command
+     * @param pGameEngine the game engine that controls the game state
      */
+    
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine ) {
         String vSecondWord = super.getSecondWord();
