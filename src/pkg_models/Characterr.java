@@ -1,12 +1,12 @@
-package pkg_model;
-
+package src.pkg_models;
+import src.pkg_items.Item;
 
 /**
  * Represents a character in the game.
  * 
  * @author Pierre MATAR
  */
-public class Character
+public class Characterr
 {
     private String aName;
     private String aTextToSay;
@@ -23,7 +23,7 @@ public class Character
      * @param pItem          The item associated with the character.
      */
     
-    public Character(final String pName, final String pTextToSay, final String pResponseText, final Item pItem) {
+    public Characterr(final String pName, final String pTextToSay, final String pResponseText, final Item pItem) {
         this.aName = pName;
         this.aTextToSay = pTextToSay;
         this.aResponseText = pResponseText;

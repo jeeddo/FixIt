@@ -1,5 +1,8 @@
-package pkg_model;
-
+package src.pkg_models;
+import src.pkg_items.Beamer;
+import src.pkg_rooms.Room;
+import src.pkg_items.ItemList;
+import src.pkg_items.Item;
 import java.util.Stack;
 /**
  * Represents a player in the game.

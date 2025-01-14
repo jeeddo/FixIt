@@ -1,5 +1,5 @@
-package pkg_items;
-
+package src.pkg_items;
+import src.pkg_rooms.Room;
 
 /**
  * Beamer class represents an item that is associated with a room.

@@ -1,5 +1,6 @@
-package pkg_model;
-
+package src.pkg_models;
+import src.pkg_rooms.Room;
+import src.pkg_items.Item;
 
 /**
  * MovingCharacter class represents a character that can move between rooms.
@@ -7,7 +8,7 @@ package pkg_model;
  * 
  * @author Pierre MATAR
  */
-public class MovingCharacter extends Character
+public class MovingCharacter extends Characterr
 {
     private Room aRoom;
     

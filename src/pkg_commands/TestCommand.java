@@ -1,4 +1,4 @@
-package pkg_commands;
+package src.pkg_commands;
 
 import java.io.File;
 import java.util.Scanner;

@@ -1,6 +1,9 @@
-package pkg_commands;
-
-
+package src.pkg_commands;
+import src.pkg_models.Player;
+import src.pkg_game.GameEngine;
+import src.pkg_items.Item;
+import src.pkg_rooms.Room;
+import src.pkg_models.Characterr;
 /**
  * Command that allows the player to drop an item in the current room.
  * 
@@ -34,7 +37,7 @@ public class DropCommand extends Command
             pPlayer.setPlayerWeight(vPlayerItem.getItemWeight());
             pPlayer.removeItem(vItemName);
             pGameEngine.getGui().println("You droped " + vItemName);
-            for (Character vCharacter : vCurrentRoom.getCharacters()) {
+            for (Characterr vCharacter : vCurrentRoom.getCharacters()) {
                 if (vCharacter.getItem() == vCurrentRoom.getItem(vItemName)) {
                     pGameEngine.getGui().println(vCharacter.getName() + " : " + vCharacter.getResponseText());
                     vCurrentRoom.removeItem(vItemName);

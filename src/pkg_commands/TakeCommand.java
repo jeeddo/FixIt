@@ -1,5 +1,7 @@
-package pkg_commands;
-
+package src.pkg_commands;
+import src.pkg_models.Player;
+import src.pkg_game.GameEngine;
+import src.pkg_items.Item;
 
 /**
  * Command that allows the player to pick up an item from the current room if they can carry it.

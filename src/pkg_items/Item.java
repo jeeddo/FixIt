@@ -1,4 +1,4 @@
-package pkg_items;
+package src.pkg_items;
 
 /**
  * Represents an item with a name, description, and weight.

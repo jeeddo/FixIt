@@ -1,8 +1,5 @@
  
-
- 
-
-
+import src.pkg_game.Game;
 /**
  * Main class to execute the game.
  *

@@ -1,4 +1,4 @@
-package pkg_game;
+package src.pkg_game;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

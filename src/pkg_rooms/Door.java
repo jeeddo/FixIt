@@ -1,5 +1,5 @@
-package pkg_rooms;
-
+package src.pkg_rooms;
+import src.pkg_items.Item;
 
 /**
  * The Door class represents a door in the game. A door can be locked or unlocked,

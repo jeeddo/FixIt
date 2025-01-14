@@ -1,4 +1,4 @@
-package pkg_commands;
+package src.pkg_commands;
 
 /**
  * Representations for all the valid command words for the game

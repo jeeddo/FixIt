@@ -1,5 +1,5 @@
-package pkg_rooms;
-
+package src.pkg_rooms;
+import src.pkg_items.Item;
 
 /**
  * Represents a trap door in the game that extends a Door.

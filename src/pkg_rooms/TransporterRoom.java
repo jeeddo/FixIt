@@ -1,5 +1,5 @@
-package pkg_rooms;
-
+package src.pkg_rooms;
+import src.pkg_game.GameEngine;
 
 /**
  * This class represents a special type of room in the game, known as a transporter room.

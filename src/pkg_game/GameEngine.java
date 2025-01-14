@@ -1,8 +1,14 @@
-package pkg_game;
-
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
+package src.pkg_game;
+import src.pkg_commands.Parser;
+import src.pkg_rooms.Room;
+import src.pkg_items.*;
+import src.pkg_models.*;
+import src.pkg_rooms.TransporterRoom;
+import src.pkg_commands.Command;
+import src.pkg_commands.QuitCommand;
+import src.pkg_commands.EatCommand;
+import src.pkg_commands.CommandWord;
+import src.pkg_commands.UnknownCommand;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +31,7 @@ public class GameEngine
     private boolean aIsTestMode;
     private ItemList aItemsToEat;
     private Item aMagicCookie, aThePC;
-    private List<Character> aCharacters;
+    private List<Characterr> aCharacters;
     
 
 /**
@@ -37,7 +43,7 @@ public class GameEngine
         this.aPlayer = new Player(pPlayerName);
         this.aRooms = new ArrayList<Room>();
         this.aItemsToEat = new ItemList();
-        this.aCharacters = new ArrayList<Character>();
+        this.aCharacters = new ArrayList<Characterr>();
         this.createRoomsAndItemsAndCharacters();
   
     }
@@ -108,7 +114,7 @@ public class GameEngine
     hall.addItem(one);
     hall.addItem(zero);
     hall.addItem(key);
-    Character vRim = new Character("Rim", "hi de malda", "thanks", key);
+    Characterr vRim = new Characterr("Rim", "hi de malda", "thanks", key);
     hall.addCharacter(vRim);
 
     developerRoom.setExit("North", projectManagerOffice);
@@ -229,7 +235,7 @@ public List<Room> getRooms() {
      * @return List of characters.
      */
     
-public List<Character> getCharacters() {
+public List<Characterr> getCharacters() {
     return this.aCharacters;
 }
 

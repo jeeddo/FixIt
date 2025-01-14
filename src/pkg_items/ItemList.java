@@ -1,5 +1,6 @@
-package pkg_items;
-
+package src.pkg_items;
+import src.pkg_rooms.Room;
+import src.pkg_models.Player;
 import java.util.HashMap;
 /**
  * Manages a collection of items. Allows adding, retrieving, and removing items.

@@ -1,4 +1,4 @@
-package pkg_rooms;
+package src.pkg_rooms;
 
 import java.util.Random;
 import java.util.List;

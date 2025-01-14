@@ -1,5 +1,6 @@
-package pkg_commands;
-
+package src.pkg_commands;
+import src.pkg_models.*;
+import src.pkg_game.GameEngine;
 
 /**
  * Represents the command to interact with a character in the game.
@@ -21,7 +22,7 @@ public class InteractCommand extends Command
      @Override
      public void execute(final Player pPlayer, final GameEngine pGameEngine) {
          String vCharacterName = super.getSecondWord();
-         for (Character vCharacter : pGameEngine.getCharacters()) {
+         for (Characterr vCharacter : pGameEngine.getCharacters()) {
              
              if (vCharacter.getName().equals(vCharacterName) && vCharacter instanceof MovingCharacter) {
                  ((MovingCharacter) vCharacter).move(pPlayer.getCurrentRoom());
@@ -33,7 +34,7 @@ public class InteractCommand extends Command
                 return;
              }
          }
-        Character vCharacter = pPlayer.getCurrentRoom().getCharacter(vCharacterName);
+        Characterr vCharacter = pPlayer.getCurrentRoom().getCharacter(vCharacterName);
          if (vCharacterName == null) pGameEngine.getGui().println("With which character do you want to talk ?");
          else if (vCharacter != null) {
              pGameEngine.getGui().println(vCharacter.getTextToSay());

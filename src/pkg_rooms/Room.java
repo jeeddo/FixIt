@@ -1,5 +1,7 @@
-package pkg_rooms;
-
+package src.pkg_rooms;
+import src.pkg_items.ItemList;
+import src.pkg_items.Item;
+import src.pkg_models.Characterr;
 import java.util.Collection;
 
  import java.util.HashMap;
@@ -18,7 +20,7 @@ public class Room
     private HashMap<String, Door> aDoors;
     private String aImageName;
     private ItemList aItems;
-    private HashMap<String, Character> aCharacters;
+    private HashMap<String, Characterr> aCharacters;
 
        
     /**
@@ -35,7 +37,7 @@ public class Room
         this.aDoors = new HashMap<String, Door>();
         this.aImageName = pImage;
         this.aItems = new ItemList();
-        this.aCharacters = new HashMap<String, Character>();
+        this.aCharacters = new HashMap<String, Characterr>();
     }//Room
     /**
      * @return A string representing the description of the room.
@@ -218,7 +220,7 @@ public class Room
      * @param pCharacter The character to add.
      */
     
-    public void addCharacter(final Character pCharacter) {
+    public void addCharacter(final Characterr pCharacter) {
         this.aCharacters.put(pCharacter.getName(), pCharacter);
     }
     
@@ -228,7 +230,7 @@ public class Room
      * @param pCharacter The character to remove.
      */
     
-    public void removeCharacter(final Character pCharacter) {
+    public void removeCharacter(final Characterr pCharacter) {
         this.aCharacters.remove(pCharacter.getName());
     }
     
@@ -238,7 +240,7 @@ public class Room
      * @param pCharacterName The name of the character to retrieve.
      * @return The character if found, otherwise null.
      */
-    public Character getCharacter(final String pCharacterName) {
+    public Characterr getCharacter(final String pCharacterName) {
         return this.aCharacters.get(pCharacterName);
     }
     
@@ -246,7 +248,7 @@ public class Room
      * @return A collection of characters in the room.
      */
     
-    public Collection<Character> getCharacters() {
+    public Collection<Characterr> getCharacters() {
         return this.aCharacters.values();
     }
    
