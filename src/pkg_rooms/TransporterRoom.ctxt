@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=TransporterRoom
+comment0.text=\r\n\ This\ class\ represents\ a\ special\ type\ of\ room\ in\ the\ game,\ known\ as\ a\ transporter\ room.\r\n\ A\ transporter\ room\ can\ randomly\ teleport\ the\ player\ to\ another\ room\ in\ the\ game.\r\n\ It\ extends\ the\ basic\ functionality\ of\ a\ Room\ and\ adds\ teleportation\ capabilities.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pName\ pDescription\ pImage\ pIsTransporterRoom\ pGameEngine
+comment1.target=TransporterRoom(java.lang.String,\ java.lang.String,\ java.lang.String,\ boolean,\ src.pkg_game.GameEngine)
+comment1.text=\r\n\ Constructor\ to\ initialize\ a\ transporter\ room\ with\ specific\ properties.\r\n\ \r\n\ @param\ pName\ The\ name\ of\ the\ room.\r\n\ @param\ pDescription\ A\ description\ of\ the\ room.\r\n\ @param\ pImage\ The\ image\ representing\ the\ room.\r\n\ @param\ pIsTransporterRoom\ A\ flag\ indicating\ if\ the\ room\ is\ a\ transporter\ room.\r\n\ @param\ pGameEngine\ The\ game\ engine\ for\ managing\ room\ and\ game\ state.\r\n
+comment2.params=pName\ pDescription\ pImage
+comment2.target=TransporterRoom(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.text=\r\n\ Constructor\ to\ initialize\ a\ transporter\ room\ without\ specifying\ transporter\ functionality.\r\n\ This\ constructor\ defaults\ the\ transporter\ room\ flag\ to\ false\ and\ passes\ null\ for\ the\ game\ engine.\r\n\ \r\n\ @param\ pName\ The\ name\ of\ the\ room.\r\n\ @param\ pDescription\ A\ description\ of\ the\ room.\r\n\ @param\ pImage\ The\ image\ representing\ the\ room.\r\n
+comment3.params=
+comment3.target=boolean\ isATransporterRoom()
+comment3.text=\r\n\ @return\ True\ if\ the\ room\ is\ a\ transporter\ room,\ false\ otherwise.\r\n
+comment4.params=pDirection
+comment4.target=Room\ getExit(java.lang.String)
+comment4.text=\r\n\ Returns\ the\ exit\ in\ the\ specified\ direction.\r\n\ If\ the\ direction\ is\ valid,\ it\ calls\ the\ parent\ method\ to\ retrieve\ the\ exit.\r\n\ Otherwise,\ it\ teleports\ the\ player\ to\ a\ random\ room.\r\n\ \r\n\ @param\ pDirection\ The\ direction\ of\ the\ exit.\r\n\ @return\ The\ room\ that\ the\ player\ can\ enter\ after\ moving\ in\ the\ specified\ direction\ or\ a\ random\ room.\r\n
+comment5.params=
+comment5.target=Room\ findRandomRoom()
+comment5.text=\r\n\ Finds\ a\ random\ room\ in\ the\ game\ and\ returns\ it.\r\n\ This\ method\ is\ used\ when\ the\ player\ attempts\ to\ move\ from\ a\ transporter\ room.\r\n\ \r\n\ @return\ A\ randomly\ selected\ room\ from\ the\ available\ rooms\ in\ the\ game.\r\n
+numComments=6

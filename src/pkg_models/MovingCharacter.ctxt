@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=MovingCharacter
+comment0.text=\r\n\ MovingCharacter\ class\ represents\ a\ character\ that\ can\ move\ between\ rooms.\r\n\ It\ extends\ the\ Character\ class\ and\ provides\ functionality\ to\ change\ the\ room\ of\ the\ character.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pName\ pTextToSay\ pResponse\ pItem\ pRoom
+comment1.target=MovingCharacter(java.lang.String,\ java.lang.String,\ java.lang.String,\ src.pkg_items.Item,\ src.pkg_rooms.Room)
+comment1.text=\r\n\ Constructs\ a\ MovingCharacter\ with\ the\ specified\ name,\ text\ to\ say,\ response,\ item,\ and\ room.\r\n\r\n\ @param\ pName\ the\ name\ of\ the\ character\r\n\ @param\ pTextToSay\ the\ text\ the\ character\ will\ say\r\n\ @param\ pResponse\ the\ response\ of\ the\ character\r\n\ @param\ pItem\ the\ item\ associated\ with\ the\ character\r\n\ @param\ pRoom\ the\ room\ where\ the\ character\ is\ initially\ located\r\n
+comment2.params=pRoom
+comment2.target=void\ setRoom(src.pkg_rooms.Room)
+comment2.text=\r\n\ Sets\ the\ room\ of\ the\ character.\r\n\r\n\ @param\ pRoom\ the\ room\ to\ set\r\n
+comment3.params=pRoom
+comment3.target=void\ move(src.pkg_rooms.Room)
+comment3.text=\r\n\ Moves\ the\ character.\r\n\ \r\n\ @param\ pRoom\ the\ room\ to\ move\ the\ character\ to\r\n
+numComments=4

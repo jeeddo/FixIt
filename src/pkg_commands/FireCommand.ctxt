@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=FireCommand
+comment0.text=\r\n\ FireCommand\ class\ is\ a\ command\ that\ allows\ the\ player\ to\ fire\ the\ beamer.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pPlayer\ pGameEngine
+comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
+comment1.text=\r\n\ Executes\ the\ "fire"\ command\ for\ the\ player.\r\n\ It\ checks\ whether\ the\ player\ owns\ the\ beamer,\ whether\ the\ beamer\ is\ charged,\r\n\ and\ whether\ the\ player\ is\ in\ the\ correct\ room\ to\ fire\ the\ beamer.\r\n\r\n\ @param\ pPlayer\ the\ player\ who\ issued\ the\ command\r\n\ @param\ pGameEngine\ the\ game\ engine\ that\ controls\ the\ game\ state\r\n
+numComments=2

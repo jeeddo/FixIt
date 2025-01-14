@@ -1,5 +1,7 @@
 package src.pkg_commands;
 
+import src.pkg_models.Player;
+import src.pkg_game.GameEngine;
 
 /**
  * Command that handles quitting the game. 

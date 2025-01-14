@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Command
+comment0.text=\r\n\ Command\ class\ is\ an\ abstract\ class\ that\ serves\ as\ a\ base\ for\ specific\ game\ commands.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=
+comment1.target=java.lang.String\ getSecondWord()
+comment1.text=\r\n\ Returns\ the\ second\ word\ of\ the\ command.\r\n
+comment2.params=pSecondWord
+comment2.target=void\ setSecondWord(java.lang.String)
+comment2.text=\r\n\ Sets\ the\ second\ word\ of\ the\ command.\r\n\ This\ is\ used\ to\ provide\ additional\ information\ to\ the\ command.\r\n\ \r\n\ @param\ pSecondWord\ The\ second\ word\ to\ be\ set\ for\ the\ command.\r\n
+comment3.params=
+comment3.target=boolean\ hasSecondWord()
+comment3.text=\r\n\ Checks\ if\ the\ command\ has\ a\ second\ word.\r\n\ \r\n\ @return\ True\ if\ the\ command\ has\ a\ second\ word,\ false\ otherwise.\r\n
+comment4.params=pPlayer\ pGameEngine
+comment4.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
+comment4.text=\r\n\ Executes\ the\ command.\ This\ method\ must\ be\ implemented\ by\ subclasses\ to\ define\r\n\ the\ specific\ behavior\ of\ each\ command\ in\ the\ game.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ who\ is\ executing\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine\ that\ manages\ the\ state\ of\ the\ game.\r\n
+numComments=5

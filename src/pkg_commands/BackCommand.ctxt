@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=BackCommand
+comment0.text=\r\n\ Represents\ the\ command\ to\ move\ the\ player\ back\ to\ the\ previous\ room\ in\ their\ itinerary.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pPlayer\ pGameEngine
+comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
+comment1.text=\r\n\ Executes\ the\ "back"\ command,\ moving\ the\ player\ to\ the\ previous\ room\ in\ their\ itinerary.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ who\ is\ executing\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine.\r\n
+numComments=2

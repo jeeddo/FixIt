@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Image;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -69,18 +70,29 @@ public class UserInterface implements ActionListener
     /**
      * Show an image file in the interface.
      */
-    public void showImage( final String pImageName )
-    {
-        String vImagePath = "" + pImageName; // to change the directory
-        URL vImageURL = this.getClass().getClassLoader().getResource( vImagePath );
-        if ( vImageURL == null )
-            System.out.println( "Image not found : " + vImagePath );
-        else {
-            ImageIcon vIcon = new ImageIcon( vImageURL );
-            this.aImage.setIcon( vIcon );
-            this.aMyFrame.pack();
+  
+    public void showImage(final String pImageName) {
+    String vImagePath = "" + pImageName; 
+    URL vImageURL = this.getClass().getClassLoader().getResource(vImagePath);
+    if (vImageURL == null) {
+        System.out.println("Image not found: " + vImagePath);
+    } else {
+        ImageIcon vIcon = new ImageIcon(vImageURL);
+        Image vImage = vIcon.getImage();
+        
+        int maxWidth = 500; 
+        int width = vImage.getWidth(null);
+        int height = vImage.getHeight(null);
+        
+        if (width > maxWidth) {
+            int newHeight = (int) ((double) maxWidth / width * height);
+            vImage = vImage.getScaledInstance(maxWidth, newHeight, Image.SCALE_SMOOTH);
         }
-    } // showImage(.)
+
+        this.aImage.setIcon(new ImageIcon(vImage));
+        this.aMyFrame.pack(); 
+    }
+} //showImage(.)
 
     /**
      * Enable or disable input in the entry field or button(s).

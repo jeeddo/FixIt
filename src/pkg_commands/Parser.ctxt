@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Parser
+comment0.text=\r\n\ This\ class\ parses\ user\ input,\ maps\ it\ to\ known\ commands,\ and\ returns\ the\ corresponding\ Command\ object.\r\n\ It\ handles\ single\ and\ multi-word\ commands\ and\ special\ cases,\ like\ restarting\ the\ game.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pGameEngine
+comment1.target=Parser(src.pkg_game.GameEngine)
+comment1.text=\r\n\ Initializes\ the\ parser\ with\ valid\ commands\ and\ the\ game\ engine.\r\n\ \r\n\ @param\ pGameEngine\ The\ game\ engine.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getCommands()
+comment2.text=\r\n\ Returns\ a\ list\ of\ valid\ command\ words.\r\n
+comment3.params=pInputLine
+comment3.target=Command\ getCommand(java.lang.String)
+comment3.text=\r\n\ Parses\ user\ input\ and\ returns\ the\ corresponding\ Command\ object.\r\n\ Handles\ special\ cases\ like\ "yes"\ for\ restarting\ the\ game.\r\n\ \r\n\ @param\ pInputLine\ User\ input.\r\n\ @return\ Corresponding\ Command\ object.\r\n
+numComments=4

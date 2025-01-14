@@ -1,6 +1,8 @@
 package src.pkg_commands;
 
-
+import src.pkg_models.Player;
+import src.pkg_game.GameEngine;
+import src.pkg_rooms.TransporterRoom;
 /**
  * Represents the command to move the player back to the previous room in their itinerary.
  * 

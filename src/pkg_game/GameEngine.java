@@ -82,16 +82,16 @@ public class GameEngine
     {
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
-    hall = new TransporterRoom("hall", "in The entry hall.", "images/hall.png");
-    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "images/developerRoom.png");
-    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "images/serverRoom.png");
-    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "images/meetingRoom.png");
-    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "images/cafeteria.png");
-    projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "images/projectManagerOffice.png", true, this);
-    openSpace = new TransporterRoom("openSpace","inside the open-space", "images/openSpace.png");
-    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "images/presentationRoom.png");
-    Wc = new TransporterRoom("Wc","In the toilet...", "images/Wc.png");
-    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "images/maintenanceRoom.png");
+    hall = new TransporterRoom("hall", "in The entry hall.", "assets/images/Hall.jpg");
+    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "assets/images/Developer.jpg");
+    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "assets/images/Server.jpg");
+    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "assets/images/Meeting.jpg");
+    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "assets/images/Cafeteria.jpg");
+    projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "assets/images/ProjectManager.jpg", true, this);
+    openSpace = new TransporterRoom("openSpace","inside the open-space", "assets/images/OpenSpace.jpg");
+    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "assets/images/Presentation.jpg");
+    Wc = new TransporterRoom("Wc","In the toilet...", "assets/images/Wc.jpg");
+    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "assets/images/Maintenance.jpg");
     
     Item one = new Item("Item", "Item 1 ", 300);
     Item two = new Item("Item4", "Item 2 ", 200);

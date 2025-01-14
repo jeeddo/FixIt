@@ -1,5 +1,8 @@
 package src.pkg_commands;
-
+import src.pkg_models.Player;
+import src.pkg_game.GameEngine;
+import src.pkg_items.ItemList;
+import src.pkg_rooms.Room;
 import java.util.Set;
 /**
  * Command allowing the player to consume a specific item, 

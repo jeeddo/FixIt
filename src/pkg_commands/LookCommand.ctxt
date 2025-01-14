@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=LookCommand
+comment0.text=\r\n\ The\ LookCommand\ class\ is\ used\ to\ handle\ the\ "look"\ command\ in\ the\ game.\r\n\ It\ allows\ the\ player\ to\ examine\ the\ current\ room\ or\ specific\ items\ within\ the\ room.\r\n\ \r\n\ If\ no\ specific\ item\ is\ mentioned,\ the\ description\ of\ the\ current\ room\ is\ shown.\r\n\ If\ one\ item\ or\ severals\ items\ are\ mentioned,\ the\ description\ of\ each\ item\ is\ displayed\ if\ they\ exist\ in\ the\ room.\r\n\r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pPlayer\ pGameEngine
+comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
+comment1.text=\r\n\ Executes\ the\ look\ command.\r\n\ If\ no\ second\ word\ is\ provided,\ displays\ the\ information\ of\ the\ current\ room.\r\n\ If\ second\ words\ are\ provided,\ looks\ at\ the\ specified\ items\ in\ the\ room.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ who\ executed\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine\ handling\ the\ game\ logic\ and\ output.\r\n
+numComments=2

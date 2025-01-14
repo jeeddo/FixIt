@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=RoomRandomizer
+comment0.text=\r\n\ Randomizes\ room\ selection\ for\ the\ game.\r\n\ Can\ return\ either\ a\ predetermined\ room\ or\ a\ randomly\ chosen\ room\ from\ a\ list.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=pAleaRoom
+comment1.target=RoomRandomizer(Room)
+comment1.text=\r\n\ RoomRandomizer\ constructor.\r\n\ @param\ pAleaRoom\ The\ fixed\ room\ to\ return\ if\ specified,\ or\ null\ for\ random\ selection.\r\n
+comment2.params=pRooms\ pTransporterRoom
+comment2.target=Room\ getRandomRoom(java.util.List,\ Room)
+comment2.text=\r\n\ Returns\ a\ random\ room\ from\ a\ list\ of\ available\ rooms.\r\n\ Ensures\ that\ the\ transporter\ room\ is\ not\ selected.\r\n\ \r\n\ @param\ pRooms\ \ \ \ \ \ \ \ \ \ \ \ The\ list\ of\ possible\ rooms\ in\ the\ game.\r\n\ @param\ pTransporterRoom\ \ The\ room\ to\ exclude\ from\ selection.\r\n\ @return\ A\ randomly\ selected\ room\ or\ the\ fixed\ room\ if\ specified.\r\n
+numComments=3
