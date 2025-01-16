@@ -19,7 +19,7 @@ public class Player
     private int aWeight;
     private int aNbMoves;
     private Beamer aBeamer;
-    private int aMaxMoves;
+    private final int NB_MAX_MOVES = 25;
     
     
       /**
@@ -34,7 +34,6 @@ public class Player
         this.aWeight = 300;
         this.aNbMoves = 0;
         this.aItinerary = new Stack<Room>();
-        this.aMaxMoves = 25;
     }
        /**
      * Sets the current room the player is in.
@@ -58,7 +57,7 @@ public class Player
      * @return The maximum number of moves.
      */
     public int getMaxMoves() {
-        return this.aMaxMoves;
+        return this.NB_MAX_MOVES;
     }
     /**
     

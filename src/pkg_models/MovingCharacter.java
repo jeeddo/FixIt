@@ -19,12 +19,10 @@ public class MovingCharacter extends Characterr
      * @param pTextToSay the text the character will say
      * @param pResponse the response of the character
      * @param pItem the item associated with the character
-     * @param pRoom the room where the character is initially located
      */
     
-    public MovingCharacter(final String pName, final String pTextToSay, final String pResponse, final Item pItem, final Room pRoom) {
+    public MovingCharacter(final String pName, final String pTextToSay, final String pResponse, final Item pItem) {
         super(pName, pTextToSay, pResponse, pItem);
-        this.aRoom = pRoom;
     }
 
      /**

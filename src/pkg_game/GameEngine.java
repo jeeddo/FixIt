@@ -12,6 +12,7 @@ import src.pkg_commands.UnknownCommand;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * This class represents the core engine of the game, responsible for managing game elements such as rooms, items, and characters.
@@ -44,7 +45,7 @@ public class GameEngine
         this.aRooms = new ArrayList<Room>();
         this.aItemsToEat = new ItemList();
         this.aCharacters = new ArrayList<Characterr>();
-        this.createRoomsAndItemsAndCharacters();
+        this.createRoomsWithConfiguration();
   
     }
      /**
@@ -78,31 +79,25 @@ public class GameEngine
  * Creates the different rooms / items / characters in the game.
  */
 
-    private void createRoomsAndItemsAndCharacters() 
+    private void createRoomsWithConfiguration() 
     {
+        
+    HashMap<String, Item> vItems = this.createItems();
+    HashMap<String, Characterr> vCharacters = this.createCharacters(vItems);
+    
     Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
     
     hall = new TransporterRoom("hall", "in The entry hall.", "assets/images/Hall.jpg");
     developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "assets/images/Developer.jpg");
     serverRoom = new TransporterRoom("serverRoom","inside the server room.", "assets/images/Server.jpg");
     meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "assets/images/Meeting.jpg");
-    cafeteria = new TransporterRoom("cafeteria","inside the cafétéria,", "assets/images/Cafeteria.jpg");
+    cafeteria = new TransporterRoom("cafeteria","inside the cafeteria,", "assets/images/Cafeteria.jpg");
     projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "assets/images/ProjectManager.jpg", true, this);
     openSpace = new TransporterRoom("openSpace","inside the open-space", "assets/images/OpenSpace.jpg");
     presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "assets/images/Presentation.jpg");
     Wc = new TransporterRoom("Wc","In the toilet...", "assets/images/Wc.jpg");
     maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "assets/images/Maintenance.jpg");
-    
-    Item one = new Item("Item", "Item 1 ", 300);
-    Item two = new Item("Item4", "Item 2 ", 200);
-    
-    Item three = new Item("Item3", "Item 3 ", 500);
-    Item zero = new Item("Item0", "0", 100);
-    Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
-    Item thePC = new Item("thePC", "the holy grail", 300);
-    Beamer beamer = new Beamer("beamer", "the transporter room ! ", 200);
-    Item key = new Item("key", "the key", 100);
-    
+ 
     
     
     hall.setExit("North", null);
@@ -111,11 +106,10 @@ public class GameEngine
     hall.setExit("West", null);
     hall.setExit("Up", openSpace);
     hall.setExit("Down", null);
-    hall.addItem(one);
-    hall.addItem(zero);
-    hall.addItem(key);
-    Characterr vRim = new Characterr("Rim", "hi de malda", "thanks", key);
-    hall.addCharacter(vRim);
+    hall.addItem(vItems.get("one"));
+    hall.addItem(vItems.get("zero"));
+    hall.addItem(vItems.get("key"));
+    hall.addCharacter(vCharacters.get("Rim"));
 
     developerRoom.setExit("North", projectManagerOffice);
     developerRoom.setExit("South", null);
@@ -123,12 +117,12 @@ public class GameEngine
     developerRoom.setExit("West", serverRoom);
     developerRoom.setExit("Up", null);
     developerRoom.setExit("Down", meetingRoom);
-    developerRoom.addItem(thePC);
+    developerRoom.addItem(this.aThePC);
 
  
     serverRoom.setExit("North", null);
     serverRoom.setExit("South", maintenanceRoom);
-    serverRoom.setExit("East", developerRoom, true, key, true);
+    serverRoom.setExit("East", developerRoom, true, vItems.get("key"), true);
     serverRoom.setExit("West", null);
     serverRoom.setExit("Up", null);
     serverRoom.setExit("Down", null);
@@ -140,9 +134,10 @@ public class GameEngine
     meetingRoom.setExit("West", null);
     meetingRoom.setExit("Up", developerRoom);
     meetingRoom.setExit("Down", null);
-    MovingCharacter vPierre = new MovingCharacter("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", zero, meetingRoom);
-    meetingRoom.addCharacter(vPierre);
-    meetingRoom.addItem(two);
+    ((MovingCharacter) vCharacters.get("Pierre")).setRoom(meetingRoom);
+    meetingRoom.addCharacter(vCharacters.get("Pierre"));
+    
+    meetingRoom.addItem(vItems.get("two"));
 
     
     cafeteria.setExit("North", presentationRoom);
@@ -151,7 +146,7 @@ public class GameEngine
     cafeteria.setExit("West", openSpace);
     cafeteria.setExit("Up", null);
     cafeteria.setExit("Down", null);
-    cafeteria.addItem(beamer);
+    cafeteria.addItem(this.aPlayer.getBeamer());
     
 
    
@@ -161,7 +156,7 @@ public class GameEngine
     projectManagerOffice.setExit("West", null);
     projectManagerOffice.setExit("Up", null);
     projectManagerOffice.setExit("Down", null);
-    projectManagerOffice.addItem(three);
+    projectManagerOffice.addItem(vItems.get("three"));
     
     openSpace.setExit("North", null);
     openSpace.setExit("South", null);
@@ -169,7 +164,7 @@ public class GameEngine
     openSpace.setExit("West", meetingRoom);
     openSpace.setExit("Up", null);
     openSpace.setExit("Down", hall);
-    openSpace.addItem(three);
+    openSpace.addItem(vItems.get("three"));
     
 
     
@@ -194,7 +189,7 @@ public class GameEngine
     maintenanceRoom.setExit("West", null);
     maintenanceRoom.setExit("Up", null);
     maintenanceRoom.setExit("Down", null);
-    maintenanceRoom.addItem(magicCookie);
+    maintenanceRoom.addItem(this.aMagicCookie);
     
 
     
@@ -213,15 +208,66 @@ public class GameEngine
             serverRoom,
             developerRoom
         ));
-        
-    this.aItemsToEat.addItem(magicCookie);
-    this.aItemsToEat.addItem(zero);
-    this.aPlayer.setBeamer(beamer);
+} // createRooms
+
+/**
+ * Create all items needed for the game.
+ */
+private HashMap<String, Item> createItems() {
+       
+    HashMap<String, Item> vItems = new HashMap<String, Item>();
+    
+    Item one = new Item("one", "Item 1 ", 300);
+    Item two = new Item("two", "Item 2 ", 200);
+    Item three = new Item("three", "Item 3 ", 500);
+    Item zero = new Item("zero", "0", 100);
+    Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
+    Item thePC = new Item("thePC", "the holy grail", 300);
+    Beamer beamer = new Beamer("beamer", "the transporter room ! ", 200);
+    Item key = new Item("key", "the key", 100);
+    
+    vItems.put(one.getName(), one);
+    vItems.put(two.getName(), two);
+    vItems.put(three.getName(), three);
+    vItems.put(zero.getName(), zero);
+    vItems.put(magicCookie.getName(), magicCookie);
+    vItems.put(thePC.getName(), thePC);
+    vItems.put(beamer.getName(), beamer);
+    vItems.put(key.getName(), key);
+    
     this.aMagicCookie = magicCookie;
     this.aThePC = thePC;
+    
+    this.aPlayer.setBeamer(beamer);
+    
+    this.aItemsToEat.addItem(magicCookie);
+    this.aItemsToEat.addItem(zero);
+   
+
+    return vItems;
+    
+} //createItems
+
+/**
+ * Create all characters needed for the game.
+ * @param the items to add to chracters if needed.
+ */
+private HashMap<String, Characterr> createCharacters(final HashMap<String, Item> pItems) {
+    HashMap<String, Characterr> vCharacters = new HashMap<String, Characterr>();
+    
+    Characterr vRim = new Characterr("Rim", "hi de malda", "thanks", pItems.get("key"));
+    MovingCharacter vPierre = new MovingCharacter("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", pItems.get("zero"));
+    
+
+    vCharacters.put(vRim.getName(), vRim);
+    vCharacters.put(vPierre.getName(), vPierre);
+    
+       
     this.aCharacters.add(vPierre);
     this.aCharacters.add(vRim);
-} // createRooms
+    
+    return vCharacters;
+} //createCharacters
 
  /**
 * @return List of rooms.
