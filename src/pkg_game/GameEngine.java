@@ -76,7 +76,7 @@ public class GameEngine
         return this.aParser;
     }
         /**
- * Creates the different rooms / items / characters in the game.
+ * Creates the different rooms with their configuration (exits / items / characters).
  */
 
     private void createRoomsWithConfiguration() 
@@ -382,11 +382,8 @@ public void setAleaRoom(final Room pRoom) {
     
             if (this.aRestartGame) {
                 String vSecondWord = vCommand.getSecondWord();
-                vCommand = CommandWord.QUIT.getCommand();
-                if (vSecondWord == null || !vSecondWord.equals("yes")) {
-                    ((QuitCommand)vCommand).setState(false);
-                    vCommand.execute(this.aPlayer, this);
-                }
+
+                if (vSecondWord == null || !vSecondWord.equals("yes")) this.invokeQuitCommand(false);
                 else {
                     this.aGui.closeWindow();
                     new Game();
@@ -399,26 +396,38 @@ public void setAleaRoom(final Room pRoom) {
             }
             return;
         }
-        else if (vCommand instanceof EatCommand) {
-            ((EatCommand)vCommand).setItems(this.aItemsToEat);
-        }
         
-        if (this.aPlayer.getNbMoves() == this.aPlayer.getMaxMoves()) {
+        if (this.aPlayer.isNbMaxMovesReached()) {
             this.aGui.println("you've reached the maximum number of attempts ( " + this.aPlayer.getMaxMoves() + " )... ");
-            
-            vCommand = CommandWord.QUIT.getCommand();
-            ((QuitCommand)vCommand).setState(true);
-            vCommand.execute(this.aPlayer, this);
+            this.invokeQuitCommand(true);
             return;
-            
         }
-        
-
         
         vCommand.execute(this.aPlayer, this);
         this.aPlayer.addOneMove();
 }
+    
+    /**
+     * @return a list of items eatable.
+     */
+    
+    public ItemList getItemsToEat() {
+        return this.aItemsToEat;
+    }
         
+    /**
+     * Allow to quit the game.
+     * @param false to quit immediately, true to ask to restart the game.
+     */
+    
+    private void invokeQuitCommand(final boolean pShouldRestart) {
+        
+            QuitCommand vQuitCommand = (QuitCommand) CommandWord.QUIT.getCommand();
+            vQuitCommand.setState(pShouldRestart);
+            vQuitCommand.execute(this.aPlayer, this);
+           
+        }
+
     
       /**
      * @return True if the game is ready to restart, false otherwise.

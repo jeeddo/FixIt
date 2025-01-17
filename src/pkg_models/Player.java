@@ -221,6 +221,10 @@ public class Player
     public Beamer getBeamer() {
         return this.aBeamer;
     }
-    
-
+    /**
+     * @return true if the number of max moves is reached, false otherwise.
+     */
+    public boolean isNbMaxMovesReached() {
+        return this.NB_MAX_MOVES == this.aNbMoves;
+    }
 }

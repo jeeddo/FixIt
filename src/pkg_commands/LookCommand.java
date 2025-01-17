@@ -24,13 +24,13 @@ public class LookCommand extends Command
      */
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine){
-        Room vCurrentRoom = pPlayer.getCurrentRoom();
-        String vSecondWord = super.getSecondWord();
-        if (vSecondWord == null)
+    
+        if (!super.hasSecondWord())
             pGameEngine.printLocationInfo();
         else {
+            Room vCurrentRoom = pPlayer.getCurrentRoom();
+            String vSecondWord = super.getSecondWord();
             String[] vItemsToLook = vSecondWord.split(" ");
-            
             for (String pItemName : vItemsToLook) {
                 if (vCurrentRoom.getItem(pItemName) == null) {
                     pGameEngine.getGui().println( pItemName + " does'nt exist in this room...");

@@ -24,9 +24,10 @@ public class AleaCommand extends Command
     
     @Override
    public void execute(final Player pPlayer, final GameEngine pGameEngine) {
-        String vSecondCommandWord = super.getSecondWord();
         if (!pGameEngine.isTestMode()) pGameEngine.getGui().println("You're not in test mode");
-        else if (vSecondCommandWord != null) {
+        else if (super.hasSecondWord()) {
+            String vSecondCommandWord = super.getSecondWord();
+
                for (Room room : pGameEngine.getRooms()) {
                        if (room.getName().equals(vSecondCommandWord)) {
                         pGameEngine.setAleaRoom(room);

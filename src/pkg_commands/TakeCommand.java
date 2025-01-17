@@ -18,12 +18,14 @@ public class TakeCommand extends Command
      */
     @Override
    public void execute(final Player pPlayer, final GameEngine pGameEngine) {
-       String vItemName = super.getSecondWord();
-       Item vRoomItem = pPlayer.getCurrentRoom().getItem(vItemName);
+       
         if (!super.hasSecondWord()) {
             pGameEngine.getGui().println("Take what ?");
             return;
         }
+        
+        String vItemName = super.getSecondWord();
+        Item vRoomItem = pPlayer.getCurrentRoom().getItem(vItemName);
         if (vRoomItem != null) {
             
             if (vRoomItem.getItemWeight() <= pPlayer.getPlayerWeight()) {

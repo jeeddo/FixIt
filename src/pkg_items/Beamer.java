@@ -41,4 +41,8 @@ public class Beamer extends Item
     public void setRoom(final Room pRoom) {
         this.aRoom = pRoom;
     }
+    
+    public boolean isBeamerCharged() {
+        return this.aRoom != null;
+    }
 }

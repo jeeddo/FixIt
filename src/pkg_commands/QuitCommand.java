@@ -13,6 +13,13 @@ public class QuitCommand extends Command
 {
     private boolean aState;
     
+    /**
+     * Constructor of QuitCommand that put false by default to his aState attribute.
+     */
+    public QuitCommand() {
+        this.aState = false;
+    }
+    
      /**
      * Sets the state indicating whether the game can be restarted.
      * 

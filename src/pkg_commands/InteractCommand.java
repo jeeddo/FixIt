@@ -35,10 +35,10 @@ public class InteractCommand extends Command
              }
          }
         Characterr vCharacter = pPlayer.getCurrentRoom().getCharacter(vCharacterName);
-         if (vCharacterName == null) pGameEngine.getGui().println("With which character do you want to talk ?");
+         if (!super.hasSecondWord()) pGameEngine.getGui().println("With which character do you want to talk ?");
          else if (vCharacter != null) {
              pGameEngine.getGui().println(vCharacter.getTextToSay());
-             if (vCharacter.getItem() != null) pGameEngine.getGui().println("Give " + vCharacter.getItem().getName() + " and maybe "+ vCharacter.getName() +  " can help you to found your PC.");
+             if (vCharacter.hasItem()) pGameEngine.getGui().println("Give " + vCharacter.getItem().getName() + " and maybe "+ vCharacter.getName() +  " can help you to found your PC.");
          }
          else pGameEngine.getGui().println(vCharacterName + " doesn't exist in " + pPlayer.getCurrentRoom().getName());
          

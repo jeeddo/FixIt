@@ -170,12 +170,11 @@ public class UserInterface implements ActionListener
             return;
         }
         
-        String vInput = this.aEntryField.getText();
+        String vInputValue = this.aEntryField.getText();
         
-        if (vInput.equals(""))
-            return;
+        if (vInputValue.equals("")) return;
             
-        this.processCommand(vInput); 
+        this.processCommand(vInputValue); 
         this.aEntryField.setText( "" );
 
        

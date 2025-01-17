@@ -62,4 +62,12 @@ public class Characterr
         return this.aItem;
     }
     
+    /**
+     * @return true if the character has an item, false otherwise.
+     */
+    
+    public boolean hasItem() {
+        return this.aItem != null;
+    }
+    
 }

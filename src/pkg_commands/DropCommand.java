@@ -20,14 +20,16 @@ public class DropCommand extends Command
      */
     @Override
     public void execute(final Player pPlayer, final GameEngine pGameEngine) {
-        String vItemName = super.getSecondWord();
-        Room vCurrentRoom = pPlayer.getCurrentRoom();
-        Item vPlayerItem = pPlayer.getItem(vItemName); 
-
+        
         if (!super.hasSecondWord()) {
             pGameEngine.getGui().println("Drop what ?");
             return;
         }
+        
+        String vItemName = super.getSecondWord();
+        Room vCurrentRoom = pPlayer.getCurrentRoom();
+        Item vPlayerItem = pPlayer.getItem(vItemName); 
+
         if ( vPlayerItem == null) pGameEngine.getGui().println("You don't own " + vItemName);
         
         else if (vCurrentRoom.getItem(vItemName) != null) pGameEngine.getGui().println("You are not allowed to put the same item in the room");
