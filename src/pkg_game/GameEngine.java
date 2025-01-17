@@ -106,10 +106,10 @@ public class GameEngine
     hall.setExit("West", null);
     hall.setExit("Up", openSpace);
     hall.setExit("Down", null);
-    hall.addItem(vItems.get("one"));
-    hall.addItem(vItems.get("zero"));
-    hall.addItem(vItems.get("key"));
-    hall.addCharacter(vCharacters.get("Rim"));
+    hall.addItem(vItems.get("apple"));
+    hall.addItem(vItems.get("welcomeNote"));
+    hall.addItem(vItems.get("trelloTask"));
+    hall.addCharacter(vCharacters.get("Christy"));
 
     developerRoom.setExit("North", projectManagerOffice);
     developerRoom.setExit("South", null);
@@ -117,37 +117,39 @@ public class GameEngine
     developerRoom.setExit("West", serverRoom);
     developerRoom.setExit("Up", null);
     developerRoom.setExit("Down", meetingRoom);
-    developerRoom.addItem(this.aThePC);
+    developerRoom.addCharacter(vCharacters.get("Jeremy"));
+
 
  
     serverRoom.setExit("North", null);
     serverRoom.setExit("South", maintenanceRoom);
-    serverRoom.setExit("East", developerRoom, true, vItems.get("key"), true);
+    serverRoom.setExit("East", developerRoom, false, null, true);
     serverRoom.setExit("West", null);
     serverRoom.setExit("Up", null);
     serverRoom.setExit("Down", null);
+    serverRoom.addItem(this.aMagicCookie);
+    serverRoom.addItem(this.aPlayer.getBeamer());
 
     
     meetingRoom.setExit("North", null);
     meetingRoom.setExit("South", null);
     meetingRoom.setExit("East", openSpace);
     meetingRoom.setExit("West", null);
-    meetingRoom.setExit("Up", developerRoom);
+    meetingRoom.setExit("Up", developerRoom, true, vItems.get("key"), false);
     meetingRoom.setExit("Down", null);
-    ((MovingCharacter) vCharacters.get("Pierre")).setRoom(meetingRoom);
-    meetingRoom.addCharacter(vCharacters.get("Pierre"));
+    meetingRoom.addCharacter(vCharacters.get("Rim"));
+    meetingRoom.addItem(vItems.get("juice"));
     
-    meetingRoom.addItem(vItems.get("two"));
 
     
-    cafeteria.setExit("North", presentationRoom);
-    cafeteria.setExit("South", Wc);
+    cafeteria.setExit("North", presentationRoom, true, vItems.get("keyCard"), false);
+    cafeteria.setExit("South", null);
     cafeteria.setExit("East", null);
     cafeteria.setExit("West", openSpace);
     cafeteria.setExit("Up", null);
-    cafeteria.setExit("Down", null);
-    cafeteria.addItem(this.aPlayer.getBeamer());
-    
+    cafeteria.setExit("Down", Wc);
+    cafeteria.addItem(vItems.get("roastBeef"));
+
 
    
     projectManagerOffice.setExit("North", null);
@@ -156,7 +158,10 @@ public class GameEngine
     projectManagerOffice.setExit("West", null);
     projectManagerOffice.setExit("Up", null);
     projectManagerOffice.setExit("Down", null);
-    projectManagerOffice.addItem(vItems.get("three"));
+    projectManagerOffice.addItem(vItems.get("keyCard"));
+    projectManagerOffice.addCharacter(vCharacters.get("Mathieu"));
+    ((MovingCharacter) vCharacters.get("Mathieu")).setRoom(projectManagerOffice);
+
     
     openSpace.setExit("North", null);
     openSpace.setExit("South", null);
@@ -164,8 +169,8 @@ public class GameEngine
     openSpace.setExit("West", meetingRoom);
     openSpace.setExit("Up", null);
     openSpace.setExit("Down", hall);
-    openSpace.addItem(vItems.get("three"));
-    
+    openSpace.addItem(vItems.get("postIt"));
+    openSpace.addItem(vItems.get("laptop"));
 
     
     presentationRoom.setExit("North", null);
@@ -174,14 +179,18 @@ public class GameEngine
     presentationRoom.setExit("West", null);
     presentationRoom.setExit("Up", null);
     presentationRoom.setExit("Down", null);
+    presentationRoom.addItem(vItems.get("coffee"));
+    presentationRoom.addItem(this.aThePC);
 
    
-    Wc.setExit("North", cafeteria);
+    Wc.setExit("North", null);
     Wc.setExit("South", null);
     Wc.setExit("East", null);
     Wc.setExit("West", null);
-    Wc.setExit("Up", null);
+    Wc.setExit("Up", cafeteria);
     Wc.setExit("Down", null);
+    Wc.addItem(vItems.get("toothbrush"));
+    Wc.addItem(vItems.get("key"));
     
     maintenanceRoom.setExit("North", serverRoom);
     maintenanceRoom.setExit("South", null);
@@ -189,11 +198,12 @@ public class GameEngine
     maintenanceRoom.setExit("West", null);
     maintenanceRoom.setExit("Up", null);
     maintenanceRoom.setExit("Down", null);
-    maintenanceRoom.addItem(this.aMagicCookie);
+    maintenanceRoom.addItem(vItems.get("toolbox"));
+    maintenanceRoom.addItem(vItems.get("kebab"));
     
 
     
-    this.aPlayer.setCurrentRoom( hall);
+    this.aPlayer.setCurrentRoom(hall);
     this.aPlayer.addRoom(this.aPlayer.getCurrentRoom());
     
      this.aRooms.addAll(Arrays.asList(
@@ -217,23 +227,39 @@ private HashMap<String, Item> createItems() {
        
     HashMap<String, Item> vItems = new HashMap<String, Item>();
     
-    Item one = new Item("one", "Item 1 ", 300);
-    Item two = new Item("two", "Item 2 ", 200);
-    Item three = new Item("three", "Item 3 ", 500);
-    Item zero = new Item("zero", "0", 100);
+    Item welcomeNote = new Item("welcomeNote", "Hi, " + this.aPlayer.getName() + ".\nThe goal of FixIt is very simple : find your PC and fix the bug with the fix command !", 20);
+    Item apple = new Item("apple", "An apple to give you the strength for this adventure", 150);
+    Item key = new Item("key", "key to open the developers room", 100);
+    Item juice = new Item("juice", "An orange juice", 50);
+    Item roastBeef = new Item("roastBeef", "a roastBeef for Rim", 220);
+    Item kebab = new Item("kebab", "kebab menu from Berlin", 300);
+    Item coffee = new Item("coffee", "drink this coffee", 100);
+    Item postIt = new Item("postIt", "hello " + this.aPlayer.getName() + ", how are you today ?", 20);
+    Item toothbrush = new Item("toothbrush", "do you want to clean your theeth ?", 40);
     Item magicCookie = new Item("magicCookie", "THE magic cookie !", 0);
-    Item thePC = new Item("thePC", "the holy grail", 300);
-    Beamer beamer = new Beamer("beamer", "the transporter room ! ", 200);
-    Item key = new Item("key", "the key", 100);
+    Item thePC = new Item("thePC", "the holy grail", 500);
+    Beamer beamer = new Beamer("beamer", "the transporter room !", 300);
+    Item keyCard = new Item("keyCard", "keyCard to go in the presentation room", 250);
+    Item trelloTask = new Item("trelloTask", "final task : Fix the bug in the FixIt project", 70);
+    Item  toolbox = new Item("toolbox", "a toolBox with severals tools...", 250);
+    Item laptop = new Item("laptop", "ohh nooo, this is not your PC !", 210);
     
-    vItems.put(one.getName(), one);
-    vItems.put(two.getName(), two);
-    vItems.put(three.getName(), three);
-    vItems.put(zero.getName(), zero);
+    vItems.put(welcomeNote.getName(), welcomeNote);
+    vItems.put(apple.getName(), apple);
+    vItems.put(key.getName(), key);
+    vItems.put(juice.getName(), juice);
+    vItems.put(roastBeef.getName(), roastBeef);
+    vItems.put(kebab.getName(), kebab);
+    vItems.put(coffee.getName(), coffee);
+    vItems.put(postIt.getName(), postIt);
+    vItems.put(toothbrush.getName(), toothbrush);
     vItems.put(magicCookie.getName(), magicCookie);
     vItems.put(thePC.getName(), thePC);
     vItems.put(beamer.getName(), beamer);
-    vItems.put(key.getName(), key);
+    vItems.put(keyCard.getName(), keyCard);
+    vItems.put(trelloTask.getName(), trelloTask);
+    vItems.put(toolbox.getName(), toolbox);
+    vItems.put(laptop.getName(), laptop);
     
     this.aMagicCookie = magicCookie;
     this.aThePC = thePC;
@@ -241,7 +267,11 @@ private HashMap<String, Item> createItems() {
     this.aPlayer.setBeamer(beamer);
     
     this.aItemsToEat.addItem(magicCookie);
-    this.aItemsToEat.addItem(zero);
+    this.aItemsToEat.addItem(apple);
+    this.aItemsToEat.addItem(juice);
+    this.aItemsToEat.addItem(coffee);
+    this.aItemsToEat.addItem(kebab);
+    this.aItemsToEat.addItem(roastBeef);
    
 
     return vItems;
@@ -255,16 +285,19 @@ private HashMap<String, Item> createItems() {
 private HashMap<String, Characterr> createCharacters(final HashMap<String, Item> pItems) {
     HashMap<String, Characterr> vCharacters = new HashMap<String, Characterr>();
     
-    Characterr vRim = new Characterr("Rim", "hi de malda", "thanks", pItems.get("key"));
-    MovingCharacter vPierre = new MovingCharacter("Pierre", "Salut, je m'appelle Pierre et toi ?", "Merci", pItems.get("zero"));
-    
+    Characterr vChristy = new Characterr("Christy", "Welcome to Webtech, have a nice day !", null, null);
+    Characterr vRim = new Characterr("Rim", "I'm hungry I want my roast beef please", "Miammmmmmm so good, thank u very much !", pItems.get("roastBeef"));
+    MovingCharacter vMathieu = new MovingCharacter("Mathieu", "Hi, I'm the project manager.", "Maybe you can find your PC in the presentation room.", pItems.get("trelloTask"));
+    Characterr vJeremy = new Characterr("Jeremy", "Hello, I'm a senior full stack developer, do you want some help ?", "You can solve the problem on your PC with the string 'bug'", pItems.get("laptop"));
+
 
     vCharacters.put(vRim.getName(), vRim);
-    vCharacters.put(vPierre.getName(), vPierre);
-    
+    vCharacters.put(vChristy.getName(), vChristy);
+    vCharacters.put(vMathieu.getName(), vMathieu);  
+    vCharacters.put(vJeremy.getName(), vJeremy);
        
-    this.aCharacters.add(vPierre);
-    this.aCharacters.add(vRim);
+   
+    this.aCharacters.addAll(Arrays.asList(vRim, vChristy, vMathieu, vJeremy));
     
     return vCharacters;
 } //createCharacters

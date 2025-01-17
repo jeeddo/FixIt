@@ -1,10 +1,7 @@
 #BlueJ class context
 comment0.target=EatCommand
 comment0.text=\r\n\ Command\ allowing\ the\ player\ to\ consume\ a\ specific\ item,\ \r\n\ adjusting\ their\ weight\ depending\ on\ the\ item\ consumed.\r\n\r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pItems
-comment1.target=void\ setItems(src.pkg_items.ItemList)
-comment1.text=\r\n\ Sets\ the\ available\ items\ for\ the\ command.\r\n\r\n\ @param\ pItems\ list\ of\ consumable\ items.\r\n
-comment2.params=pPlayer\ pGameEngine
-comment2.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment2.text=\r\n\ Executes\ the\ "Eat"\ command\ by\ consuming\ an\ item\ from\ the\ current\ room\ \r\n\ or\ player's\ inventory\ and\ adjusting\ weight\ accordingly.\r\n\r\n\ @param\ pPlayer\ \ \ \ \ \ the\ player\ executing\ the\ command.\r\n\ @param\ pGameEngine\ \ the\ game\ engine\ managing\ interactions.\r\n
-numComments=3
+comment1.params=pPlayer\ pGameEngine
+comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
+comment1.text=\r\n\ Executes\ the\ "Eat"\ command\ by\ consuming\ an\ item\ from\ the\ current\ room\ \r\n\ or\ player's\ inventory\ and\ adjusting\ weight\ accordingly.\r\n\r\n\ @param\ pPlayer\ \ \ \ \ \ the\ player\ executing\ the\ command.\r\n\ @param\ pGameEngine\ \ the\ game\ engine\ managing\ interactions.\r\n
+numComments=2

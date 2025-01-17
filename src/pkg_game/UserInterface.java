@@ -116,7 +116,7 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "404 error : PC not found" );  
+        this.aMyFrame = new JFrame( "FixIt" );  
         this.aEntryField = new JTextField( 34 );
 
         this.aLog = new JTextArea();

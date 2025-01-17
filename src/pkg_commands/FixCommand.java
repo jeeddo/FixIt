@@ -25,7 +25,7 @@ public class FixCommand extends Command
         if (pPlayer.getItem(pGameEngine.getThePC().getName()) == null) pGameEngine.getGui().println("You didn't find yourPC yet ...");
         else if (pPlayer.getItem(pGameEngine.getThePC().getName()) != null && (!super.hasSecondWord() || !super.getSecondWord().equals("bug"))) pGameEngine.getGui().println("ahh you were close !");
         else {
-            pGameEngine.getGui().println("------------ YOUUUUUPIII you have fix the bug, you won the Game BRAVO ! ------------");
+            pGameEngine.getGui().println("------------ YOUUUUUPIII you have fixed the bug, you won the Game BRAVO ! ------------");
             QuitCommand vQuitCommand = new QuitCommand();
             vQuitCommand.setState(true);
             vQuitCommand.execute(pPlayer, pGameEngine);

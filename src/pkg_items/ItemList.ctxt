@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=ItemList
+comment0.text=\r\n\ Manages\ a\ collection\ of\ items.\ Allows\ adding,\ retrieving,\ and\ removing\ items.\r\n\ Also\ provides\ a\ method\ to\ list\ items\ based\ on\ context.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
+comment1.params=
+comment1.target=ItemList()
+comment1.text=\r\n\ Constructs\ an\ ItemList\ with\ an\ empty\ HashMap\ of\ items.\r\n
+comment2.params=pItem
+comment2.target=void\ addItem(Item)
+comment2.text=\r\n\ Adds\ an\ item\ to\ the\ collection.\r\n\ \r\n\ @param\ pItem\ The\ item\ to\ add\ to\ the\ collection.\r\n
+comment3.params=pItemName
+comment3.target=Item\ getItem(java.lang.String)
+comment3.text=\r\n\ Retrieves\ an\ item\ from\ the\ collection\ by\ its\ name.\r\n\ \r\n\ @param\ pItemName\ The\ name\ of\ the\ item\ to\ retrieve.\r\n\ @return\ The\ item\ if\ found;\ otherwise,\ null.\r\n
+comment4.params=pItemName
+comment4.target=void\ removeItem(java.lang.String)
+comment4.text=\r\n\ Removes\ an\ item\ from\ the\ collection\ by\ its\ name.\r\n\ \r\n\ @param\ pItemName\ The\ name\ of\ the\ item\ to\ remove.\r\n
+comment5.params=pO
+comment5.target=java.lang.String\ getAllItemString(java.lang.Object)
+comment5.text=\r\n\ Returns\ a\ string\ representation\ of\ all\ items\ in\ the\ collection.\r\n\ Displays\ different\ formats\ based\ on\ the\ context.\r\n\ \r\n\ @param\ pO\ The\ context\ (Room\ or\ Player).\r\n\ @return\ A\ string\ listing\ all\ items\ or\ a\ message\ if\ none.\r\n
+numComments=6

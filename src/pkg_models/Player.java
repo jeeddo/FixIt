@@ -19,7 +19,7 @@ public class Player
     private int aWeight;
     private int aNbMoves;
     private Beamer aBeamer;
-    private final int NB_MAX_MOVES = 25;
+    private final int NB_MAX_MOVES = 30;
     
     
       /**

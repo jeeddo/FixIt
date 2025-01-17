@@ -33,23 +33,17 @@ public class EatCommand extends Command
         if (pGameEngine.getItemsToEat().getItem(vItemName) != null) {
                if (vCurrentRoom.getItem(vItemName) != null ) {
             
-                  if (vCurrentRoom.getItem(vItemName) == pGameEngine.getMagicCookie()) {
-                    pPlayer.setPlayerWeight(pPlayer.getPlayerWeight());
-                  }
-                  else {
-                      pPlayer.setPlayerWeight(vCurrentRoom.getItem(vItemName).getItemWeight());
-                  }
+                    if (vCurrentRoom.getItem(vItemName) == pGameEngine.getMagicCookie()) pPlayer.setPlayerWeight(pPlayer.getPlayerWeight());
+                    else pPlayer.setPlayerWeight(vCurrentRoom.getItem(vItemName).getItemWeight());
+                      
                     vCurrentRoom.removeItem(vItemName);
                     pGameEngine.getGui().println("Miam miam miammmmm, here is your weigth now : " + pPlayer.getPlayerWeight());
                 }
         else if (pPlayer.getItem(vItemName) != null) {
-                  if (pPlayer.getItem(vItemName) == pGameEngine.getMagicCookie()) {
-                    pPlayer.setPlayerWeight(pPlayer.getPlayerWeight());
-                  }
-                  else {
-                      pPlayer.setPlayerWeight(pPlayer.getItem(vItemName).getItemWeight());
-                  }
-                    pPlayer.removeItem(vItemName);
+                if (pPlayer.getItem(vItemName) == pGameEngine.getMagicCookie()) pPlayer.setPlayerWeight(pPlayer.getPlayerWeight());
+                else pPlayer.setPlayerWeight(pPlayer.getItem(vItemName).getItemWeight());
+                
+                pPlayer.removeItem(vItemName);
                 pGameEngine.getGui().println("Miam miam miammmmm, here is your weigth now : " + pPlayer.getPlayerWeight());
             }
         else pGameEngine.getGui().println(vItemName + " is not here and you don't own it...");

@@ -64,6 +64,6 @@ public class Item
      */
     
     public String getItemString() {
-        return this.aName +" "+this.aDescription + " " + this.aWeight;
+        return this.aName +" : "+this.aDescription + " (" + this.aWeight + ")";
     }
 }
