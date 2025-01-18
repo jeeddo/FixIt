@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=HelpCommand
-comment0.text=\r\n\ The\ HelpCommand\ class\ represents\ the\ command\ that\ the\ player\ can\ issue\ to\ get\ help\ or\ guidance.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Executes\ the\ "help"\ command.\ This\ method\ prints\ a\ brief\ description\ of\ the\ game\r\n\ and\ lists\ all\ the\ valid\ commands\ that\ the\ player\ can\ use.\r\n\r\n\ @param\ pPlayer\ The\ player\ object,\ representing\ the\ current\ player\ in\ the\ game.\r\n\ @param\ pGameEngine\ The\ game\ engine,\ which\ controls\ the\ game's\ state\ and\ logic.\r\n
-numComments=2

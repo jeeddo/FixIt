@@ -1,22 +1,31 @@
+alea Wc
+look welcomeNote
+eat apple
+take trelloTask
+interact Mathieu
+drop trelloTask
 go Up
-take Item3
-go West
-drop Item
-drop Item3
-go Up
-go West
-go South
-eat
-look magicCookie
-take magicCookie
-look
-items
-eat magicCookie
-back
 go East
-back 
-back back back
+go Down
+take key
+back back
+go West
+go Up
+go West
+eat magicCookie
+go East
+go North
+take keyCard
+go South
+go Up
+eat roastBeef
+items
+go North
+look coffee thePC
+eat coffee
+drop key
+drop keyCard
 take thePC
-fix fde
+fix
 fix bug
 no

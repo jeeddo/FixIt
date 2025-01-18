@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=InteractCommand
-comment0.text=\r\n\ Represents\ the\ command\ to\ interact\ with\ a\ character\ in\ the\ game.\r\n\ The\ player\ can\ attempt\ to\ talk\ to\ or\ move\ a\ character\ in\ the\ current\ room.\r\n\ The\ command\ checks\ if\ the\ character\ exists,\ whether\ he\ can\ be\ interacted\ with,\ and\ if\ he\ can\ move.\r\n\r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Executes\ the\ interaction\ command,\ allowing\ the\ player\ to\ interact\ with\ a\ character\ in\ the\ room.\r\n\ The\ player\ can\ either\ talk\ to\ the\ character\ or\ move\ the\ character\ if\ applicable.\r\n\ If\ the\ character\ cannot\ be\ found\ or\ interacted\ with,\ appropriate\ messages\ are\ displayed.\r\n\r\n\ @param\ pPlayer\ The\ player\ who\ is\ executing\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine.\r\n
-numComments=2

@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=ChargeCommand
-comment0.text=\r\n\ ChargeCommand\ class\ represents\ a\ command\ that\ allows\ the\ player\ to\ charge\ their\ beamer.\r\n\ The\ player\ can\ charge\ the\ beamer\ by\ specifying\ its\ name.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Executes\ the\ ChargeCommand,\ allowing\ the\ player\ to\ charge\ the\ beamer\ in\ their\ current\ room.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ who\ issued\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine\ which\ contains\ the\ state\ of\ the\ game.\r\n
-numComments=2

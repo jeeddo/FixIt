@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=TakeCommand
-comment0.text=\r\n\ Command\ that\ allows\ the\ player\ to\ pick\ up\ an\ item\ from\ the\ current\ room\ if\ they\ can\ carry\ it.\r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Executes\ the\ command\ to\ allow\ the\ player\ to\ pick\ up\ an\ item\ if\ they\ are\ able\ to\ carry\ it.\r\n\ Checks\ if\ the\ item\ exists\ in\ the\ room\ and\ if\ the\ player\ can\ carry\ it\ based\ on\ weight.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ attempting\ to\ take\ the\ item.\r\n\ @param\ pGameEngine\ The\ game\ engine\ instance\ to\ manage\ output.\r\n
-numComments=2

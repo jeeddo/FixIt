@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=DropCommand
-comment0.text=\r\n\ Command\ that\ allows\ the\ player\ to\ drop\ an\ item\ in\ the\ current\ room.\r\n\ \r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ The\ "Drop"\ command,\ allowing\ the\ player\ to\ remove\ an\ item\ \r\n\ from\ their\ inventory\ and\ place\ it\ in\ the\ current\ room.\r\n\r\n\ @param\ pPlayer\ \ \ \ \ \ the\ player\ executing\ the\ command.\r\n\ @param\ pGameEngine\ \ the\ game\ engine\ managing\ interactions.\r\n
-numComments=2

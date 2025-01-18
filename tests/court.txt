@@ -1,8 +1,11 @@
 go Up
 look
-eat
-back
-go 
+look laptop
+eat postIt
+back back
 go Up
 go West
-alea Wc
+interact Mathieu
+interact Rim
+take juice
+eat juice

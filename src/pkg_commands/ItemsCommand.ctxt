@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=ItemsCommand
-comment0.text=\r\n\ ItemsCommand\ a\ class\ that\ prints\ the\ player's\ items.\r\n\r\n\ @author\ Pierre\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Displays\ the\ list\ of\ items\ currently\ in\ the\ player's\ inventory.\r\n
-numComments=2

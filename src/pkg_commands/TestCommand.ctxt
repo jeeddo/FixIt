@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=TestCommand
-comment0.text=\r\n\ The\ TestCommand\ class\ is\ used\ to\ execute\ a\ series\ of\ commands\ from\ a\ file.\r\n\ This\ command\ allows\ the\ player\ to\ load\ and\ execute\ predefined\ commands\ from\ a\ text\ file.\r\n\ \r\n\ @author\ Piere\ MATAR\r\n
-comment1.params=pPlayer\ pGameEngine
-comment1.target=void\ execute(src.pkg_models.Player,\ src.pkg_game.GameEngine)
-comment1.text=\r\n\ Executes\ the\ "test"\ command.\r\n\ If\ no\ file\ name\ is\ provided,\ prompts\ the\ player\ to\ specify\ a\ file.\r\n\ If\ a\ valid\ file\ is\ found,\ executes\ each\ command\ inside\ it.\r\n\ \r\n\ @param\ pPlayer\ The\ player\ who\ executed\ the\ command.\r\n\ @param\ pGameEngine\ The\ game\ engine.\r\n
-numComments=2

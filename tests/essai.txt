@@ -14,7 +14,9 @@ go Down
 go North
 back back back
 go Down
+interact Rim
 go North
+eat magicCookie
 help
 quit
 quit fze

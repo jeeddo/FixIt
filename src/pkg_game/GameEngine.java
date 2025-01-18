@@ -85,18 +85,18 @@ public class GameEngine
     HashMap<String, Item> vItems = this.createItems();
     HashMap<String, Characterr> vCharacters = this.createCharacters(vItems);
     
-    Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, Wc, maintenanceRoom;
+    Room hall, developerRoom, serverRoom, meetingRoom, cafeteria, projectManagerOffice, openSpace, presentationRoom, wc, maintenanceRoom;
     
     hall = new TransporterRoom("hall", "in The entry hall.", "assets/images/Hall.jpg");
-    developerRoom = new TransporterRoom("developerRoom","inside the developer room.", "assets/images/Developer.jpg");
-    serverRoom = new TransporterRoom("serverRoom","inside the server room.", "assets/images/Server.jpg");
-    meetingRoom = new TransporterRoom("meetingRoom","inside the meeting room.", "assets/images/Meeting.jpg");
+    developerRoom = new TransporterRoom("production","inside the developer room.", "assets/images/Developer.jpg");
+    serverRoom = new TransporterRoom("server","inside the server room.", "assets/images/Server.jpg");
+    meetingRoom = new TransporterRoom("meeting","inside the meeting room.", "assets/images/Meeting.jpg");
     cafeteria = new TransporterRoom("cafeteria","inside the cafeteria,", "assets/images/Cafeteria.jpg");
     projectManagerOffice = new TransporterRoom("projectManagerOffice", "inside the project manager office.", "assets/images/ProjectManager.jpg", true, this);
     openSpace = new TransporterRoom("openSpace","inside the open-space", "assets/images/OpenSpace.jpg");
-    presentationRoom = new TransporterRoom("presentationRoom","inside the presenting room", "assets/images/Presentation.jpg");
-    Wc = new TransporterRoom("Wc","In the toilet...", "assets/images/Wc.jpg");
-    maintenanceRoom = new TransporterRoom("maintenanceRoom","inside the maintenance room.", "assets/images/Maintenance.jpg");
+    presentationRoom = new TransporterRoom("presentation","inside the presenting room", "assets/images/Presentation.jpg");
+    wc = new TransporterRoom("wc","In the toilet...", "assets/images/Wc.jpg");
+    maintenanceRoom = new TransporterRoom("maintenance","inside the maintenance room.", "assets/images/Maintenance.jpg");
  
     
     
@@ -147,7 +147,7 @@ public class GameEngine
     cafeteria.setExit("East", null);
     cafeteria.setExit("West", openSpace);
     cafeteria.setExit("Up", null);
-    cafeteria.setExit("Down", Wc);
+    cafeteria.setExit("Down", wc);
     cafeteria.addItem(vItems.get("roastBeef"));
 
 
@@ -183,14 +183,14 @@ public class GameEngine
     presentationRoom.addItem(this.aThePC);
 
    
-    Wc.setExit("North", null);
-    Wc.setExit("South", null);
-    Wc.setExit("East", null);
-    Wc.setExit("West", null);
-    Wc.setExit("Up", cafeteria);
-    Wc.setExit("Down", null);
-    Wc.addItem(vItems.get("toothbrush"));
-    Wc.addItem(vItems.get("key"));
+    wc.setExit("North", null);
+    wc.setExit("South", null);
+    wc.setExit("East", null);
+    wc.setExit("West", null);
+    wc.setExit("Up", cafeteria);
+    wc.setExit("Down", null);
+    wc.addItem(vItems.get("toothbrush"));
+    wc.addItem(vItems.get("key"));
     
     maintenanceRoom.setExit("North", serverRoom);
     maintenanceRoom.setExit("South", null);
@@ -209,7 +209,7 @@ public class GameEngine
      this.aRooms.addAll(Arrays.asList(
             hall,
             presentationRoom,
-            Wc,
+            wc,
             maintenanceRoom,
             openSpace,
             projectManagerOffice,
@@ -280,7 +280,7 @@ private HashMap<String, Item> createItems() {
 
 /**
  * Create all characters needed for the game.
- * @param the items to add to chracters if needed.
+ * @param pItems the items to add to chracters if needed.
  */
 private HashMap<String, Characterr> createCharacters(final HashMap<String, Item> pItems) {
     HashMap<String, Characterr> vCharacters = new HashMap<String, Characterr>();

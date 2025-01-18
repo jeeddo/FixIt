@@ -52,6 +52,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Print out some text into the text area.
+     * @param pText The text to print.
      */
     public void print( final String pText )
     {
@@ -61,6 +62,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Print out some text into the text area, followed by a line break.
+     * @param pText The text to print.
      */
     public void println( final String pText )
     {
@@ -69,6 +71,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Show an image file in the interface.
+     * @param pImageName The name of the image file to display.
      */
   
     public void showImage(final String pImageName) {
@@ -96,6 +99,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Enable or disable input in the entry field or button(s).
+     * @param pOnOff True to enable input, false to disable it.
      */
     public void enable( final boolean pOnOff )
     {
@@ -162,6 +166,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Actionlistener interface for entry textfield.
+     * @param pE The ActionEvent triggered by the user.
      */
     @Override public void actionPerformed( final ActionEvent pE ) 
     {
@@ -184,6 +189,7 @@ public class UserInterface implements ActionListener
     /**
      * A command has been entered in the entry field.  
      * Read the command and do whatever is necessary to process it.
+     * @param pString The command string to process.
      */
     private void processCommand(final String pString)
     {

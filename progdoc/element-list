@@ -1,1 +1,5 @@
-unnamed package
+src.pkg_commands
+src.pkg_game
+src.pkg_items
+src.pkg_models
+src.pkg_rooms
