@@ -1,4 +1,4 @@
-alea Wc
+alea wc
 look welcomeNote
 eat apple
 take trelloTask
